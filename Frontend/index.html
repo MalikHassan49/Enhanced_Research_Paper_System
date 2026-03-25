@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="javascriptreact">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/1d8804d5ad.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <form>
+    <h2>Research Paper System</h2>
+    <h3>Welcome Back</h3>
+    <!-- first input container -->
+    <div class="input-container">
+      <label for="Email">Email Address</label>
+      <div class="email-container">
+        <i class="fa-solid fa-envelope"></i>
+        <input type="text" name="Email" placeholder="Enter your email">
+      </div>
+    </div>
+    <!-- second input container -->
+    <div class="input-container">
+      <label for="Password">Password</label>
+      <div class="password-container">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" name="Password" placeholder="Enter your password">
+        <i class="fa-solid fa-eye"></i>
+      </div>
+    </div>
+    <!-- third input container -->
+    <div class="input-container">
+      <label for="Confirm-Password">Confirm Password</label>
+      <div class="confirm-password-container">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" name="Confirm-Password" placeholder="Enter Confirm Password">
+        <i class="fa-solid fa-eye"></i>
+      </div>
+    </div>
+    <!-- roles-container -->
+    <div class="roles-container">
+      <label for="Roles">Select Role</label>
+      <div class="role-selection">
+        <i class="fa-solid fa-user"></i>
+        <select name="Roles" id="Roles">
+          <option value="author">Author</option>
+          <option value="student">Student</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+    </div>
+        <button class="register-button">
+        Register
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+      <p>Already have an account&#63;
+        <a href="#">Login Here</a>
+      </p>
+  </form>
+</body>
+
+</html>
