@@ -223,6 +223,13 @@ input::placeholder {
   padding-block: 80px;
 }
 
+.login-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-block: 80px;
+}
+
 .image-container img {
   max-width: 600px;
 }
