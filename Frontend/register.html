@@ -7,6 +7,7 @@
   <title>Register Page</title>
   <link rel="stylesheet" href="register.css">
   <script src="https://kit.fontawesome.com/1d8804d5ad.js" crossorigin="anonymous"></script>
+  
 </head>
 
 <body>
@@ -39,18 +40,18 @@
     <div class="input-container">
       <label for="Password">Password</label>
       <div class="password-container">
-        <i class="fa-solid fa-lock"></i>
-        <input type="password" name="Password" placeholder="Enter your password">
-        <i class="fa-solid fa-eye"></i>
+        <i id="lock-password" class="fa-solid fa-lock"></i>
+        <input type="password" id="password" name="Password" placeholder="Enter your password">
+        <i id="toggle-password" class="fa-solid fa-eye"></i>
       </div>
     </div>
     <!-- third input container -->
     <div class="input-container">
       <label for="Confirm-Password">Confirm Password</label>
       <div class="confirm-password-container">
-        <i class="fa-solid fa-lock"></i>
-        <input type="password" name="Confirm-Password" placeholder="Enter Confirm Password">
-        <i class="fa-solid fa-eye"></i>
+        <i id="confirm-lock-password" class="fa-solid fa-lock"></i>
+        <input type="password" id="confirm-password" name="Confirm-Password" placeholder="Enter Confirm Password">
+        <i id="confirm-toggle-password" class="fa-solid fa-eye"></i>
       </div>
     </div>
     <!-- roles-container -->
@@ -75,6 +76,8 @@
   </form>
   </div>
   <!-- register section ends here -->
+  <script src="https://kit.fontawesome.com/1d8804d5ad.js" crossorigin="anonymous"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
