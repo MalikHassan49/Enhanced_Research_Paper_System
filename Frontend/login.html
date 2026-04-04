@@ -12,7 +12,7 @@
   <div class="image-container">
     <img src="images/image_4.png" alt="image_4">
   </div>
-  <form>
+  <form id="loginForm">
     <span></span>
     <span></span>
     <span></span>
@@ -29,25 +29,25 @@
         <span></span>
         <span></span>
         <i class="fa-solid fa-envelope"></i>
-        <input type="text" name="Email" placeholder="Enter your email">
+        <input type="text" id="login-email" name="Email" placeholder="Enter your email">
       </div>
     </div>
     <!-- second input container -->
     <div class="input-container">
       <label for="Password">Password</label>
       <div class="password-container">
-        <i id="lock-password" class="fa-solid fa-lock"></i>
-        <input type="password" id="password" name="Password" placeholder="Enter your password">
-        <i id="toggle-password" class="fa-solid fa-eye"></i>
+        <i id="login-lock-password" class="fa-solid fa-lock"></i>
+        <input type="password" id="login-password" placeholder="Enter your password">
+        <i id="login-toggle-password" class="fa-solid fa-eye"></i>
       </div>
     </div>
     <!-- third input container -->
     <div class="input-container">
       <label for="Confirm-Password">Confirm Password</label>
       <div class="confirm-password-container">
-        <i id="confirm-lock-password" class="fa-solid fa-lock"></i>
-        <input type="password" id="confirm-password" name="Confirm-Password" placeholder="Enter Confirm Password">
-        <i id="toggle-confirm-password" class="fa-solid fa-eye"></i>
+        <i id="login-confirm-lock-password" class="fa-solid fa-lock"></i>
+        <input type="password" id="login-confirm-password" name="confirm-login-password" placeholder="Enter Confirm Password">
+        <i id="login-toggle-confirm-password" class="fa-solid fa-eye"></i>
       </div>
     </div>
     <!-- roles-container -->
