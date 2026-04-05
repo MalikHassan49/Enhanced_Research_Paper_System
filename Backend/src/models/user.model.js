@@ -1,6 +1,6 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt";
-import jwt from "jwt";
+import jwt from "jsonwebtoken";
 
 const userSchema = new Schema({
   email: {
@@ -13,18 +13,13 @@ const userSchema = new Schema({
     required: [true, "password is required"],
     unique: true
   },
-  confirmPassword: {
-    type: String,
-    required: true,
-    unique: true
-  },
   role: {
     type: String,
     enum: ["Student", "Author", "Admin"],
     required: true
   }
 },
-{timestamps: true})
+  { timestamps: true })
 
 // check password is correct or not
 userSchema.methods.isPasswordCorrect = async function (password) {

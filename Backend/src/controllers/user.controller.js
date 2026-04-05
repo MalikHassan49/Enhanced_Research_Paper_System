@@ -1,7 +1,7 @@
-import { User } from "../models/user.model";
-import { ApiError } from "../utils/ApiError";
-import { ApiResponse } from "../utils/ApiResponse";
-import { asyncHandler } from "../utils/asyncHandler";
+import { User } from "../models/user.model.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 
 // generate access token and refresh token
@@ -24,14 +24,18 @@ const generateAccessTokenAndRefreshToken = async (userId) => {
 
 // register controller
 const registerUser = asyncHandler(async(req, res, next) => {
+  console.log("API HIT");
   // flow of api
   // Take email,password etc from user
   // Check email,password etc
   // 
-  const {email, password, confirmPassword, role } = req.body;
+  const {email, password, role } = req.body;
+  console.log("Email: ", email);
+  console.log("Password: ", password);
+  console.log("Role: ", role);
 
   if(
-    [email, password, confirmPassword, role].some(field => field.trim() === "")
+    [email, password, role].some(field => field.trim() === "")
   ) {
     throw new ApiError(400, "All the fields are required");
   }
@@ -47,7 +51,6 @@ const registerUser = asyncHandler(async(req, res, next) => {
   const user = await User.create({
     email, 
     password,
-    confirmPassword,
     role
   })
 
@@ -58,7 +61,8 @@ const registerUser = asyncHandler(async(req, res, next) => {
   .json(
     new ApiResponse(
       200,
-
+      createdUser,
+      "User registered successfully"
     )
   )
 })

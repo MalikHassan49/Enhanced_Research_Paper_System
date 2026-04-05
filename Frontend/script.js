@@ -21,12 +21,7 @@ const registerConfirmTogglePassword = document.getElementById("register-toggle-c
 // add event listener on login toggle password
 if(loginTogglePassword && loginPassword) {
   loginTogglePassword.addEventListener("click", () => {
-  if (loginPassword.type === "password") {
-    loginPassword.type = "text";
-  }
-  else {
-    loginPassword.type = "password";
-  }
+    loginPassword.type = loginPassword.type === "password" ? "text" : "password";
 });
 }
 
@@ -40,12 +35,7 @@ if(loginLockPassword && loginPassword) {
 // add event listener on login toggle confirm password
 if(loginConfirmTogglePassword && loginConfirmPassword) {
   loginConfirmTogglePassword.addEventListener("click", () => {
-  if (loginConfirmPassword.type === "password") {
-    loginConfirmPassword.type = "text";
-  }
-  else {
-    loginConfirmPassword.type = "password";
-  }
+    loginConfirmPassword.type = loginConfirmPassword.type === "password" ? "text" : "password";
 });
 }
 
@@ -60,12 +50,7 @@ if(loginConfirmLockPassword && loginConfirmPassword) {
 // add event listener on register toggle password
 if(registerTogglePassword && registerPassword) {
   registerTogglePassword.addEventListener("click", () => {
-  if (registerPassword.type === "password") {
-    registerPassword.type = "text";
-  }
-  else {
-    registerPassword.type = "password";
-  }
+    registerPassword.type = registerPassword.type === "password" ? "text" : "password";
 });
 }
 
@@ -79,12 +64,7 @@ if(registerLockPassword && registerPassword) {
 // add event listener on register toggle confirm password
 if(registerConfirmTogglePassword && registerConfirmPassword) {
   registerConfirmTogglePassword.addEventListener("click", () => {
-  if (registerConfirmPassword.type === "password") {
-    registerConfirmPassword.type = "text";
-  }
-  else {
-    registerConfirmPassword.type = "password";
-  }
+    registerConfirmPassword.type = registerConfirmPassword.type === "password" ? "text" : "password";
 });
 }
 
@@ -94,3 +74,52 @@ if(registerConfirmLockPassword && registerConfirmPassword) {
   registerConfirmPassword.disabled = !registerConfirmPassword.disabled;
 })
 };
+
+// Registration Form
+
+const registerForm = document.getElementById("registerForm");
+
+if(registerForm) {
+  registerForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById("register-email").value;
+  const password = document.getElementById("register-password").value;
+  const confirmPassword = document.getElementById("register-confirm-password").value;
+  const role = document.getElementById("Roles").value;
+
+  // simple validation
+  if(password !== confirmPassword) {
+    alert("Passwords do not match");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:8080/api/v1/users/register", {
+      method: "POST", 
+      headers: {
+        "Content-Type" : "application/json"
+      }, 
+      body: JSON.stringify({
+        email,
+        password,
+        role
+      })
+    });
+
+    const data = await response.json();
+
+    if(response.ok) {
+      alert("User register successfully");
+      console.log("Response data: ", data);
+    }
+    else {
+      alert(data.message || "Registration Failed");
+    }
+
+  } catch (error) {
+    console.log(error);
+    alert("Server error");
+  }
+})
+}
