@@ -6,9 +6,7 @@ import cors from "cors";
 const app = express();
 
 app.use(cors({
-  origin: ["http://localhost:3002",
-    "http://127.0.0.1:3002"
-  ],
+  origin: process.env.CROSS_ORIGIN,
   credentials: true
 }));
 
@@ -24,4 +22,6 @@ import userRouter from "./src/routes/user.routes.js";
 // routes declaration
 app.use("/api/v1/users", userRouter);
 
+
 export { app }
+

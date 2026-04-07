@@ -13,7 +13,7 @@ const generateAccessTokenAndRefreshToken = async (userId) => {
     const refreshToken = user.generateRefreshToken();
 
     user.refreshToken = refreshToken;
-    user.save({validateBeforeSave: false});
+    await user.save({validateBeforeSave: false});
 
     return { accessToken, refreshToken }
   } catch (error) {
@@ -23,7 +23,7 @@ const generateAccessTokenAndRefreshToken = async (userId) => {
 
 
 // register controller
-const registerUser = asyncHandler(async(req, res, next) => {
+const registerUser = asyncHandler(async(req, res) => {
   console.log("API HIT");
   // flow of api
   // Take email,password etc from user
@@ -40,9 +40,7 @@ const registerUser = asyncHandler(async(req, res, next) => {
     throw new ApiError(400, "All the fields are required");
   }
 
-  const alreadyExist = await User.find({
-    email
-  })
+  const alreadyExist = await User.findOne({email})
 
   if(alreadyExist) {
     throw new ApiError(400, "The user with this email is already exist try another email");
@@ -60,7 +58,7 @@ const registerUser = asyncHandler(async(req, res, next) => {
   .status(200)
   .json(
     new ApiResponse(
-      200,
+      201,
       createdUser,
       "User registered successfully"
     )
