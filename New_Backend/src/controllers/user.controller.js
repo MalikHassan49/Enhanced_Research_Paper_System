@@ -3,24 +3,23 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
-
 // generate access token and refresh token
-const generateAccessTokenAndRefreshToken = async (userId) => {
+const generateAccessAndRefreshToken = async (userId) => {
   try {
-    const user = await User.findById(userId);
+    const user = await User.findById(userId)
 
-    const accessToken = user.generateAccessToken();
-    const refreshToken = user.generateRefreshToken();
+    const accessToken = user.generateAccessToken()
+    const refreshToken = user.generateRefreshToken()
 
-    user.refreshToken = refreshToken;
-    await user.save({validateBeforeSave: false});
+    user.refreshToken = refreshToken
+    await user.save({validateBeforeSave: false })
 
     return { accessToken, refreshToken }
   } catch (error) {
-    throw new ApiError(400, "Something went wrong while generating access and refresh token");
+    console.log("REAL ERROR: ", error);
+    throw new ApiError(400, "Something went wrong while generating Access and RefreshToken")
   }
 }
-
 
 // register controller
 const registerUser = asyncHandler(async(req, res) => {
@@ -52,7 +51,7 @@ const registerUser = asyncHandler(async(req, res) => {
     role
   })
 
-  const createdUser = await User.findById(user._id).select("-password", "-refreshToken");
+  const createdUser = await User.findById(user._id).select("-password -refreshToken");
 
   return res
   .status(200)
@@ -66,7 +65,7 @@ const registerUser = asyncHandler(async(req, res) => {
 })
 
 // login controller
-const loginUser = asyncHandler(async(req, res, next) => {
+const loginUser = asyncHandler(async(req, res) => {
   // Take the email, apssword, role
   // Check the fields
   // Match passowrd, email in database
@@ -87,15 +86,15 @@ const loginUser = asyncHandler(async(req, res, next) => {
     throw new ApiError(400, "User not found");
   }
 
-  const isValidPassword = user.isPasswordCorrect(password);
+  const isValidPassword = await user.isPasswordCorrect(password);
 
   if(!isValidPassword) {
     throw new ApiError(400, "Invalid password");
   }
 
-  const { accessToken, refreshToken } = await generateAccessTokenAndRefreshToken(user._id);
+   const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id)
 
-  const loggedInUser = await User.findById(user._id);
+  const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
 
   const options = {
     http: true,
