@@ -124,3 +124,42 @@ if(registerForm) {
   }
 })
 }
+
+// Login form submit
+const loginForm = document.getElementById("loginForm");
+
+if(loginForm) {
+  loginForm.addEventListener("submit", async(e) => {
+    e.preventDefault();
+
+    const email = document.getElementById("login-email").value;
+    const password = document.getElementById("login-password").value;
+    const role = document.getElementById("Roles").value;
+
+    try {
+      const response = await fetch("http://localhost:5000/api/v1/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type" : "application/json"
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          email,
+          password,
+          role
+        })
+      });
+      // response from backend
+      const data = await response.json();
+
+      if(response.ok) {
+        alert("User Login successfull");
+        console.log(data);
+      }
+    } 
+    catch (error) {
+      console.log(error);
+      alert("Server error");
+    }
+  })
+}

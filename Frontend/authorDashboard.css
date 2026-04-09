@@ -1,0 +1,197 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI';
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 11vh;
+  padding: 20px 25px;
+  /* border: 1px solid black; */
+}
+
+nav h2 {
+  background: linear-gradient(to right bottom, #0096ff, #004aff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logout-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logout-section button {
+  background: none;
+  border: none;
+  background: linear-gradient(to right bottom, #0096ff, rgb(0, 72, 255));
+  color: #FFFFFF;
+  padding: 8px 20px;
+  margin-left: 18px;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.logout-section button:hover {
+  box-shadow: 0px 6px 10px rgba(0, 72, 255, 0.3);
+  margin-bottom: 5px;
+}
+
+.logout-section p {
+  color: #5f5f5f;
+  font-weight: 600;
+}
+
+/* main section starts here */
+main {
+  height: calc(100vh - 11vh);
+  background: linear-gradient(to bottom right, #67a6ff, #004aff);
+  padding-inline: 35px;
+  /* padding-bottom: 500px; */
+}
+
+/* author info starts here */
+.author-dashboard {
+  text-align: center;
+  padding-top: 70px;
+}
+
+.author-dashboard h1 {
+  font-size: 48px;
+  padding-bottom: 15px;
+  font-weight: 800;
+  color: #FFFFFF;
+  text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.author-dashboard p {
+  font-weight: 600;
+  color: #FFFFFF;
+  font-size: 18px;
+}
+
+.author-info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+/* author left container */
+
+.author-submit-paper-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s ease;
+  padding-inline:100px;
+}
+
+.author-submit-paper-container:hover {
+  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3);
+}
+
+.author-submit-paper-container i {
+  background: linear-gradient(to bottom right, #43e97b, #38f9d7);
+  color: #ffffff;
+  padding: 20px 40px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-size: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.author-submit-paper-container p {
+  padding-block: 20px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #5f5f5f;
+}
+
+.author-submit-paper-container button {
+  background: linear-gradient(to bottom right, #43e97b, #38f9d7);
+  color: #ffffff;
+  padding: 10px 25px;
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 35px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.author-submit-paper-container button:hover {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* author right container */
+.author-view-paper-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s ease;
+  padding-inline:138px;
+}
+
+.author-view-paper-container:hover {
+  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3);
+}
+
+.author-view-paper-container i {
+  background: linear-gradient(to bottom right, #fa709a, #fee140);
+  color: #ffffff;
+  padding: 20px 40px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-size: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.author-view-paper-container p {
+  padding-block: 20px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #5f5f5f;
+}
+
+.author-view-paper-container button {
+  background: linear-gradient(to bottom right, #fa709a, #fee140);
+  color: #ffffff;
+  padding: 10px 25px;
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 35px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.author-view-paper-container button:hover {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}

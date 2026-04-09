@@ -72,10 +72,8 @@ const loginUser = asyncHandler(async(req, res) => {
 
   const {email, password, role} = req.body;
 
-  if(
-    [email, password, role].some(field => field?.trim() === "")
-  ) {
-    throw new ApiError(400, "Invalid credentials");
+  if (!email || !password || !role) {
+    throw new ApiError(400, "All fields are required")
   }
 
   const user = await User.findOne({
