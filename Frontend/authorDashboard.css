@@ -9,7 +9,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 11vh;
+  height: 12vh;
   padding: 20px 25px;
   /* border: 1px solid black; */
 }
@@ -37,7 +37,7 @@ nav h2 {
   font-size: 16px;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
 }
 
 .logout-section button:hover {
@@ -52,10 +52,9 @@ nav h2 {
 
 /* main section starts here */
 main {
-  height: calc(100vh - 11vh);
+  height: 100vh;
   background: linear-gradient(to bottom right, #67a6ff, #004aff);
   padding-inline: 35px;
-  /* padding-bottom: 500px; */
 }
 
 /* author info starts here */
@@ -86,6 +85,13 @@ main {
 }
 
 /* author left container */
+
+/* .upper-line {
+  width: 100%;
+  background: linear-gradient(to right, #43e97b, #38f9d7);
+  height: 5px;
+  border-radius: 30px;
+} */
 
 .author-submit-paper-container {
   display: flex;
@@ -156,6 +162,7 @@ main {
 
 .author-view-paper-container:hover {
   box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3);
+  /* margin-top: 15px; */
 }
 
 .author-view-paper-container i {
@@ -194,4 +201,14 @@ main {
 
 .author-view-paper-container button:hover {
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+footer {
+  height: 11vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: #4d4b4b;
+  font-weight: 600;
 }

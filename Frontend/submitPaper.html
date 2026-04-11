@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="javascriptreact">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Paper</title>
+  <link rel="stylesheet" href="submitPaper.css">
+</head>
+
+<body>
+  <form>
+    <div class="submit-paper-container">
+      <div class="submit-paper-content">
+        <div class="submit-paper-head-section">
+        <button class="dashboard-btn">
+          <i class="fa-solid fa-arrow-left"></i>
+          Back to Dashboard
+        </button>
+        <h1 class="main-heading">Submit Research Paper</h1>
+        <p class="para">Fill in the details and upload your research paper</p>
+      </div>
+      <div class="submit-paper-basic-info">
+        <label for="paper-title">Paper Title*</label>
+        <input type="text" name="paper-title" id="paper-title">
+        <label for="paper-abstract">Abstract*</label>
+        <textarea name="paper-abstract" id="paper-abstract" cols="30" rows="8"></textarea>
+        <!-- file container starts here -->
+        <div class="file-container">
+          <p>Upload Paper File * (PDF, DOC, DOCX)</p>
+          <label for="fileUpload" class="custom-btn"> <i class="fa-solid fa-arrow-up-from-bracket arrow-up"></i> Choose a file</label>
+          <input type="file" name="fileUpload" id="fileUpload" accept=".pdf, .doc, .docx" hidden>
+          <span id="fileText"></span>
+        </div>
+      </div>
+      <button type="submit" class="submit-button">Submit Paper</button>
+      </div>
+    </div>
+  </form>
+  <script src="https://kit.fontawesome.com/1d8804d5ad.js" crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

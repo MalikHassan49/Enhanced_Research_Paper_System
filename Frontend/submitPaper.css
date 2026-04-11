@@ -1,0 +1,167 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  font-family: 'Segoe UI';
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom right, #43e97b, #38f9d7);
+}
+
+form {
+  padding-block: 50px;
+}
+
+.submit-paper-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 20px;
+  width: 750px;
+  margin: 0 auto;
+  padding-block: 50px;
+  box-shadow: 4px 4px 10px 4px rgba(0, 0, 0, 0.1),
+  -4px -4px 10px 4px rgba(0, 0, 0, 0.1);
+}
+
+.submit-paper-head-section .main-heading {
+  text-align: center;
+  font-weight: 800;
+  font-size: 35px;
+  margin-top: 25px;
+  margin-bottom: 5px;
+  background: linear-gradient(to bottom right,#43e97b, #38f9d7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.submit-paper-head-section .para {
+  text-align: center;
+  color: #5f5f5f;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.dashboard-btn {
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #ffffff;
+  background: linear-gradient(to bottom right, rgb(102, 126, 234), #764ba2);
+  transition: all 0.3s ease;
+}
+
+.dashboard-btn:hover {
+  box-shadow: 2px 10px 10px rgba(102, 126, 234, 0.3);
+}
+
+.dashboard-btn i {
+  color: #ffffff;
+}
+
+.submit-paper-basic-info label {
+  font-weight: 600;
+}
+
+#paper-title {
+  display: block;
+  width: 650px;
+  height: 40px;
+  font-size: 16px;
+  border-radius: 10px;
+  margin-block: 10px;
+  transition: all 0.5s ease;
+  border: none;
+  padding: 10px;
+}
+
+#paper-title:focus {
+  border: 2px solid #38f9d7;
+  box-shadow: 0 0 0px 4px #9ad19a;
+  outline: none;
+}
+
+#paper-abstract {
+  display: block;
+  width: 650px;
+  font-size: 16px;
+  border-radius: 10px;
+  margin-block: 5px;
+  transition: all 0.5s ease;
+  border: none;
+  padding: 10px;
+}
+
+#paper-abstract:focus {
+  outline: none;
+  border: 2px solid #38f9d7;
+  box-shadow: 0 0 0px 4px #9ad19a;
+}
+
+#fileUpload {
+  display: none;
+}
+
+.file-container p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.custom-btn {
+  display: block;
+  border: 3px dashed #43e97b;
+  width: 650px;
+  padding-block: 60px;
+  background-color: #ffffff;
+  text-align: center;
+  border-radius: 10px;
+  color: #5f5f5f;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.custom-btn i {
+  font-size: 20px;
+}
+
+.submit-button {
+  position: relative;
+  overflow: hidden;
+  background: none;
+  border: none;
+  margin-top: 50px;
+  width: 650px;
+  padding-block: 10px;
+  background: linear-gradient(to bottom right, #43e97b, #38f9d7);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Light effect layer before buuton element */
+.submit-button::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transition: 0.9s;
+}
+
+/* hover effect on button */
+.submit-button:hover::before {
+  left: 100%;  /* left se right move karege */
+}
