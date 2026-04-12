@@ -27,22 +27,17 @@ const registerUser = asyncHandler(async (req, res) => {
   // flow of api
   // Take email,password etc from user
   // Check email,password etc
-  // 
-  const { email, password, role } = req.body;
+  
+  const { username, email, password, role } = req.body;
+  console.log("Username: ", username);
   console.log("Email: ", email);
   console.log("Password: ", password);
   console.log("Role: ", role);
 
   // safe validation
-  if(!email || !password || !role) {
+  if (!username || !email || !password || !role) {
     throw new ApiError(400, "All fields are required");
   }
-
-  // if (
-  //   [email, password, role].some(field => field.trim() === "")
-  // ) {
-  //   throw new ApiError(400, "All the fields are required");
-  // }
 
   const alreadyExist = await User.findOne({ email })
 
@@ -52,6 +47,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
 
   const user = await User.create({
+    username,
     email,
     password,
     role
@@ -64,7 +60,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const options = {
     httpOnly: true,
     secure: false,
-    sameSite: "lax"
+    sameSite: "Lax"
   }
 
   return res
@@ -86,15 +82,13 @@ const loginUser = asyncHandler(async (req, res) => {
   // Check the fields
   // Match passowrd, email in database
   console.log("login API hit");
-  const { email, password, role } = req.body;
+  const { username, email, password, role } = req.body;
 
-  if (!email || !password || !role) {
+  if ( !username || !email || !password || !role) {
     throw new ApiError(400, "All fields are required")
   }
 
-  const user = await User.findOne({
-    $or: [{ email }, { password }]
-  })
+  const user = await User.findOne({ email })
 
   if (!user) {
     throw new ApiError(400, "User not found");
@@ -113,7 +107,7 @@ const loginUser = asyncHandler(async (req, res) => {
   const options = {
     httpOnly: true,
     secure: false,
-    sameSite: "lax"
+    sameSite: "Lax"
   }
 
 
@@ -134,31 +128,31 @@ const loginUser = asyncHandler(async (req, res) => {
 
 const logoutUser = asyncHandler(async (req, res) => {
   console.log("logout API hit");
-  const updatedUser = await User.findByIdAndUpdate(req.user._id,
+  await User.findByIdAndUpdate(req.user._id,
     {
       $unset: {
         refreshToken: ""
       }
     },
     {
-      new: true
+      returnDocument: "after"
     }
   )
 
   const options = {
     httpOnly: true,
     secure: false,
-    sameSite: "lax"
+    sameSite: "Lax"
   }
 
   return res
-    .send(200)
+    .status(200)
     .clearCookie("accessToken", options)
     .clearCookie("refreshToken", options)
     .json(
       new ApiResponse(
         200,
-        logoutUser,
+        {},
         "User logout successfully"
       )
     )

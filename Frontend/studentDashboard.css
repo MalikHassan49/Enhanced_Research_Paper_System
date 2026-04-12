@@ -5,6 +5,14 @@
   font-family: 'Segoe UI';
 }
 
+body {
+  transition: opacitiy 0.1s ease;
+}
+
+body.fade-out {
+  opacity: 0;
+}
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -58,12 +66,12 @@ main {
 }
 
 /* author info starts here */
-.author-dashboard {
+.student-dashboard {
   text-align: center;
   padding-top: 70px;
 }
 
-.author-dashboard h1 {
+.student-dashboard h1 {
   font-size: 48px;
   padding-bottom: 15px;
   font-weight: 800;
@@ -71,29 +79,20 @@ main {
   text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
 }
 
-.author-dashboard p {
+.student-dashboard p {
   font-weight: 600;
   color: #FFFFFF;
   font-size: 18px;
 }
 
-.author-info-container {
+.student-info-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 40px;
 }
 
-/* author left container */
-
-/* .upper-line {
-  width: 100%;
-  background: linear-gradient(to right, #43e97b, #38f9d7);
-  height: 5px;
-  border-radius: 30px;
-} */
-
-.author-submit-paper-container {
+.student-submit-paper-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -105,11 +104,11 @@ main {
   padding-inline:100px;
 }
 
-.author-submit-paper-container:hover {
+.student-submit-paper-container:hover {
   box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3);
 }
 
-.author-submit-paper-container i {
+.student-submit-paper-container i {
   background: linear-gradient(to bottom right, #43e97b, #38f9d7);
   color: #ffffff;
   padding: 20px 40px;
@@ -122,14 +121,14 @@ main {
   border-radius: 50%;
 }
 
-.author-submit-paper-container p {
+.student-submit-paper-container p {
   padding-block: 20px;
   font-weight: 600;
   font-size: 16px;
   color: #5f5f5f;
 }
 
-.author-submit-paper-container button {
+.student-submit-paper-container button {
   background: linear-gradient(to bottom right, #43e97b, #38f9d7);
   color: #ffffff;
   padding: 10px 25px;
@@ -143,12 +142,12 @@ main {
   transition: all 0.3s ease;
 }
 
-.author-submit-paper-container button:hover {
+.student-submit-paper-container button:hover {
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* author right container */
-.author-view-paper-container {
+/* student right container */
+.student-view-paper-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -160,12 +159,12 @@ main {
   padding-inline:138px;
 }
 
-.author-view-paper-container:hover {
+.student-view-paper-container:hover {
   box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3);
   /* margin-top: 15px; */
 }
 
-.author-view-paper-container i {
+.student-view-paper-container i {
   background: linear-gradient(to bottom right, #fa709a, #fee140);
   color: #ffffff;
   padding: 20px 40px;
@@ -178,14 +177,14 @@ main {
   border-radius: 50%;
 }
 
-.author-view-paper-container p {
+.student-view-paper-container p {
   padding-block: 20px;
   font-weight: 600;
   font-size: 16px;
   color: #5f5f5f;
 }
 
-.author-view-paper-container button {
+.student-view-paper-container button {
   background: linear-gradient(to bottom right, #fa709a, #fee140);
   color: #ffffff;
   padding: 10px 25px;
@@ -199,7 +198,7 @@ main {
   transition: all 0.3s ease;
 }
 
-.author-view-paper-container button:hover {
+.student-view-paper-container button:hover {
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
 

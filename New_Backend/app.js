@@ -27,15 +27,13 @@ app.use(express.urlencoded({extended: true, limit: '16kb'}))
 app.use(express.static("public"))
 app.use(cookieParser())
 
-// simple route test
-app.get("/", (req, res) => {
-  res.send("Backend working");
-});
 
 // import routes
 import userRouter from "./src/routes/user.routes.js";
+import paperRouter from "./src/routes/paper.routes.js";
 
 // routes declaration
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/papers", paperRouter);
 
 export { app }

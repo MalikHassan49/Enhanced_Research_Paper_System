@@ -3,11 +3,6 @@ const loginPassword = document.getElementById("login-password");
 const loginLockPassword = document.getElementById("login-lock-password");
 const loginTogglePassword = document.getElementById("login-toggle-password");
 
-// Login confirm password field
-const loginConfirmPassword = document.getElementById("login-confirm-password");
-const loginConfirmLockPassword = document.getElementById("login-confirm-lock-password");
-const loginConfirmTogglePassword = document.getElementById("login-toggle-confirm-password");
-
 // add event listener on login toggle password
 if (loginTogglePassword && loginPassword) {
   loginTogglePassword.addEventListener("click", () => {
@@ -22,20 +17,6 @@ if (loginLockPassword && loginPassword) {
   });
 }
 
-// add event listener on login toggle confirm password
-if (loginConfirmTogglePassword && loginConfirmPassword) {
-  loginConfirmTogglePassword.addEventListener("click", () => {
-    loginConfirmPassword.type = loginConfirmPassword.type === "password" ? "text" : "password";
-  });
-}
-
-// add event listener on login confirm lock password
-if (loginConfirmLockPassword && loginConfirmPassword) {
-  loginConfirmLockPassword.addEventListener("click", () => {
-    loginConfirmPassword.disabled = !loginConfirmPassword.disabled;
-  });
-}
-
 // Login form submit
 const loginForm = document.getElementById("loginForm");
 
@@ -43,6 +24,7 @@ if (loginForm) {
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    const username = document.getElementById("login-username").value;
     const email = document.getElementById("login-email").value;
     const password = document.getElementById("login-password").value;
     const role = document.getElementById("Roles").value;
@@ -55,6 +37,7 @@ if (loginForm) {
         },
         credentials: "include",
         body: JSON.stringify({
+          username,
           email,
           password,
           role
@@ -70,7 +53,7 @@ if (loginForm) {
         document.body.classList.add("fade-out");
 
         setTimeout(() => {
-          window.location.href = "authorDashboard.html";
+          window.location.href = "studentDashboard.html";
         }, 100);
       }
     }

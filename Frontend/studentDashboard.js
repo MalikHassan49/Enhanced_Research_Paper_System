@@ -30,3 +30,15 @@ logoutBtn.addEventListener("click", async () => {
     alert("LogOut Failed");
   }
 })
+
+// submit paper page
+
+const submitBtn = document.getElementById("submit-button");
+
+submitBtn.addEventListener("click", () => {
+  document.body.classList.add("fade-out");
+
+  setTimeout(() => {
+    window.location.href = "submitPaper.html"
+  }, 100);
+})

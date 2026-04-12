@@ -3,11 +3,6 @@ const registerPassword = document.getElementById("register-password");
 const registerLockPassword = document.getElementById("register-lock-password");
 const registerTogglePassword = document.getElementById("register-toggle-password");
 
-// Register confirm password field
-const registerConfirmPassword = document.getElementById("register-confirm-password");
-const registerConfirmLockPassword = document.getElementById("register-confirm-lock-password");
-const registerConfirmTogglePassword = document.getElementById("register-toggle-confirm-password");
-
 
 // add event listener on register toggle password
 if (registerTogglePassword && registerPassword) {
@@ -23,19 +18,6 @@ if (registerLockPassword && registerPassword) {
   });
 }
 
-// add event listener on register toggle confirm password
-if (registerConfirmTogglePassword && registerConfirmPassword) {
-  registerConfirmTogglePassword.addEventListener("click", () => {
-    registerConfirmPassword.type = registerConfirmPassword.type === "password" ? "text" : "password";
-  });
-}
-
-// add event listener on register confirm lock password
-if (registerConfirmLockPassword && registerConfirmPassword) {
-  registerConfirmLockPassword.addEventListener("click", () => {
-    registerConfirmPassword.disabled = !registerConfirmPassword.disabled;
-  })
-};
 
 // Registration Form
 
@@ -45,16 +27,10 @@ if (registerForm) {
   registerForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    const username = document.getElementById("register-username").value;
     const email = document.getElementById("register-email").value;
     const password = document.getElementById("register-password").value;
-    const confirmPassword = document.getElementById("register-confirm-password").value;
     const role = document.getElementById("Roles").value;
-
-    // simple validation
-    if (password !== confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
 
     try {
       const response = await fetch("http://127.0.0.1:5000/api/v1/users/register", {
@@ -64,6 +40,7 @@ if (registerForm) {
         },
         credentials: "include",
         body: JSON.stringify({
+          username,
           email,
           password,
           role
@@ -75,10 +52,10 @@ if (registerForm) {
       if (response.ok) {
         console.log("User register successfully");
         console.log("Response data: ", data);
-        // for smooth animate to authorDashboard
+        // for smooth animate to studentDashboard
         document.body.classList.add("fade-out");
         setTimeout(() => {
-          window.location.href = "authorDashboard.html";
+          window.location.href = "studentDashboard.html";
         }, 100)
       }
       else {

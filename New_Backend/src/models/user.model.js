@@ -3,6 +3,11 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const userSchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+    required: true
+  },
   email: {
     type: String,
     required: [true, "email is required"],
@@ -15,7 +20,7 @@ const userSchema = new Schema({
   },
   role: {
     type: String,
-    enum: ["Student", "Author", "Admin"],
+    enum: ["Student", "Teacher", "Admin"],
     required: true
   },
   refreshToken: {

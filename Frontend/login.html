@@ -1,77 +1,75 @@
 <!DOCTYPE html>
 <html lang="javascriptreact">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Page</title>
   <link rel="stylesheet" href="register.css">
 </head>
-<body style="height: 100vh;">
-  <!-- login section starts here -->
-    <div class="login-container">
-  <div class="image-container">
-    <img src="images/image_4.png" alt="image_4">
-  </div>
-  <form id="loginForm">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
 
-    <h2 class="main-heading">Research Paper System</h2>
-    <h3>Welcome Back</h3>
-    <!-- first input container -->
-    <div class="input-container">
-      <label for="Email">Email Address</label>
-      <div class="email-container">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <i class="fa-solid fa-envelope"></i>
-        <input type="text" id="login-email" name="Email" placeholder="Enter your email">
-      </div>
+<body style="height: 100%;">
+  <!-- login section starts here -->
+  <div class="login-container">
+    <div class="image-container">
+      <img src="images/image_4.png" alt="image_4">
     </div>
-    <!-- second input container -->
-    <div class="input-container">
-      <label for="Password">Password</label>
-      <div class="password-container">
-        <i id="login-lock-password" class="fa-solid fa-lock"></i>
-        <input type="password" id="login-password" placeholder="Enter your password">
-        <i id="login-toggle-password" class="fa-solid fa-eye"></i>
+    <form id="loginForm">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+
+      <h2 class="main-heading">Research Paper System</h2>
+      <h3>Welcome Back</h3>
+      <!-- first input container -->
+      <div class="input-container">
+        <label for="Username">Username</label>
+        <div class="user-container">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" id="login-username" name="Username" placeholder="Enter your name">
+        </div>
       </div>
-    </div>
-    <!-- third input container -->
-    <!-- <div class="input-container">
-      <label for="Confirm-Password">Confirm Password</label>
-      <div class="confirm-password-container">
-        <i id="login-confirm-lock-password" class="fa-solid fa-lock"></i>
-        <input type="password" id="login-confirm-password" name="confirm-login-password" placeholder="Enter Confirm Password">
-        <i id="login-toggle-confirm-password" class="fa-solid fa-eye"></i>
+      <!-- second input container -->
+      <div class="input-container">
+        <label for="Email">Email Address</label>
+        <div class="email-container">
+          <i class="fa-solid fa-envelope"></i>
+          <input type="text" id="login-email" name="Email" placeholder="Enter your email">
+        </div>
       </div>
-    </div> -->
-    <!-- roles-container -->
-    <div class="roles-container">
-      <label for="Roles">Select Role</label>
-      <div class="role-selection">
-        <i class="fa-solid fa-user"></i>
-        <select name="Roles" id="Roles">
-          <option value="Author">Author</option>
-          <option value="Student">Student</option>
-          <option value="Admin">Admin</option>
-        </select>
+      <!-- third input container -->
+      <div class="input-container">
+        <label for="Password">Password</label>
+        <div class="password-container">
+          <i id="login-lock-password" class="fa-solid fa-lock"></i>
+          <input type="password" id="login-password" placeholder="Enter your password">
+          <i id="login-toggle-password" class="fa-solid fa-eye"></i>
+        </div>
       </div>
-    </div>
-        <button type="submit" class="register-button">
+      <!-- roles-container -->
+      <div class="roles-container">
+        <label for="Roles">Select Role</label>
+        <div class="role-selection">
+          <i class="fa-solid fa-user"></i>
+          <select name="Roles" id="Roles">
+            <option value="Teacher">Teacher</option>
+            <option value="Student">Student</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="register-button">
         Login
         <i class="fa-solid fa-arrow-right"></i>
       </button>
       <p>Don't have an account&#63;
         <a href="#">Register Here</a>
       </p>
-  </form>
+    </form>
   </div>
   <script src="https://kit.fontawesome.com/1d8804d5ad.js" crossorigin="anonymous"></script>
   <script src="login.js"></script>
 </body>
+
 </html>

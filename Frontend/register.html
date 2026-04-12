@@ -7,74 +7,78 @@
   <title>Register Page</title>
   <link rel="stylesheet" href="register.css">
   <script src="https://kit.fontawesome.com/1d8804d5ad.js" crossorigin="anonymous"></script>
-  
+
 </head>
 
 <body>
   <!-- register section starts here -->
   <div class="register-container">
-  <div class="image-container">
-    <img src="images/image_3.png" alt="image_1">
-  </div>
-  <form id="registerForm">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
+    <div class="image-container">
+      <img src="images/image_3.png" alt="image_1">
+    </div>
+    <form id="registerForm">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
 
-    <h2 class="main-heading">Research Paper System</h2>
-    <h3>Welcome Back</h3>
-    <!-- first input container -->
-    <div class="input-container">
-      
-      <label for="Email">Email Address</label>
-      <div class="email-container">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <i class="fa-solid fa-envelope"></i>
-        <input type="text" id="register-email" name="Email" placeholder="Enter your email">
+      <h2 class="main-heading">Research Paper System</h2>
+      <h3>Welcome Back</h3>
+      <!-- first input container -->
+      <div class="input-container">
+        <label for="Username">Username</label>
+        <div class="user-container">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" id="register-username" name="Username" placeholder="Enter your name">
+        </div>
       </div>
-    </div>
-    <!-- second input container -->
-    <div class="input-container">
-      <label for="Password">Password</label>
-      <div class="password-container">
-        <i id="register-lock-password" class="fa-solid fa-lock"></i>
-        <input type="password" id="register-password" name="register-password" placeholder="Enter your password">
-        <i id="register-toggle-password" class="fa-solid fa-eye"></i>
+      <!-- second input container -->
+      <div class="input-container">
+        <label for="Email">Email Address</label>
+        <div class="email-container">
+          <i class="fa-solid fa-envelope"></i>
+          <input type="email" id="register-email" name="Email" placeholder="Enter your email">
+        </div>
       </div>
-    </div>
-    <!-- third input container -->
-    <div class="input-container">
-      <label for="Confirm-Password">Confirm Password</label>
-      <div class="confirm-password-container">
-        <i id="register-confirm-lock-password" class="fa-solid fa-lock"></i>
-        <input type="password" id="register-confirm-password" name="confirm-register-password" placeholder="Enter Confirm Password">
-        <i id="register-toggle-confirm-password" class="fa-solid fa-eye"></i>
+      <!-- third input container -->
+      <div class="input-container">
+        <label for="Password">Password</label>
+        <div class="password-container">
+          <i id="register-lock-password" class="fa-solid fa-lock"></i>
+          <input type="password" id="register-password" name="register-password" placeholder="Enter your password">
+          <i id="register-toggle-password" class="fa-solid fa-eye"></i>
+        </div>
       </div>
-    </div>
-    <!-- roles-container -->
-    <div class="roles-container">
-      <label for="Roles">Select Role</label>
-      <div class="role-selection">
-        <i class="fa-solid fa-user"></i>
-        <select name="Roles" id="Roles">
-          <option value="Author">Author</option>
-          <option value="Student">Student</option>
-          <option value="Admin">Admin</option>
-        </select>
+      <!-- fourth input container -->
+      <!-- <div class="input-container">
+        <label for="Confirm-Password">Confirm Password</label>
+        <div class="confirm-password-container">
+          <i id="register-confirm-lock-password" class="fa-solid fa-lock"></i>
+          <input type="password" id="register-confirm-password" name="confirm-register-password"
+            placeholder="Enter Confirm Password">
+          <i id="register-toggle-confirm-password" class="fa-solid fa-eye"></i>
+        </div>
+      </div> -->
+      <!-- roles-container -->
+      <div class="roles-container">
+        <label for="Roles">Select Role</label>
+        <div class="role-selection">
+          <i class="fa-solid fa-user"></i>
+          <select name="Roles" id="Roles">
+            <option value="Teacher">Teacher</option>
+            <option value="Student">Student</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </div>
       </div>
-    </div>
-        <button type="submit" class="register-button">
+      <button type="submit" class="register-button">
         Register
         <i class="fa-solid fa-arrow-right"></i>
       </button>
       <p>Already have an account&#63;
         <a href="#">Login Here</a>
       </p>
-  </form>
+    </form>
   </div>
   <!-- register section ends here -->
   <script src="https://kit.fontawesome.com/1d8804d5ad.js" crossorigin="anonymous"></script>
