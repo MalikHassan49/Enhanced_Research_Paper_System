@@ -7,9 +7,9 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 const verifyJWT = asyncHandler( async(req, _, next) => {
  try {
    const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "");
-   console.log("Cookies: ", req.cookies);
-   console.log("Cookies Acccess Token: ", req.cookies.accessToken);
-   console.log("Header: ",req.headers.authorization);
+  //  console.log("Cookies: ", req.cookies);
+  //  console.log("Cookies Acccess Token: ", req.cookies.accessToken);
+  //  console.log("Header: ",req.headers.authorization);
 
   if(!token) {
     throw new ApiError(401, "Unauthorized user");

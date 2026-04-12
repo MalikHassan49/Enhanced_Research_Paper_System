@@ -8,20 +8,21 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 const submitPaper = asyncHandler(async (req, res) => {
   console.log("Submit Paper API HIT");
+
+  console.log("Req body: ", req.body);
+  console.log("File object: ", req.file);
+  console.log("File path: ", req.file.path);
   const { paperTitle, paperAbstract } = req.body;
   const file = req.file;
   const localFilePath = req.file.path;
 
-  console.log("File object: ", req.file);
-  console.log("File path: ", req.file.path);
-
-  const userId = req.user._id;
+  const userId = 1234;
 
   if (!paperTitle || !paperAbstract) {
     throw new ApiError(400, "Paper title and Abstract is required");
   }
 
-  if (!req.files || localFilePath) {
+  if (!req.file || !localFilePath) {
     throw new ApiError(400, "File path is required");
   }
 
