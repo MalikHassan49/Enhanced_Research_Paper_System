@@ -6,6 +6,6 @@ import { upload } from "../middlewares/multer.middleware.js";
 
 const router = express.Router();
 
-router.route("/submit-paper").post(upload.single("file"), submitPaper);
+router.route("/submit-paper").post(verifyJWT, upload.single("file"), submitPaper);
 
 export default router;

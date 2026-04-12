@@ -16,15 +16,15 @@ fileUpload.addEventListener("change", () => {
 
 // send request to backend
 const submitBtn = document.getElementById("submit-button");
-const paperTitle = document.getElementById("paper-title").value;
-const paperAbstract = document.getElementById("paper-abstract").value;
+const paperTitle = document.getElementById("paper-title");
+const paperAbstract = document.getElementById("paper-abstract");
 
-submitBtn.addEventListener("click", async () => {
-
+submitBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
   const formData = new FormData();
 
-  formData.append("paperTitle", paperTitle);
-  formData.append("paperAbstract", paperAbstract);
+  formData.append("paperTitle", paperTitle.value);
+  formData.append("paperAbstract", paperAbstract.value);
   formData.append("file", fileUpload.files[0]);
 
   try {

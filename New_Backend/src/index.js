@@ -1,9 +1,8 @@
 import dotenv from "dotenv";
-dotenv.config({ path: './.env' });
 import { app } from "./app.js";
-import connectDB from "./src/db/db.js"
+import connectDB from "./db/db.js";
 
-console.log("ENV Check: ", process.env);
+dotenv.config({path: "./.env"});
 
 connectDB()
   .then(() => {

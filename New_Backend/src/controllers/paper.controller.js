@@ -16,7 +16,9 @@ const submitPaper = asyncHandler(async (req, res) => {
   const file = req.file;
   const localFilePath = req.file.path;
 
-  const userId = 1234;
+  // console.log("Request User: ", req.user)
+
+  const userId = req.user?._id;
 
   if (!paperTitle || !paperAbstract) {
     throw new ApiError(400, "Paper title and Abstract is required");
