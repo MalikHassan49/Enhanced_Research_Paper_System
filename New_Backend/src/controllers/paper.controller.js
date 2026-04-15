@@ -61,7 +61,7 @@ const submitPaper = asyncHandler(async (req, res) => {
 });
 
 const studentAllPapers = asyncHandler(async (req, res) => {
-  // console.log("Student All Papers API HIT");
+  console.log("Student All Papers API HIT");
   const userId = req.user._id;
 
   const papers = await Paper.find({

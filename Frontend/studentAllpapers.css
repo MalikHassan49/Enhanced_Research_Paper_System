@@ -10,6 +10,11 @@ body {
   background: linear-gradient(to bottom right, #ff69e0, #ffff14);
   width: 100%;
   min-height: 100vh;
+  transition: opacity 0.3s all;
+}
+
+body .fade-out {
+  opacity: 0;
 }
 
 .main-heading {
@@ -54,12 +59,17 @@ body {
 
 .papers-container .paper {
   width: 400px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border: none;
   border-radius: 20px;
   background-color: #fffffff3;
   padding: 25px;
   margin-right: 35px;
   margin-bottom: 40px;
+  overflow: hidden;
 }
 
 .papers-container .paper .status {
@@ -75,19 +85,37 @@ body {
 }
 
 .papers-container .paper .paper-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: #363535;
 }
 
 .papers-container .paper .paper-abstract {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* only show three lines    */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
   color: #475259;
   margin-top: 10px;
   margin-bottom: 20px;
 }
 
+
 .papers-container .paper .paper-name-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* overflow: hidden; */
+}
+
+.paper-name-container p {
+  max-width: 180px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .papers-container .paper .view-paper-btn {

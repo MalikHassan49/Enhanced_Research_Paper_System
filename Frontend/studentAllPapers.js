@@ -1,7 +1,3 @@
-const paperStatus = document.getElementById("status");
-const paperTitle = document.getElementById("paper-title");
-const paperAbstract = document.getElementById("paper-abstract");
-const fileName = document.getElementsByName("file-name");
 
 async function fetchPapersData() {
   try {
@@ -12,14 +8,28 @@ async function fetchPapersData() {
       }
     )
 
-    const data = response.json();
-    console.log(data);
-    if (data.length > 0) {
-      paperTitle.textContent = data.paperTitle;
-      paperAbstract.textContent = data.paperAbstract;
-      fileName.textContent = data.file.filename;
-      paperStatus.textContent = data.status;
-      document.querySelector(".papers-container").style.display = "flex";
+    const responseData = await response.json();
+    console.log("Response Data: ", responseData);
+
+    const container = document.querySelector(".papers-container");
+
+    if (responseData.data.length > 0) {
+      container.style.display = "flex";
+      responseData.data.forEach(paper => {
+        const card = document.createElement("div");
+        card.classList.add("paper");
+
+        card.innerHTML = `
+        <p class = "status">${paper.status}</p>
+        <h2 class = "paper-title">${paper.paperTitle}</h2>
+        <p class = "paper-abstract">${paper.paperAbstract}</p>
+        <div class = "paper-name-container">
+          <p class = "file-name">${paper.file.filename}</p>
+          <button class = "view-paper-btn">View Paper</button>
+        </div>
+        `
+        container.appendChild(card);
+      })
     }
     else {
       document.querySelector(".papers-available-container").style.display = "block";
@@ -28,3 +38,16 @@ async function fetchPapersData() {
     console.log(error);
   }
 }
+
+fetchPapersData();
+
+// back to student dashboard
+const dashboardBtn = document.getElementById("dashboard-btn");
+
+dashboardBtn.addEventListener("click", () => {
+  document.body.classList.add('fade-out');
+
+  setTimeout(() => {
+    window.location.href = "studentDashboard.html";
+  }, 200)
+})

@@ -15,11 +15,10 @@ fileUpload.addEventListener("change", () => {
 });
 
 // send request to backend
-const submitBtn = document.getElementById("submit-button");
 const paperTitle = document.getElementById("paper-title");
 const paperAbstract = document.getElementById("paper-abstract");
 
-submitBtn.addEventListener("click", async (e) => {
+document.querySelector("form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const formData = new FormData();
 
@@ -36,8 +35,8 @@ submitBtn.addEventListener("click", async (e) => {
       }
     );
 
-    const data = response.json();
-    console.log(data);
+    const responseData = response.json();
+    console.log(responseData.data);
   } catch (error) {
     console.log(error);
   }
