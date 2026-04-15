@@ -43,7 +43,8 @@ const submitPaper = asyncHandler(async (req, res) => {
     paperAbstract,
     file: {
       url: fileURL,
-      publicId: filePublicId
+      publicId: filePublicId,
+      filename: req.file.originalname
     },
     student: userId,
   })
@@ -59,4 +60,42 @@ const submitPaper = asyncHandler(async (req, res) => {
     )
 });
 
-export { submitPaper }
+const studentAllPapers = asyncHandler(async (req, res) => {
+  // console.log("Student All Papers API HIT");
+  const userId = req.user._id;
+
+  const papers = await Paper.find({
+    student: userId
+  })
+
+  if(papers.length > 0) {
+    return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        papers,
+        "All papers fetched successfully"
+      )
+    )
+  }
+  else {
+    return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        {},
+        "No papers available"
+      )
+    )
+  }
+
+
+})
+
+
+export {
+  submitPaper,
+  studentAllPapers
+}

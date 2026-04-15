@@ -12,9 +12,9 @@ cloudinary.config({
 
 // cloudinary checking
 
-console.log("Cloud_Name: ", process.env.CLOUDINARY_CLOUD_NAME);
-console.log("Cloudinary_Api_Key: ", process.env.CLOUDINARY_API_KEY);
-console.log("CLOUDINARY_API_SECRET: ", process.env.CLOUDINARY_API_SECRET);
+// console.log("Cloud_Name: ", process.env.CLOUDINARY_CLOUD_NAME);
+// console.log("Cloudinary_Api_Key: ", process.env.CLOUDINARY_API_KEY);
+// console.log("CLOUDINARY_API_SECRET: ", process.env.CLOUDINARY_API_SECRET);
 
 // upload the file on cloudinary
 const uploadOnCloudinary = async (localFilePath) => {

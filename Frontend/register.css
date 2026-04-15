@@ -36,18 +36,6 @@ form {
   /* backdrop-filter: blur(10px); */
 }
 
-/* form::before {
-  content: "";
-  position: absolute;
-  width: 100px;
-  height: 3px;
-  border-radius: 15px;
-  background: #38BDF8;
-  
-  animation: moveBorder 4s linear infinite;
-  z-index: -1;
-} */
-
 form span {
   position: absolute;
   display: block;

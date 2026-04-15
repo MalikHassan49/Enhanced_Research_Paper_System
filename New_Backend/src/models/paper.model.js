@@ -13,7 +13,8 @@ const paperSchema = new Schema({
   },
   file: {
     url: { type: String, required: true },
-    publicId: { type: String, required: true }
+    publicId: { type: String, required: true },
+    filename: { type: String, required: true }
   },
   student: {
     type: Schema.Types.ObjectId,

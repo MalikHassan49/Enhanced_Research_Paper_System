@@ -42,3 +42,15 @@ submitBtn.addEventListener("click", () => {
     window.location.href = "submitPaper.html"
   }, 100);
 })
+
+// view papers page
+
+const viewPapersBtn = document.getElementById("view-papers");
+
+viewPapersBtn.addEventListener("click", () => {
+  document.body.classList.add("fade-out");
+
+  setTimeout(() => {
+    window.location.href = "studentAllPapers.html";
+  }, 100)
+})

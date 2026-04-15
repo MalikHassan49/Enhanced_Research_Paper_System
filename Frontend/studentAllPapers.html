@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="javascriptreact">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Papers</title>
+  <link rel="stylesheet" href="studentAllpapers.css">
+</head>
+
+<body>
+  <button class="dashboard-btn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+  <div class="main-heading">
+    <h1>My Research Papers</h1>
+    <p>View all your submitted papers</p>
+  </div>
+  <div class="papers-container">
+    <div class="paper">
+      <p class="status" id="status">Pending</p>
+      <h2 class="paper-title" id="paper-title">AI</h2>
+      <p class="paper-abstract" id="paper-abstract">Artificial Intelligence</p>
+      <div class="paper-name-container">
+        <p class="file-name" id="file-name"><i class="fa-regular fa-file"></i> Filename</p>
+        <button class="view-paper-btn">View Paper</button>
+      </div>
+    </div>
+  </div>
+  <!-- if papers are not submitted by user -->
+   <div class="papers-available-container">
+    <i class="fa-regular fa-file"></i>
+    <h1>No Papers Yet</h1>
+    <p>You haven't submitted any research papers</p>
+    <button>SUBMIT YOUR FIRST PAPER</button>
+  </div>
+  <script src="https://kit.fontawesome.com/1d8804d5ad.js" crossorigin="anonymous"></script>
+  <script src="studentAllPapers.js"></script>
+</body>
+
+</html>
