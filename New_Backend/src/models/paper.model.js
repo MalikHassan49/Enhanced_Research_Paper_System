@@ -27,10 +27,10 @@ const paperSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ["submitted", "reviewing", "accepted", "rejected"],
-    default: "submitted"
+    enum: ["Pending", "Under Review", "Accepted", "Rejected"],
+    default: "Pending"
   },
-  teacherCommet: {
+  teacherComment: {
     type: String,
     default: ""
   }

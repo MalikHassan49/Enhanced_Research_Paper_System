@@ -11,7 +11,7 @@
 <body>
 
   <div class="view-papers-container">
-    <button class="dashboard-btn">
+    <button class="dashboard-btn" id="dashboard-btn">
       <i class="fa-solid fa-arrow-left"></i>
       Back to Dashboard
     </button>
@@ -23,7 +23,7 @@
     </div>
     <div class="update-container">
       <p>Update Status*</p>
-      <select name="Status" id="Status">
+      <select name="paperStatus" id="paperStatus">
         <option value="Pending">Pending</option>
         <option value="Under Review">Under Review</option>
         <option value="Accepted">Accepted</option>
@@ -38,8 +38,13 @@
         <button>Download</button>
       </a>
     </div>
+    <div class="result-submittion-container">
+      <!-- dynamically create  -->
+    </div>
+    <button class="review-btn" id="review-btn">Submit Review</button>
   </div>
   <script src="https://kit.fontawesome.com/1d8804d5ad.js" crossorigin="anonymous"></script>
+  <script src="viewPaper.js"></script>
 </body>
 
 </html>

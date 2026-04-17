@@ -68,27 +68,27 @@ const studentAllPapers = asyncHandler(async (req, res) => {
     student: userId
   })
 
-  if(papers.length > 0) {
+  if (papers.length > 0) {
     return res
-    .status(200)
-    .json(
-      new ApiResponse(
-        200,
-        papers,
-        "All papers fetched successfully"
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          papers,
+          "All papers fetched successfully"
+        )
       )
-    )
   }
   else {
     return res
-    .status(200)
-    .json(
-      new ApiResponse(
-        200,
-        {},
-        "No papers available"
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          {},
+          "No papers available"
+        )
       )
-    )
   }
 
 
@@ -98,28 +98,56 @@ const allSubmittedPapers = asyncHandler(async (req, res) => {
   console.log("All Submitted Papers API HIT !!!");
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 9;
-  const skip = (page - 1) * limit ;
+  const skip = (page - 1) * limit;
 
 
   const papers = await Paper.find({})
-  .populate("student", "username")
-  .sort({createdAt : -1})
-  .limit(limit)
-  .skip(skip)
+    .populate("student", "username")
+    .sort({ createdAt: -1 })
+    .limit(limit)
+    .skip(skip)
 
   return res
-  .status(200)
-  .json(
-    new ApiResponse(
-      200,
-      papers,
-      "Papers fetched successfully"
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        papers,
+        "Papers fetched successfully"
+      )
     )
-  )
+})
+
+const reviewPaper = asyncHandler(async (req, res) => {
+  console.log("Review Paper API HIT!!!");
+  const { comment, paperStatus } = req.body;
+  const paperId = req.params.id;
+
+  if (!comment || !paperStatus) {
+    throw new ApiError(400, "All fields are required");
+  }
+
+  const updatePaper = await Paper.findByIdAndUpdate(paperId, {
+    $set: {
+      teacherComment: comment,
+      status: paperStatus
+    }
+  })
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        updatePaper,
+        "Your review submitted successfully"
+      )
+    )
 })
 
 export {
   submitPaper,
   studentAllPapers,
-  allSubmittedPapers
+  allSubmittedPapers,
+  reviewPaper
 }

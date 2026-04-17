@@ -144,3 +144,27 @@ select {
 .buttons-container button:hover {
   box-shadow: 0px 0px 8px 8px rgba(245, 175, 25, 0.3);
 }
+
+.review-btn {
+  padding: 10px 20px;
+  color: #000000;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(to bottom right, rgb(245, 175, 25), #ff9a9e);
+  cursor: pointer;
+  margin-top: 30px;
+  transition: all 0.4s ease;
+}
+
+.review-btn:hover {
+  box-shadow: 0px 0px 8px 8px rgba(245, 175, 25, 0.3);
+}
+
+.result-submittion-container p {
+  color: #ff9a9e;
+  font-size: 16px;
+  font-weight: 800;
+  margin-block: 5px;
+}

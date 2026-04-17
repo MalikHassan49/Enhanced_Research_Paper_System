@@ -4,8 +4,8 @@ async function allSubmittedPapers() {
   try {
     const response = await fetch("http://127.0.0.1:5000/api/v1/papers/all-submitted-papers",
       {
-        method : "GET",
-        credentials : "include"
+        method: "GET",
+        credentials: "include"
       }
     )
 
@@ -14,7 +14,7 @@ async function allSubmittedPapers() {
     console.log("Response Data: ", responseData);
 
     const container = document.querySelector(".review-papers-container");
-    if(responseData.data.length > 0) {
+    if (responseData.data.length > 0) {
       container.style.display = "flex";
       responseData.data.forEach(paper => {
         const card = document.createElement("div");
@@ -28,7 +28,7 @@ async function allSubmittedPapers() {
         <p class = "paper-abstract">${paper.paperAbstract}</p>
         <div class = "paper-name-container">
         <p class = "file-name">${paper.file.filename}</p>
-        <button class = "view-paper-btn" id = "view-paper-btn">Review Paper</button>
+        <button class = "view-paper-btn">Review Paper</button>
         </div>
         `
         container.appendChild(card);
@@ -52,4 +52,16 @@ dashboardBtn.addEventListener("click", () => {
   setTimeout(() => {
     window.location.href = "teacherDashboard.html";
   }, 200)
+})
+
+// view paper page
+
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains('view-paper-btn')) {
+    document.body.classList.add('fade-out');
+
+    setTimeout(() => {
+      window.location.href = "viewPaper.html";
+    }, 100)
+  }
 })
