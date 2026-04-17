@@ -3,6 +3,7 @@ const loginPassword = document.getElementById("login-password");
 const loginLockPassword = document.getElementById("login-lock-password");
 const loginTogglePassword = document.getElementById("login-toggle-password");
 
+
 // add event listener on login toggle password
 if (loginTogglePassword && loginPassword) {
   loginTogglePassword.addEventListener("click", () => {
@@ -53,7 +54,12 @@ if (loginForm) {
         document.body.classList.add("fade-out");
 
         setTimeout(() => {
-          window.location.href = "studentDashboard.html";
+          if (role === "Student") {
+            window.location.href = "studentDashboard.html";
+          }
+          if (role === "Teacher") {
+            window.location.href = "teacherDashboard.html";
+          }
         }, 100);
       }
     }

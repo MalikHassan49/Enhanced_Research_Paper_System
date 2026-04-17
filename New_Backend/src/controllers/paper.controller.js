@@ -94,8 +94,32 @@ const studentAllPapers = asyncHandler(async (req, res) => {
 
 })
 
+const allSubmittedPapers = asyncHandler(async (req, res) => {
+  console.log("All Submitted Papers API HIT !!!");
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 9;
+  const skip = (page - 1) * limit ;
+
+
+  const papers = await Paper.find({})
+  .populate("student", "username")
+  .sort({createdAt : -1})
+  .limit(limit)
+  .skip(skip)
+
+  return res
+  .status(200)
+  .json(
+    new ApiResponse(
+      200,
+      papers,
+      "Papers fetched successfully"
+    )
+  )
+})
 
 export {
   submitPaper,
-  studentAllPapers
+  studentAllPapers,
+  allSubmittedPapers
 }

@@ -25,7 +25,7 @@ async function fetchPapersData() {
         <p class = "paper-abstract">${paper.paperAbstract}</p>
         <div class = "paper-name-container">
           <p class = "file-name">${paper.file.filename}</p>
-          <button class = "view-paper-btn">View Paper</button>
+          <button class = "view-paper-btn" id = "view-paper-btn">View Paper</button>
         </div>
         `
         container.appendChild(card);
@@ -51,3 +51,14 @@ dashboardBtn.addEventListener("click", () => {
     window.location.href = "studentDashboard.html";
   }, 200)
 })
+
+// paper view by student
+// const viewPaperBtn = document.getElementById("view-paper-btn");
+
+// viewPaperBtn.addEventListener("click", () => {
+//   document.classList.add('fade-out');
+
+//   setTimeout(() => {
+//     window.location.href = "viewPaper.html";
+//   }, 200)
+// })

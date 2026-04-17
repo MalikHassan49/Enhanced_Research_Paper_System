@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="javascriptreact">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Papers</title>
+  <link rel="stylesheet" href="viewPaper.css">
+</head>
+
+<body>
+
+  <div class="view-papers-container">
+    <button class="dashboard-btn">
+      <i class="fa-solid fa-arrow-left"></i>
+      Back to Dashboard
+    </button>
+    <h1 class="main-heading">Review Research Paper</h1>
+    <p class="para">View paper, comment and update status</p>
+    <div class="paper-comment-container">
+      <p>Add Comment*</p>
+      <textarea name="paper-comment" id="paper-comment" cols="30" rows="6" placeholder="Enter your comment here..."></textarea>
+    </div>
+    <div class="update-container">
+      <p>Update Status*</p>
+      <select name="Status" id="Status">
+        <option value="Pending">Pending</option>
+        <option value="Under Review">Under Review</option>
+        <option value="Accepted">Accepted</option>
+        <option value="Rejected">Rejected</option>
+      </select>
+    </div>
+    <div class="buttons-container">
+      <a href="papers/Adnan.pdf">
+        <button>View Paper</button>
+      </a>
+      <a href="papers/Adnan.pdf" download>
+        <button>Download</button>
+      </a>
+    </div>
+  </div>
+  <script src="https://kit.fontawesome.com/1d8804d5ad.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
