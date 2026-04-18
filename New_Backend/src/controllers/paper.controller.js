@@ -100,6 +100,7 @@ const allSubmittedPapers = asyncHandler(async (req, res) => {
   const limit = parseInt(req.query.limit) || 9;
   const skip = (page - 1) * limit;
 
+  const totalPapers = await Paper.countDocuments();
 
   const papers = await Paper.find({})
     .populate("student", "username")
@@ -112,7 +113,12 @@ const allSubmittedPapers = asyncHandler(async (req, res) => {
     .json(
       new ApiResponse(
         200,
+        {
         papers,
+        totalPapers,
+        currentPage: page,
+        totalPages: Math.ceil(totalPapers / limit)
+        },
         "Papers fetched successfully"
       )
     )
@@ -122,6 +128,7 @@ const reviewPaper = asyncHandler(async (req, res) => {
   console.log("Review Paper API HIT!!!");
   const { comment, paperStatus } = req.body;
   const paperId = req.params.id;
+  const userId = req.user.id;
 
   if (!comment || !paperStatus) {
     throw new ApiError(400, "All fields are required");
@@ -130,7 +137,8 @@ const reviewPaper = asyncHandler(async (req, res) => {
   const updatePaper = await Paper.findByIdAndUpdate(paperId, {
     $set: {
       teacherComment: comment,
-      status: paperStatus
+      status: paperStatus,
+      reviewedBy: userId
     }
   })
 
@@ -145,9 +153,29 @@ const reviewPaper = asyncHandler(async (req, res) => {
     )
 })
 
+const comment = asyncHandler( async(req, res) => {
+  console.log("Comment data fetched successfully");
+  const paperId = req.params.id;
+
+  const paper = await Paper.findById(paperId)
+  .select("teacherComment")
+  .populate("reviewedBy", "username");
+
+  return res
+  .status(200)
+  .json(
+    new ApiResponse(
+      200,
+      paper,
+      "Comment data fetched successfully"
+    )
+  )
+})
+
 export {
   submitPaper,
   studentAllPapers,
   allSubmittedPapers,
-  reviewPaper
+  reviewPaper,
+  comment
 }

@@ -23,7 +23,8 @@ const paperSchema = new Schema({
   },
   reviewedBy: {
     type: Schema.Types.ObjectId,
-    ref: "User"
+    ref: "User",
+    required: true
   },
   status: {
     type: String,

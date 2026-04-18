@@ -1,6 +1,6 @@
 import express from "express";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
-import { submitPaper, studentAllPapers, allSubmittedPapers, reviewPaper  } from "../controllers/paper.controller.js";
+import { submitPaper, studentAllPapers, allSubmittedPapers, reviewPaper, comment  } from "../controllers/paper.controller.js";
 import multer from "multer";
 import { upload } from "../middlewares/multer.middleware.js";
 
@@ -9,6 +9,7 @@ const router = express.Router();
 router.route("/submit-paper").post(verifyJWT, upload.single("file"), submitPaper);
 router.route("/student-papers").get(verifyJWT, studentAllPapers);
 router.route("/all-submitted-papers").get(verifyJWT, allSubmittedPapers);
-router.route(":id/review-paper").put(verifyJWT, reviewPaper);
+router.route("/:id/review-paper").put(verifyJWT, reviewPaper);
+router.route("/:id/comment").get(verifyJWT, comment);
 
 export default router;

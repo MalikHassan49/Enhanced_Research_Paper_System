@@ -25,7 +25,7 @@ async function fetchPapersData() {
         <p class = "paper-abstract">${paper.paperAbstract}</p>
         <div class = "paper-name-container">
           <p class = "file-name">${paper.file.filename}</p>
-          <button class = "view-paper-btn" id = "view-paper-btn">View Paper</button>
+          <button class = "comment-btn" id = "comment-btn" data-id=${paper._id}>View Comment</button>
         </div>
         `
         container.appendChild(card);
@@ -52,13 +52,52 @@ dashboardBtn.addEventListener("click", () => {
   }, 200)
 })
 
-// paper view by student
-// const viewPaperBtn = document.getElementById("view-paper-btn");
 
-// viewPaperBtn.addEventListener("click", () => {
-//   document.classList.add('fade-out');
+// teacher comment 
 
-//   setTimeout(() => {
-//     window.location.href = "viewPaper.html";
-//   }, 200)
-// })
+document.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("comment-btn")) {
+    document.body.classList.add("low-fade");
+
+    const paperId = e.target.dataset.id;
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/api/v1/papers/${paperId}/comment`, {
+        method: "GET",
+        credentials: "include"
+      });
+
+      const responseData = await response.json();
+      console.log("Response Data: ", responseData);
+      const commentContainer = document.querySelector(".teacher-comment-container");
+
+      if (responseData.data) {
+        commentContainer.innerHTML = `
+      <div class = "comment-name-container">
+      <p>By: ${responseData.data.reviewedBy.username}</p>
+      <i id="x-mark" class="fa-solid fa-xmark"></i>
+      </div>
+       <div class="comment-text-container">
+      <p>Comment*</p>
+      <textarea name="comment" id="comment" cols="30" rows="6">
+      ${responseData.data.teacherComment}
+      </textarea>
+    </div>
+      `
+        commentContainer.style.display = "block";
+        // close the comment container
+
+        const xmark = document.getElementById("x-mark");
+
+        xmark.addEventListener("click", () => {
+          commentContainer.style.display = "none";
+          document.body.classList.remove("low-fade");
+        })
+
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+})
+
