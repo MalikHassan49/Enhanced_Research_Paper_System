@@ -1,0 +1,256 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI';
+}
+
+body {
+  padding: 50px 12px 30px 25px;
+  background: linear-gradient(to bottom right, #ff69e0, #ffff14);
+  width: 100%;
+  min-height: 100vh;
+  transition: opacity 0.3s all;
+}
+
+body .fade-out {
+  opacity: 0;
+}
+
+.main-heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.main-heading h1 {
+  font-size: 42px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 10px;
+  text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.main-heading p {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.dashboard-btn {
+  padding: 10px 20px;
+  color: #ffffff;
+  background: linear-gradient(to right, rgb(102, 126, 234), #764ba2);
+  border: none;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.dashboard-btn:hover {
+  box-shadow: 0px 2px 10px 5px rgba(102, 126, 234, 0.2);
+}
+
+.user-info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.review-papers-container {
+  display: none;
+  flex-wrap: wrap;
+}
+
+.review-papers-container .paper {
+  width: 400px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: none;
+  border-radius: 20px;
+  background-color: #fffffff3;
+  padding: 25px;
+  margin-right: 35px;
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+.review-papers-container .username {
+  font-size: 16px;
+  font-weight: 600;
+
+}
+
+.review-papers-container .paper .status {
+  background-color: #ffff14;
+  color: #ffffff;
+  width: fit-content;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.review-papers-container .paper .paper-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #363535;
+}
+
+.review-papers-container .paper .paper-abstract {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* only show three lines    */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #475259;
+  margin-top: 7px;
+  margin-bottom: 10px;
+}
+
+
+.review-papers-container .paper .paper-name-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* overflow: hidden; */
+}
+
+.paper-name-container p {
+  max-width: 150px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.review-papers-container .paper .delete-btn {
+  background: linear-gradient(to bottom right, #28ffb3, #43e97b);
+  border: none;
+  padding: 10px 40px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: box-shadow 0.4s ease;
+}
+
+.delete-btn:hover {
+  box-shadow: 0px 3px 10px 2px rgba(0, 0, 0, 0.2);
+}
+
+.review-papers-container .paper .file-name {
+  color: #475259;
+  font-weight: 600;
+}
+
+.file-name i {
+  color: #ff69e0;
+}
+
+/* if papers are not submitted */
+
+.review-papers-available-container {
+  display: none;
+  text-align: center;
+  border: 1px solid black;
+  width: 100%;
+  padding-block: 70px;
+  background-color: #ffffffef;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.review-papers-available-container:hover {
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.1), -5px -5px 10px 5px rgba(0, 0, 0, 0.1);
+}
+
+.review-papers-available-container i {
+  font-size: 100px;
+  color: #fa709a;
+  margin-bottom: 25px;
+}
+
+.review-papers-available-container h1 {
+  color: #475259;
+  margin-bottom: 10px;
+}
+
+.review-papers-available-container p {
+  color: #475259;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.review-papers-available-container button {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: linear-gradient(to bottom right, #fa709a, #ffff14);
+  transition: all 0.5s ease;
+}
+
+.review-papers-available-container button:hover {
+  box-shadow: 0px 5px 5px 5px rgba(250, 112, 154, 0.2);
+}
+
+#page-number {
+  display: none;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+#left-btn {
+  display: none;
+  color: #ffffff;
+  background-color: rgb(255, 255, 20);
+  padding: 10px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+#left-btn:hover {
+  box-shadow: 0px 0px 6px 6px rgba(255, 255, 20, 0.3);
+}
+
+.right-btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#right-btn {
+  display: none;
+  color: #ffffff;
+  background-color: rgb(255, 105, 224);
+  padding: 10px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+#right-btn:hover {
+  box-shadow: 0px 0px 6px 6px rgba(255, 105, 224, 0.3);
+}

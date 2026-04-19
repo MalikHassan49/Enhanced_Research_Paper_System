@@ -12,7 +12,9 @@ dashboardBtn.addEventListener("click", () => {
 // URL params come from reviewPaper.html file
 const params = new URLSearchParams(window.location.search);
 const paperId = params.get("id");
+const fileUrl = decodeURIComponent(params.get("url"));
 console.log("paperId: ", paperId);
+console.log("fileUrl: ", fileUrl);
 
 // send request to backend
 const reviewBtn = document.getElementById("review-btn");
@@ -45,3 +47,16 @@ reviewBtn.addEventListener("click", async () => {
     console.log(error);
   }
 })
+
+// open the file in new tab
+
+const buttonsContainer = document.querySelector(".buttons-container");
+
+buttonsContainer.innerHTML = `
+  <a href="${fileUrl}" target="_blank">
+        <button>View Paper</button>
+      </a>
+      <a href="${fileUrl}" download>
+        <button>Download</button>
+      </a>
+`

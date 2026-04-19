@@ -27,7 +27,7 @@ const registerUser = asyncHandler(async (req, res) => {
   // flow of api
   // Take email,password etc from user
   // Check email,password etc
-  
+
   const { username, email, password, role } = req.body;
   console.log("Username: ", username);
   console.log("Email: ", email);
@@ -84,7 +84,7 @@ const loginUser = asyncHandler(async (req, res) => {
   console.log("login API hit");
   const { username, email, password, role } = req.body;
 
-  if ( !username || !email || !password || !role) {
+  if (!username || !email || !password || !role) {
     throw new ApiError(400, "All fields are required")
   }
 
@@ -159,8 +159,106 @@ const logoutUser = asyncHandler(async (req, res) => {
 
 })
 
+
+const allTeachers = asyncHandler(async (req, res) => {
+  console.log("All Teachers API HIT!!!");
+  const teachers = await User.find({ role: "Teacher" })
+    .select("username email role")
+    .sort({ createdAt: -1 })
+
+  if (teachers.length > 0) {
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          teachers,
+          "All teachers fetched successfully"
+        )
+      )
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        {},
+        "Teacher are not registered"
+      )
+    )
+})
+
+const deleteTeacher = asyncHandler(async (req, res) => {
+  console.log("Delete teacher API HIT!!!");
+  const teacherId = req.params.id;
+
+  const teacher = await User.findByIdAndDelete(teacherId);
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        teacher,
+        "Teacher deleted successfully"
+      )
+    )
+})
+
+
+const allStudents = asyncHandler(async (req, res) => {
+  console.log("All Students API HIT!!!");
+  const students = await User.find({ role: "Student" })
+    .select("username email role")
+    .sort({ createdAt: -1 })
+
+  if (students.length > 0) {
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          students,
+          "All students fetched successfully"
+        )
+      )
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        {},
+        "Student are not registered"
+      )
+    )
+})
+
+const deleteStudent = asyncHandler(async (req, res) => {
+  console.log("Delete student API HIT!!!");
+  const studentId = req.params.id;
+
+  const student = await User.findByIdAndDelete(studentId);
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        student,
+        "Student deleted successfully"
+      )
+    )
+})
+
 export {
   registerUser,
   loginUser,
-  logoutUser
+  logoutUser,
+  allTeachers,
+  deleteTeacher,
+  allStudents,
+  deleteStudent
 }

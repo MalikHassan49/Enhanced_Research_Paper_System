@@ -55,8 +55,8 @@ if (registerForm) {
         // for smooth animate to studentDashboard
         document.body.classList.add("fade-out");
         setTimeout(() => {
-          if (role === "Teacher") {
-            window.location.href = "teacherDashboard.html";
+          if (role === "Student") {
+            window.location.href = "studentDashboard.html";
           }
         }, 100)
       }

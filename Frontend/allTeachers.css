@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI';
+}
+
+body {
+  padding: 50px 12px 30px 25px;
+  background: linear-gradient(to bottom right, #ff69e0, #ffff14);
+  width: 100%;
+  min-height: 100vh;
+  transition: opacity 0.3s all;
+}
+
+body .fade-out {
+  opacity: 0;
+}
+
+.main-heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.main-heading h1 {
+  font-size: 42px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 10px;
+  text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.main-heading p {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.dashboard-btn {
+  padding: 10px 20px;
+  color: #ffffff;
+  background: linear-gradient(to right, #667eea, #764ba2);
+  border: none;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.dashboard-btn:hover {
+  box-shadow: 0px 2px 10px 5px rgba(102, 126, 234, 0.2);
+}
+
+.teachers-container {
+  display: none;
+  flex-wrap: wrap;
+}
+
+.teacher-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+  width: 700px;
+  margin: 0 auto;
+  padding: 10px 20px 10px 15px;
+  border-radius: 30px;
+  border: 2px solid #5f5f5f;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.teacher-container p {
+  padding: 8px;
+  border-radius: 30px;
+}
+
+.teacher-container .role {
+  background-color: #764ba2;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.teacher-container .email {
+  background-color: #764ba2;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.teacher-container .username {
+  background-color: #764ba2;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.delete-btn {
+  background-color: #ffff14;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}

@@ -35,7 +35,7 @@ const submitPaper = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Something went wrong while uploading file on cloudinary");
   }
 
-  const fileURL = responseFromCloudinary.url;
+  const fileURL = responseFromCloudinary.secure_url;
   const filePublicId = responseFromCloudinary.public_id;
 
   const paper = await Paper.create({
@@ -104,6 +104,7 @@ const allSubmittedPapers = asyncHandler(async (req, res) => {
 
   const papers = await Paper.find({})
     .populate("studentId", "username")
+    .populate("reviewedBy", "username")
     .sort({ createdAt: -1 })
     .limit(limit)
     .skip(skip)
@@ -176,20 +177,40 @@ const reviewedPapers = asyncHandler(async (req, res) => {
   console.log("Reviewed papers API HIT!!!");
   const userId = req.user.id;
 
-  const papers = await Paper.find({reviewedBy : userId})
-  .select("paperTitle status")
-  .populate("student", "username")
+  const papers = await Paper.find({ reviewedBy: userId })
+    .select("paperTitle status")
+    .populate("student", "username")
 
   return res
-  .status(200)
-  .json(
-    new ApiResponse(
-      200,
-      papers,
-      "Reviewed papers fetched succesfully"
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        papers,
+        "Reviewed papers fetched succesfully"
+      )
     )
-  )
 })
+
+// delete paper
+
+const deletePaper = asyncHandler(async (req, res) => {
+  console.log("Delete paper API HIT!!!");
+  const paperId = req.params.id;
+
+  const paper = await Paper.findByIdAndDelete(paperId);
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        paper,
+        "Paper deleted successfully"
+      )
+    )
+})
+
 
 export {
   submitPaper,
@@ -197,5 +218,6 @@ export {
   allSubmittedPapers,
   reviewPaper,
   comment,
-  reviewedPapers
+  reviewedPapers,
+  deletePaper
 }
