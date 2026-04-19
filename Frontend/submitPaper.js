@@ -41,3 +41,14 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     console.log(error);
   }
 });
+
+// back to student dashboard
+const dashboardBtn = document.getElementById("dashboard-btn");
+
+dashboardBtn.addEventListener("click", () => {
+  document.body.classList.add('fade-out');
+
+  setTimeout(() => {
+    window.location.href = "studentDashboard.html";
+  }, 200)
+})

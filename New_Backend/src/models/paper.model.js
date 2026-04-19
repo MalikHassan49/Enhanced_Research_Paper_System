@@ -16,7 +16,7 @@ const paperSchema = new Schema({
     publicId: { type: String, required: true },
     filename: { type: String, required: true }
   },
-  student: {
+  studentId: {
     type: Schema.Types.ObjectId,
     ref: "User",
     required: true

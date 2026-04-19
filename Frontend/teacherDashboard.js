@@ -41,3 +41,15 @@ reviewBtn.addEventListener("click", () => {
     window.location.href = "reviewPapers.html";
   }, 100)
 })
+
+// view all papers that teacher had reviewed
+
+const viewPaperBtn = document.getElementById("view-papers");
+
+viewPaperBtn.addEventListener("click", async () => {
+  document.body.classList.add("fade-out");
+
+  setTimeout(() => {
+    window.location.href = "reviewedPapers.html";
+  }, 100)
+})

@@ -1,3 +1,15 @@
+// back to admin dashboard
+const dashboardBtn = document.getElementById("dashboard-btn");
+
+dashboardBtn.addEventListener("click", () => {
+  document.body.classList.add('fade-out');
+
+  setTimeout(() => {
+    window.location.href = "admin.html";
+  }, 200)
+})
+
+
 // Register Password field
 const registerPassword = document.getElementById("register-password");
 const registerLockPassword = document.getElementById("register-lock-password");

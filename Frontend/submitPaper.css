@@ -51,11 +51,11 @@ form {
   cursor: pointer;
   border: none;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 12px;
   font-weight: 600;
   font-size: 16px;
   color: #ffffff;
-  background: linear-gradient(to bottom right, rgb(102, 126, 234), #764ba2);
+  background: linear-gradient(to bottom right, #667eea, #764ba2);
   transition: all 0.3s ease;
 }
 

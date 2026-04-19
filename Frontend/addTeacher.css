@@ -6,10 +6,11 @@
 }
 
 body {
-  max-width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #1E3A8A, #6B85B6);
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to right, #667eea, #764ba2);
   transition: opacity 0.1s ease;
+  padding-block: 60px;
   /* for smooth animation */
 }
 
@@ -17,26 +18,44 @@ body.fade-out {
   opacity: 0;
 }
 
+
+.dashboard-btn {
+  padding: 10px 20px;
+  color: #ffffff;
+  background-color: #764ba2;
+  border: none;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 40px;
+}
+
+.dashboard-btn:hover {
+  box-shadow: 0px 2px 10px 5px rgba(14, 45, 179, 0.2);
+}
+
 form {
-  position: relative;
+  /* position: relative; */
   width: 360px;
-  height: auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* border: 6px solid #808080; */
   overflow: hidden;
   border-radius: 15px;
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 20px;
   padding-bottom: 15px;
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.3);
+  /* background: #764ba2; */
   background: rgba(255, 255, 255, 0.09);
   /* backdrop-filter: blur(10px); */
 }
 
-form span {
+/* form span {
   position: absolute;
   display: block;
 }
@@ -78,7 +97,7 @@ form span:nth-child(4) {
   background: linear-gradient(to top, #1E3A8A, #38BDF8);
   animation: leftMove 2s linear infinite;
   animation-delay: 1.5s;
-}
+} */
 
 form h3 {
   color: #000000;
@@ -167,22 +186,6 @@ input::placeholder {
   font-size: 16px;
 }
 
-.confirm-password-container {
-  border: 3px solid #000000;
-  padding: 10px;
-  word-spacing: 10px;
-  border-radius: 8px;
-}
-
-.confirm-password-container i {
-  color: #1E3A8A;
-}
-
-.confirm-password-container input {
-  background: none;
-  font-size: 16px;
-}
-
 
 .roles-container label {
   display: block;
@@ -227,7 +230,7 @@ input::placeholder {
   justify-content: space-between;
   border-radius: 8px;
   border: 3px solid #000000;
-  background: linear-gradient(to right, #1E3A8A, #38BDF8);
+  background: linear-gradient(to bottom right, #667eea, #764ba2);
 }
 
 .register-container {
@@ -236,7 +239,6 @@ input::placeholder {
   align-items: center;
   padding-block: 80px;
 }
-
 
 .login-container {
   display: flex;
@@ -247,19 +249,6 @@ input::placeholder {
 
 .image-container img {
   max-width: 600px;
-}
-
-/* invalid credentials container */
-
-.credentials-container p {
-  color: #1E3A8A;
-  font-weight: 800;
-  font-size: 16px;
-  background-color: antiquewhite;
-  padding: 10px;
-  border-radius: 10px;
-  width: 290px;
-  margin-top: 10px;
 }
 
 @keyframes topMove {

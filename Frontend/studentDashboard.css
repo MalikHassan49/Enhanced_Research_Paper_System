@@ -37,7 +37,7 @@ nav h2 {
 .logout-section button {
   background: none;
   border: none;
-  background: linear-gradient(to right bottom, #0096ff, rgb(0, 72, 255));
+  background: linear-gradient(to right bottom, #0096ff, #0048ff);
   color: #FFFFFF;
   padding: 8px 20px;
   margin-left: 18px;

@@ -57,15 +57,19 @@ if (loginForm) {
           if (role === "Student") {
             window.location.href = "studentDashboard.html";
           }
-          if (role === "Teacher") {
+          else if (role === "Teacher") {
             window.location.href = "teacherDashboard.html";
+          }
+          else if (role === "Admin") {
+            window.location.href = "admin.html";
           }
         }, 100);
       }
     }
     catch (error) {
       console.log(error);
-      alert("Server error");
+      const container = document.querySelector(".credentials-container");
+      container.innerHTML = `<p>Invalid email or password</p>`
     }
   })
 }

@@ -1,7 +1,7 @@
 
-async function fetchPapersData() {
+async function fetchReviewedPapers() {
   try {
-    const response = await fetch("http://127.0.0.1:5000/api/v1/papers/student-papers",
+    const response = await fetch("http://127.0.0.1:5000/api/v1/papers/reviewed-papers",
       {
         method: "GET",
         credentials: "include"
@@ -11,44 +11,45 @@ async function fetchPapersData() {
     const responseData = await response.json();
     console.log("Response Data: ", responseData);
 
-    const container = document.querySelector(".papers-container");
+    const container = document.querySelector(".reviews-container");
 
     if (responseData.data.length > 0) {
       container.style.display = "flex";
-      responseData.data.forEach(paper => {
+      responseData.data.forEach(review => {
         const card = document.createElement("div");
-        card.classList.add("paper");
+        card.classList.add("review");
 
         card.innerHTML = `
-        <p class = "status">${paper.status}</p>
-        <h2 class = "paper-title">${paper.paperTitle}</h2>
-        <p class = "paper-abstract">${paper.paperAbstract}</p>
-        <div class = "paper-name-container">
-          <p class = "file-name">${paper.file.filename}</p>
-          <button class = "comment-btn" id = "comment-btn" data-id=${paper._id}>View Comment</button>
+        <div class = "reviews-basic-info-container">
+        <p class = "username">Submitted By: ${review.student.username}</p>
+        <p class = "status">${review.status}</p>
+        </div>
+        <h2 class = "paper-title">${review.paperTitle}</h2>
+        <div class = "review-btn-container">
+          <button class = "review-btn" id = "review-btn" data-id=${review._id}>View Reviews</button>
         </div>
         `
         container.appendChild(card);
       })
     }
     else {
-      document.querySelector(".papers-available-container").style.display = "block";
+      document.querySelector(".reviews-available-container").style.display = "block";
     }
   } catch (error) {
     console.log(error);
   }
 }
 
-fetchPapersData();
+fetchReviewedPapers();
 
-// back to student dashboard
+// back to teacher dashboard
 const dashboardBtn = document.getElementById("dashboard-btn");
 
 dashboardBtn.addEventListener("click", () => {
   document.body.classList.add('fade-out');
 
   setTimeout(() => {
-    window.location.href = "studentDashboard.html";
+    window.location.href = "teacherDashboard.html";
   }, 200)
 })
 
@@ -56,7 +57,7 @@ dashboardBtn.addEventListener("click", () => {
 // teacher comment 
 
 document.addEventListener("click", async (e) => {
-  if (e.target.classList.contains("comment-btn")) {
+  if (e.target.classList.contains("review-btn")) {
     document.body.classList.add("low-fade");
 
     const paperId = e.target.dataset.id;
@@ -73,7 +74,7 @@ document.addEventListener("click", async (e) => {
       if (responseData.data) {
         commentContainer.innerHTML = `
       <div class = "comment-name-container">
-      <p>Reviewed By : ${responseData.data.reviewedBy.username}</p>
+      <p>Name : ${responseData.data.reviewedBy.username}</p>
       <i id="x-mark" class="fa-solid fa-xmark"></i>
       </div>
        <div class="comment-text-container">
