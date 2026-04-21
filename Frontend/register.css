@@ -246,6 +246,10 @@ input::placeholder {
   padding-block: 80px;
 }
 
+.login-container .login-password {
+  margin-right: 5px;
+}
+
 .image-container img {
   max-width: 600px;
 }
@@ -301,4 +305,75 @@ input::placeholder {
   100% {
     bottom: 100%;
   }
+}
+
+
+@media screen and (max-width: 600px) {
+  .image-container {
+    display: none;
+  }
+
+  .register-container {
+    width: 88%;
+    margin: 0 auto;
+  }
+
+  .user-container {
+    width: 255px;
+  }
+
+  .email-container {
+    width: 255px;
+  }
+
+  .password-container {
+    /* font-size: 14px; */
+    width: 255px;
+  }
+
+  #register-password {
+    margin-right: 0px;
+  }
+
+  .password-container i {
+    color: #1E3A8A;
+  }
+
+  .password-container input {
+    width: 155px;
+  }
+
+  .roles-container select {
+    width: 205px;
+  }
+
+  .roles-container select {
+    padding-right: 140px;
+    outline: none;
+  }
+
+  .register-button {
+    width: 255px;
+  }
+
+  .account-container {
+    width: 285px;
+    padding-left: 15px;
+  }
+
+  .main-heading {
+    color: #000000;
+    text-align: center;
+  }
+
+  .login-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-block: 80px;
+    width: 88%;
+    margin: 0 auto;
+  }
+
+
 }

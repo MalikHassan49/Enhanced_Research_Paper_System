@@ -101,7 +101,7 @@ main {
   border-radius: 20px;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
   transition: all 0.4s ease;
-  padding-inline:100px;
+  padding-inline: 100px;
 }
 
 .student-submit-paper-container:hover {
@@ -160,7 +160,7 @@ main {
   border-radius: 20px;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
   transition: all 0.4s ease;
-  padding-inline:138px;
+  padding-inline: 138px;
 }
 
 .student-view-paper-container:hover {
@@ -218,4 +218,32 @@ footer {
   font-size: 18px;
   color: #4d4b4b;
   font-weight: 600;
+}
+
+@media screen and (max-width: 600px) {
+
+  /* body {
+  min-height: 100vh;
+} */
+
+ .student-dashboard h1 {
+  font-size: 20px;
+  padding-bottom: 15px;
+  font-weight: 600;
+  color: #FFFFFF;
+  text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.student-dashboard p {
+  font-weight: 600;
+  color: #FFFFFF;
+  font-size: 18px;
+}
+
+.student-info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
 }
