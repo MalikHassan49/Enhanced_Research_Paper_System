@@ -47,11 +47,10 @@ if (registerForm) {
         })
       });
 
-      const data = await response.json();
-
+      const responseData = await response.json();
       if (response.ok) {
         console.log("User register successfully");
-        console.log("Response data: ", data);
+        console.log("Response data: ", responseData);
         // for smooth animate to studentDashboard
         document.body.classList.add("fade-out");
         setTimeout(() => {

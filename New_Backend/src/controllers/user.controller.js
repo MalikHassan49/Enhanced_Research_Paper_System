@@ -251,7 +251,24 @@ const deleteStudent = asyncHandler(async (req, res) => {
         "Student deleted successfully"
       )
     )
-})
+});
+
+const getCurrentUser = asyncHandler(async (req, res) => {
+  console.log("Current User API HIT!!!");
+  const userId = req.user?.id;
+
+  const user = await User.findById(userId).select("username");
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        user,
+        "Current user fetched successfull"
+      )
+    )
+});
 
 export {
   registerUser,
@@ -260,5 +277,6 @@ export {
   allTeachers,
   deleteTeacher,
   allStudents,
-  deleteStudent
+  deleteStudent,
+  getCurrentUser
 }
