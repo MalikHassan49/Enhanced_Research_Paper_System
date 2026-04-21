@@ -28,8 +28,12 @@ const submitPaper = asyncHandler(async (req, res) => {
     throw new ApiError(400, "File path is required");
   }
 
+
   // file upload on cloudinary
+
+  console.log("1 Api Hit");
   const responseFromCloudinary = await uploadOnCloudinary(localFilePath);
+  console.log("2 Cloudinary done");
 
   if (!responseFromCloudinary) {
     throw new ApiError(400, "Something went wrong while uploading file on cloudinary");
@@ -47,7 +51,11 @@ const submitPaper = asyncHandler(async (req, res) => {
       filename: req.file.originalname
     },
     studentId: userId,
-  })
+  });
+
+  console.log("3 Mongo db save done");
+
+  console.log("4  Sending response...");
 
   return res
     .status(200)
@@ -58,6 +66,7 @@ const submitPaper = asyncHandler(async (req, res) => {
         "Paper submitted successfully"
       )
     )
+    console.log("5 Response send properly...");
 });
 
 const studentAllPapers = asyncHandler(async (req, res) => {
@@ -221,6 +230,25 @@ const deletePaper = asyncHandler(async (req, res) => {
 })
 
 
+const papersStatus = asyncHandler( async (req, res) => {
+  const acceptedPapers = await Paper.countDocuments({status : "Accepted"})
+  const rejectedPapers = await Paper.countDocuments({status : "Rejected"});
+  const pendingPapers = await Paper.countDocuments({status : "Pending"});
+  const underReviewPapers = await Paper.countDocuments({status : "Under Review"});
+
+  return res
+  .status(200)
+  .json(
+    new ApiResponse(
+      200,
+      {
+        acceptedPapers, rejectedPapers, pendingPapers, underReviewPapers
+      },
+      "Paper status fetched successfully!"
+    )
+  )
+})
+
 export {
   submitPaper,
   studentAllPapers,
@@ -228,5 +256,6 @@ export {
   reviewPaper,
   comment,
   reviewedPapers,
-  deletePaper
+  deletePaper,
+  papersStatus
 }

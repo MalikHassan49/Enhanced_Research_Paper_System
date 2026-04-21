@@ -80,6 +80,7 @@ aside p {
   background-color: #ffffff;
   border: none;
   border-radius: 5px;
+  color: #3d3a3a;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -91,6 +92,7 @@ aside p:hover {
 aside i {
   font-size: 16px;
   margin-right: 6px;
+  color: #764ba2;
 }
 main {
   margin: 95px 0px 0px 260px;
@@ -107,7 +109,7 @@ main .para {
   font-weight: 600
 }
 
-.students-container {
+/* .students-container {
   display: flex;
   justify-content: space-between;
   margin-top: 50px;
@@ -148,4 +150,33 @@ main .para {
   color: #ffffff;
   font-size: 16px;
   font-weight: 600;
+} */
+
+.papers-status-container {
+  display: none;
+  margin-top: 50px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  width: 500px;
+  box-shadow: 0px 0px 4px 4px rgba(118, 75, 162, 0.3);
+  background: linear-gradient(to bottom right, rgb(102, 126, 234), rgb(118, 75, 162));
+}
+
+.papers-status-container p {
+  font-size: 18px;
+  font-weight: 600;
+  /* border: 1px solid black; */
+  border: none;
+  padding: 5px 5px 5px 10px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #3d3a3a;
+  transition: all 0.3s ease;
+}
+
+.papers-status-container p:hover {
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.3);
 }

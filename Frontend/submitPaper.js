@@ -2,7 +2,6 @@
 const fileUpload = document.getElementById("fileUpload");
 const fileText = document.getElementById("fileText");
 
-console.log(fileUpload);
 
 fileUpload.addEventListener("change", () => {
   console.log("File data: ", fileUpload.files);
@@ -11,21 +10,28 @@ fileUpload.addEventListener("change", () => {
   if (fileUpload.files.length > 0) {
     fileText.textContent = fileUpload.files[0].name;
   }
-
 });
 
 // send request to backend
 const paperTitle = document.getElementById("paper-title");
 const paperAbstract = document.getElementById("paper-abstract");
 
-document.querySelector("form").addEventListener("submit", async (e) => {
+// form submission
+const submitBtn = document.getElementById("submit-button");
+
+submitBtn.addEventListener("click", async (e) => {
   e.preventDefault();
+
+  window.addEventListener("beforeunload", () => {
+    console.log("PAGE RELOADING");
+  });
   const formData = new FormData();
 
   formData.append("paperTitle", paperTitle.value);
   formData.append("paperAbstract", paperAbstract.value);
   formData.append("file", fileUpload.files[0]);
 
+  console.log("Before fetch");
   try {
     const response = await fetch("http://127.0.0.1:5000/api/v1/papers/submit-paper",
       {
@@ -35,14 +41,24 @@ document.querySelector("form").addEventListener("submit", async (e) => {
       }
     );
 
-    const responseData = response.json();
-    console.log(responseData.data);
+    console.log("After fetch");
+    console.log("Response without fetch: ", response);
+
+    const responseData = await response.json();
+    console.log("Response Data: ", responseData);
 
     if (response.ok) {
       const credentialsContainer = document.querySelector(".credentials-container");
-      credentialsContainer.innerHTML = `
+      if (credentialsContainer) {
+        credentialsContainer.innerHTML = `
         <p>Paper Submitted Successfully</p>
       `
+      }
+      else {
+        credentialsContainer.innerHTML = `
+        <p style ="color: red;">Submit Failed</p>
+      `
+      }
     }
   } catch (error) {
     console.log(error);

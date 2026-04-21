@@ -78,3 +78,31 @@ logoutBtn.addEventListener("click", async () => {
     alert("Logout Failed");
   }
 })
+
+// papers status count
+
+async function papersStatus() {
+  try {
+    const response = await fetch("http://127.0.0.1:5000/api/v1/papers/papers-status", {
+      method : "GET",
+      credentials : "include"
+    });
+
+    const responseData = await response.json();
+    console.log("Response Data: ", responseData);
+    if (responseData.data) {
+      const statusContainer = document.querySelector(".papers-status-container");
+      statusContainer.style.display = "block";
+      statusContainer.innerHTML = `
+      <p>Total Accepted Papers: ${responseData.data?.acceptedPapers || 0}</p>
+      <p>Total Rejected Papers: ${responseData.data?.rejectedPapers || 0}</p>
+      <p>Total Pending Papers: ${responseData.data?.pendingPapers || 0}</p>
+      <p>Total Under Review Papers: ${responseData.data?.underReviewPapers || 0}</p>
+      `
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+papersStatus();

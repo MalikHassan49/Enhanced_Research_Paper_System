@@ -112,6 +112,8 @@ form {
 
 #fileText {
   color: #5f5f5f;
+  font-size: 16px;
+  font-weight: 800;
 }
 
 .file-container p {
@@ -177,9 +179,6 @@ form {
   color: #43e97b;
   font-weight: 800;
   font-size: 16px;
-  /* background-color: antiquewhite; */
-  /* padding: 10px;
-  border-radius: 10px; */
   width: 290px;
   margin-top: 10px;
 }
