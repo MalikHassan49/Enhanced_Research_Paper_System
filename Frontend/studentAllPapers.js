@@ -73,13 +73,13 @@ document.addEventListener("click", async (e) => {
       if (responseData.data) {
         commentContainer.innerHTML = `
       <div class = "comment-name-container">
-      <p>Reviewed By : ${responseData.data.reviewedBy.username}</p>
+      <p>Reviewed By : ${responseData.data.reviewedBy?.username || "No Reviewed yet."}</p>
       <i id="x-mark" class="fa-solid fa-xmark"></i>
       </div>
        <div class="comment-text-container">
       <p>Comment*</p>
-      <textarea name="comment" id="comment" cols="30" rows="6">
-      ${responseData.data.teacherComment}
+      <textarea name="comment" id="comment" cols="30" rows="6" readonly>
+      ${responseData.data.teacherComment?.trim() || "No comments yet."}
       </textarea>
     </div>
       `

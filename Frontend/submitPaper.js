@@ -37,6 +37,13 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 
     const responseData = response.json();
     console.log(responseData.data);
+
+    if (response.ok) {
+      const credentialsContainer = document.querySelector(".credentials-container");
+      credentialsContainer.innerHTML = `
+        <p>Paper Submitted Successfully</p>
+      `
+    }
   } catch (error) {
     console.log(error);
   }

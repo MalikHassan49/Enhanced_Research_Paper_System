@@ -64,13 +64,16 @@ if (registerForm) {
       if (response.ok) {
         console.log("User register successfully");
         console.log("Response data: ", data);
-        // for smooth animate to studentDashboard
-        document.body.classList.add("fade-out");
+
+        const credentialsContainer = document.querySelector(".credentials-container");
+        credentialsContainer.innerHTML = `
+          <p>Teacher register successfully</p>
+        `
         setTimeout(() => {
-          if (role === "Teacher") {
-            window.location.href = "teacherDashboard.html";
-          }
-        }, 100)
+          document.body.classList.add('fade-out');
+
+          window.location.href = "admin.html";
+        }, 1200)
       }
       else {
         alert(data.message || "Registration Failed");

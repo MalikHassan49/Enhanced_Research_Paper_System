@@ -26,7 +26,7 @@ form {
   margin: 0 auto;
   padding-block: 50px;
   box-shadow: 4px 4px 10px 4px rgba(0, 0, 0, 0.1),
-  -4px -4px 10px 4px rgba(0, 0, 0, 0.1);
+    -4px -4px 10px 4px rgba(0, 0, 0, 0.1);
 }
 
 .submit-paper-head-section .main-heading {
@@ -35,7 +35,7 @@ form {
   font-size: 35px;
   margin-top: 25px;
   margin-bottom: 5px;
-  background: linear-gradient(to bottom right,#43e97b, #38f9d7);
+  background: linear-gradient(to bottom right, #43e97b, #38f9d7);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -110,6 +110,10 @@ form {
   display: none;
 }
 
+#fileText {
+  color: #5f5f5f;
+}
+
 .file-container p {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -163,5 +167,19 @@ form {
 
 /* hover effect on button */
 .submit-button:hover::before {
-  left: 100%;  /* left se right move karege */
+  left: 100%;
+  /* left se right move karege */
+}
+
+/* credentials container */
+
+.credentials-container p {
+  color: #43e97b;
+  font-weight: 800;
+  font-size: 16px;
+  /* background-color: antiquewhite; */
+  /* padding: 10px;
+  border-radius: 10px; */
+  width: 290px;
+  margin-top: 10px;
 }

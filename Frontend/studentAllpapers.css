@@ -120,7 +120,7 @@ body.low-fade::before {
 }
 
 .paper-name-container p {
-  max-width: 180px;
+  max-width: 140px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

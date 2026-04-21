@@ -40,7 +40,7 @@ async function allSubmittedPapers(page) {
         card.classList.add("paper");
         card.innerHTML = `
         <div class = "user-info-container">
-        <p class = "username">By: ${paper.student.username}</p>
+        <p class = "username">By: ${paper.studentId.username}</p>
         <p class = "status">${paper.status}</p>
         </div>
         <h1 class = "paper-title">${paper.paperTitle}</h1>

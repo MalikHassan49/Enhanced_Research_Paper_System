@@ -24,7 +24,7 @@ const paperSchema = new Schema({
   reviewedBy: {
     type: Schema.Types.ObjectId,
     ref: "User",
-    required: true
+    default: null
   },
   status: {
     type: String,

@@ -53,10 +53,26 @@ reviewBtn.addEventListener("click", async () => {
 const buttonsContainer = document.querySelector(".buttons-container");
 
 buttonsContainer.innerHTML = `
-  <a href="${fileUrl}" target="_blank">
+      <a href="${fileUrl}">
         <button>View Paper</button>
       </a>
       <a href="${fileUrl}" download>
         <button>Download</button>
       </a>
 `
+// move to pdfViewer.html file
+
+{/* <button id="viewBtn">View Paper</button> */}
+
+// document.getElementById("viewBtn").addEventListener("click", () => {  
+
+//   window.location.href = `pdfViewer.html?file=${encodeURIComponent(fileUrl)}`;
+// });
+
+
+// let fullUrl = fileUrl;
+
+  // // agar local path hai
+  // if(fileUrl.startsWith("/temp")) {
+  //   fullUrl = `http://localhost:5000${fileUrl}`;
+  // }

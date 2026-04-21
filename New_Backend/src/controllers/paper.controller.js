@@ -3,7 +3,7 @@ import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import { deleteFromCloudinary, uploadOnCloudinary } from "../utils/cloudinary.js";
 
 
 const submitPaper = asyncHandler(async (req, res) => {
@@ -46,7 +46,7 @@ const submitPaper = asyncHandler(async (req, res) => {
       publicId: filePublicId,
       filename: req.file.originalname
     },
-    student: userId,
+    studentId: userId,
   })
 
   return res
@@ -65,7 +65,7 @@ const studentAllPapers = asyncHandler(async (req, res) => {
   const userId = req.user._id;
 
   const papers = await Paper.find({
-    student: userId
+    studentId: userId
   })
 
   if (papers.length > 0) {
@@ -179,7 +179,7 @@ const reviewedPapers = asyncHandler(async (req, res) => {
 
   const papers = await Paper.find({ reviewedBy: userId })
     .select("paperTitle status")
-    .populate("student", "username")
+    .populate("studentId", "username")
 
   return res
     .status(200)
@@ -198,7 +198,16 @@ const deletePaper = asyncHandler(async (req, res) => {
   console.log("Delete paper API HIT!!!");
   const paperId = req.params.id;
 
+  const file = await Paper.findById(paperId).select("file");
+  const publicId = file.publicId;
+
   const paper = await Paper.findByIdAndDelete(paperId);
+
+  if (!paper) {
+    throw new ApiError(400, "Something wrong while deleting paper from DB!");
+  }
+
+  const responseFromCloudinary = await deleteFromCloudinary(publicId);
 
   return res
     .status(200)

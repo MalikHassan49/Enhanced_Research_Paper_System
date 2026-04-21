@@ -21,7 +21,7 @@ async function fetchReviewedPapers() {
 
         card.innerHTML = `
         <div class = "reviews-basic-info-container">
-        <p class = "username">Submitted By: ${review.student.username}</p>
+        <p class = "username">Submitted By: ${review.studentId.username}</p>
         <p class = "status">${review.status}</p>
         </div>
         <h2 class = "paper-title">${review.paperTitle}</h2>
