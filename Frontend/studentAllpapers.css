@@ -254,3 +254,96 @@ body.low-fade::before {
   font-size: 16px;
   border-radius: 12px;
 }
+
+@media screen and (max-width: 600px) {
+
+  .main-heading {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .main-heading h1 {
+    font-size: 30px;
+    margin-top: 10px;
+  }
+
+  .remove-mobile {
+    display: none;
+  }
+
+  .papers-container {
+    display: none;
+    flex-wrap: wrap;
+  }
+
+  .papers-container .paper {
+    margin-right: 0%;
+    margin-left: 0px;
+  }
+
+  .papers-container .paper .paper-abstract {
+    -webkit-line-clamp: 1;
+  }
+
+  .paper-name-container p {
+    max-width: 100px;
+  }
+
+  .papers-container .paper .comment-btn {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  /* if papers are not submitted */
+
+  .papers-available-container {
+    padding-inline: 10px;
+  }
+
+  .papers-available-container i {
+    font-size: 60px;
+  }
+
+  .papers-available-container h1 {
+    font-size: 30px;
+  }
+
+  .papers-available-container p {
+    font-size: 16px;
+  }
+
+  .papers-available-container button {
+    font-size: 14px;
+    padding: 12px 20px;
+  }
+
+  .teacher-comment-container {
+    width: 320px;
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  .comment-name-container p {
+    font-size: 16px;
+  }
+
+  .comment-name-container i {
+    padding: 6px 6px;
+    border-radius: 50%;
+    width: 20px;
+    font-size: 10px;
+  }
+
+
+  .comment-text-container p {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 7px;
+  }
+
+  .comment-text-container textarea {
+    width: 280px;
+    padding-block: 5px;
+    font-size: 16px;
+  }
+}

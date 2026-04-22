@@ -7,6 +7,9 @@
 
 body {
   transition: opacitiy 0.1s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 body.fade-out {
@@ -19,7 +22,6 @@ nav {
   align-items: center;
   height: 12vh;
   padding: 20px 25px;
-  /* border: 1px solid black; */
 }
 
 nav h2 {
@@ -60,15 +62,16 @@ nav h2 {
 
 /* main section starts here */
 main {
-  height: 100vh;
+  flex: 1;
   background: linear-gradient(to bottom right, #67a6ff, #004aff);
   padding-inline: 35px;
+  padding-bottom: 50px;
 }
 
 /* author info starts here */
 .student-dashboard {
   text-align: center;
-  padding-top: 70px;
+  padding-top: 60px;
 }
 
 .student-dashboard h1 {
@@ -222,28 +225,127 @@ footer {
 
 @media screen and (max-width: 600px) {
 
-  /* body {
-  min-height: 100vh;
-} */
+ nav {
+  padding: 20px 15px;
+}
 
- .student-dashboard h1 {
-  font-size: 20px;
-  padding-bottom: 15px;
-  font-weight: 600;
-  color: #FFFFFF;
-  text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+nav h2 {
+  font-size: 18px;
+}
+
+
+.logout-section button {
+  font-size: 12px;
+}
+
+.logout-section p {
+  display: none;
+}
+
+/* main section starts here */
+main {
+  flex: 1;
+  padding-inline: 35px;
+}
+
+/* author info starts here */
+.student-dashboard {
+  padding-top: 60px;
+}
+
+.student-dashboard h1 {
+  font-size: 40px;
 }
 
 .student-dashboard p {
-  font-weight: 600;
-  color: #FFFFFF;
   font-size: 18px;
 }
 
 .student-info-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 40px;
+  flex-direction: column;
+  gap: 30px;
 }
+
+.student-submit-paper-container {
+
+  flex-direction: column;
+  justify-content: center;
+  max-width: 430px;
+  padding-inline: 20px;
+}
+
+.student-submit-paper-container h1 {
+  width: 150px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.student-submit-paper-container i {
+  padding: 15px 25px;
+  font-size: 25px;
+}
+
+.student-submit-paper-container p {
+  padding-block: 20px;
+  text-align: center;
+  width: 250px;
+}
+
+.student-submit-paper-container button {
+  padding: 10px 15px;
+  font-size: 16px;
+}
+
+/* student right container */
+.student-view-paper-container {
+  flex-direction: column;
+  justify-content: center;
+  max-width: 430px;
+  padding-inline: 20px;
+}
+
+
+.student-view-paper-container h1 {
+  width: 150px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.student-view-paper-container i {
+  padding: 15px 25px;
+  font-size: 25px;
+}
+
+.student-view-paper-container p {
+  padding-block: 20px;
+  text-align: center;
+  width: 250px;
+}
+
+.student-view-paper-container button {
+  padding: 10px 12px;
+  font-size: 16px;
+}
+
+.remove-mobile {
+  display: none;
+}
+
+footer {
+  height: 13vh;
+  display: flex;
+  flex-direction: column;
+  /* gap: 2px; */
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  color: #4d4b4b;
+  font-weight: 600;
+}
+
+.fa-copyright {
+  margin-top: 4px;
+}
+
 }

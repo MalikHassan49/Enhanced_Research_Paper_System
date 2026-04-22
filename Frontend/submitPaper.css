@@ -182,3 +182,123 @@ form {
   width: 290px;
   margin-top: 10px;
 }
+
+@media screen and (max-width: 600px) {
+
+.submit-paper-container {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.submit-paper-head-section .main-heading {
+  font-size: 22px;
+}
+
+.submit-paper-head-section .para {
+  font-size: 14px;
+  width: 250px;
+}
+
+.dashboard-btn {
+  width: 100px;
+  font-size: 14px;
+  padding: 8px 8px;
+}
+
+.hide-mobile {
+  display: none;
+}
+
+
+.dashboard-btn i {
+  color: #ffffff;
+}
+
+.submit-paper-basic-info label {
+  font-weight: 600;
+}
+
+#paper-title {
+  width: 250px;
+}
+
+#paper-title:focus {
+  border: 2px solid #38f9d7;
+  box-shadow: 0 0 0px 4px #9ad19a;
+  outline: none;
+}
+
+#paper-abstract {
+  width: 250px;
+}
+
+
+#fileUpload {
+  display: none;
+}
+
+#fileText {
+  color: #5f5f5f;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.file-container p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.custom-btn {
+  width: 250px;
+}
+
+.custom-btn i {
+  font-size: 20px;
+}
+
+.submit-button {
+  position: relative;
+  overflow: hidden;
+  background: none;
+  border: none;
+  margin-top: 50px;
+  width: 250px;
+  padding-block: 10px;
+  background: linear-gradient(to bottom right, #43e97b, #38f9d7);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Light effect layer before buuton element */
+.submit-button::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transition: 0.9s;
+}
+
+/* hover effect on button */
+.submit-button:hover::before {
+  left: 100%;
+  /* left se right move karege */
+}
+
+/* credentials container */
+
+.credentials-container p {
+  color: #43e97b;
+  font-weight: 800;
+  font-size: 16px;
+  width: 290px;
+  margin-top: 10px;
+}
+
+}

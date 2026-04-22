@@ -254,3 +254,219 @@ body .fade-out {
 #right-btn:hover {
   box-shadow: 0px 0px 6px 6px rgba(255, 105, 224, 0.3);
 }
+
+.arrow-up {
+  display: none;
+}
+
+.arrow-down {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    padding: 50px 12px 30px 25px;
+    background: linear-gradient(to bottom right, #ff69e0, #ffff14);
+    width: 100%;
+    min-height: 100vh;
+    transition: opacity 0.3s all;
+  }
+
+  body .fade-out {
+    opacity: 0;
+  }
+
+  .remove-mobile {
+    display: none;
+  }
+
+  .main-heading {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .main-heading h1 {
+    font-size: 25px;
+    margin-top: 20px;
+  }
+
+  /* .user-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .review-papers-container {
+    display: none;
+    flex-wrap: wrap;
+  } */
+
+  .review-papers-container .paper {
+    margin-right: 10px;
+    margin-left: 0px;
+  }
+
+  .review-papers-container .paper .paper-abstract {
+    -webkit-line-clamp: 1;
+  }
+
+  .paper-name-container p {
+    max-width: 112px;
+  }
+
+  .review-papers-container .paper .view-paper-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .review-papers-container .paper .file-name {
+    color: #475259;
+    font-weight: 600;
+  }
+
+
+  /* if papers are not submitted */
+
+  .review-papers-available-container {
+    display: none;
+    text-align: center;
+    border: 1px solid black;
+    width: 100%;
+    padding-block: 70px;
+    background-color: #ffffffef;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+  }
+
+  .review-papers-available-container i {
+    font-size: 100px;
+    color: #fa709a;
+    margin-bottom: 25px;
+  }
+
+  .review-papers-available-container h1 {
+    color: #475259;
+    margin-bottom: 10px;
+  }
+
+  .review-papers-available-container p {
+    color: #475259;
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+
+  .review-papers-available-container button {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: linear-gradient(to bottom right, #fa709a, #ffff14);
+    transition: all 0.5s ease;
+  }
+
+  .review-papers-available-container button:hover {
+    box-shadow: 0px 5px 5px 5px rgba(250, 112, 154, 0.2);
+  }
+
+  /* #page-number {
+    display: none;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  #left-btn {
+    display: none;
+    color: #ffffff;
+    background-color: rgb(255, 255, 20);
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+
+  #left-btn:hover {
+    box-shadow: 0px 0px 6px 6px rgba(255, 255, 20, 0.3);
+  }
+
+  .right-btn-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  #right-btn {
+    display: none;
+    color: #ffffff;
+    background-color: rgb(255, 105, 224);
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+
+  #right-btn:hover {
+    box-shadow: 0px 0px 6px 6px rgba(255, 105, 224, 0.3);
+  } */
+
+  .remove-mobile-left-btn {
+    display: none;
+  }
+
+  .remove-mobile-right-btn {
+    display: none;
+  }
+
+  .arrow-up {
+    display: block;
+    margin-left: 137px;
+    color: #ffffff;
+    background-color: rgb(255, 255, 20);
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    margin-bottom: 15px;
+    margin-top: -25px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+
+  .arrow-up:hover {
+    box-shadow: 0px 0px 6px 6px rgba(255, 255, 20, 0.3);
+  }
+
+  .arrow-down {
+    display: block;
+    margin-right: 137px;
+    color: #ffffff;
+    background-color: rgb(255, 255, 20);
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    margin-bottom: 15px;
+    margin-top: -25px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+
+   .arrow-down:hover {
+    box-shadow: 0px 0px 6px 6px rgba(255, 255, 20, 0.3);
+  }
+
+}

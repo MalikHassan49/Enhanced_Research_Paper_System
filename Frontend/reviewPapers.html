@@ -9,20 +9,28 @@
 </head>
 
 <body>
-  <button class="dashboard-btn" id="dashboard-btn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+  <button class="dashboard-btn" id="dashboard-btn"><i class="fa-solid fa-arrow-left"></i> Back <span
+      class="remove-mobile">to Dashboard</span></button>
   <div class="main-heading">
     <h1>Review Research Papers</h1>
     <p>View all submitted papers</p>
     <span id="page-number">1</span>
-  </div> 
+  </div>
   <div class="left-btn-container">
-    <button id="left-btn"><i class="fa-solid fa-arrow-left"></i> Prev</button>
+    <span class="remove-mobile-left-btn">
+      <button id="left-btn"><i class="fa-solid fa-arrow-left"></i>
+        Prev</button>
+    </span>
+    <button class="arrow-up"><i class="fa-solid fa-arrow-up"></i></button>
   </div>
   <div class="review-papers-container">
     <!-- dynamically create paper cards in javascript -->
   </div>
   <div class="right-btn-container">
-    <button id="right-btn">Next <i class="fa-solid fa-arrow-right"></i></button>
+    <span class="remove-mobile-right-btn">
+      <button id="right-btn">Next <i class="fa-solid fa-arrow-right"></i></button>
+    </span>
+    <button class="arrow-down"><i class="fa-solid fa-arrow-down"></i></button>
   </div>
 
   <!-- if papers are not submitted by user -->

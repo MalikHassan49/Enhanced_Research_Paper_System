@@ -6,6 +6,9 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   transition: opacitiy 0.1s ease;
 }
 
@@ -218,4 +221,130 @@ footer {
   font-size: 18px;
   color: #4d4b4b;
   font-weight: 600;
+}
+
+@media screen and (max-width: 600px) {
+
+ nav {
+  padding: 20px 15px;
+}
+
+nav h2 {
+  font-size: 18px;
+}
+
+
+.logout-section button {
+  font-size: 12px;
+}
+
+.logout-section p {
+  display: none;
+}
+
+/* main section starts here */
+main {
+  flex: 1;
+  padding-inline: 35px;
+}
+
+/* author info starts here */
+.teacher-dashboard {
+  padding-top: 60px;
+}
+
+.teacher-dashboard h1 {
+  font-size: 38px;
+}
+
+.teacher-dashboard p {
+  font-size: 16px;
+}
+
+.teacher-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-top: 10px;
+  padding-bottom: 40px;
+}
+
+.teacher-review-paper-container {
+  flex-direction: column;
+  justify-content: center;
+  max-width: 300px;
+}
+
+.teacher-review-paper-container h1 {
+  width: 150px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.teacher-review-paper-container i {
+  padding: 15px 25px;
+  font-size: 25px;
+}
+
+.teacher-review-paper-container p {
+  padding-block: 20px;
+  text-align: center;
+  width: 280px;
+  font-size: 14px;
+}
+
+.teacher-review-paper-container button {
+  width: 210px;
+  padding: 10px 25px;
+  font-size: 13px;
+}
+
+/* student right container */
+.teacher-reviewed-paper-container {
+  flex-direction: column;
+  justify-content: center;
+  max-width: 300px;
+}
+
+
+.teacher-reviewed-paper-container h1 {
+  width: 180px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.teacher-reviewed-paper-container i {
+  padding: 15px 25px;
+  font-size: 22px;
+}
+
+.teacher-reviewed-paper-container p {
+  padding-block: 20px;
+  text-align: center;
+  width: 250px;
+  font-size: 15px;
+}
+
+.teacher-reviewed-paper-container button {
+  width: 150px;
+  padding: 10px 30px;
+  font-size: 12px;
+}
+
+.remove-mobile {
+  display: none;
+}
+
+footer {
+  height: 13vh;
+  display: flex;
+  flex-direction: column;
+  /* gap: 2px; */
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  color: #4d4b4b;
+  font-weight: 600;
+}
+
 }
