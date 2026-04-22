@@ -94,10 +94,10 @@ async function papersStatus() {
       const statusContainer = document.querySelector(".papers-status-container");
       statusContainer.style.display = "block";
       statusContainer.innerHTML = `
-      <p>Total Accepted Papers: ${responseData.data?.acceptedPapers || 0}</p>
-      <p>Total Rejected Papers: ${responseData.data?.rejectedPapers || 0}</p>
-      <p>Total Pending Papers: ${responseData.data?.pendingPapers || 0}</p>
-      <p>Total Under Review Papers: ${responseData.data?.underReviewPapers || 0}</p>
+      <p><span class="remove-mobile">Total</span> Accepted Papers: ${responseData.data?.acceptedPapers || 0}</p>
+      <p><span class="remove-mobile">Total</span> Rejected Papers: ${responseData.data?.rejectedPapers || 0}</p>
+      <p><span class="remove-mobile">Total</span> Pending Papers: ${responseData.data?.pendingPapers || 0}</p>
+      <p><span class="remove-mobile">Total</span> Under Review Papers: ${responseData.data?.underReviewPapers || 0}</p>
       `
     }
   } catch (error) {

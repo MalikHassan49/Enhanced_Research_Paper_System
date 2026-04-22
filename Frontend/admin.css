@@ -94,6 +94,7 @@ aside i {
   margin-right: 6px;
   color: #764ba2;
 }
+
 main {
   margin: 95px 0px 0px 260px;
 }
@@ -179,4 +180,70 @@ main .para {
 
 .papers-status-container p:hover {
   box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+
+@media screen and (max-width: 600px) {
+
+  header h1 {
+    font-size: 25px;
+  }
+
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image-container img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .dashboard-conatiner {
+    display: flex;
+  }
+
+  aside {
+    position: fixed;
+    left: 0%;
+    top: 75px;
+    width: 150px;
+    margin-top: -11px;
+  }
+
+  aside p {
+    width: 128px;
+    margin-left: 10px;
+    font-size: 14px;
+  }
+
+  main {
+    margin: 95px 0px 0px 260px;
+  }
+
+  main h1 {
+    margin-left: -90px;
+    font-size: 20px;
+  }
+
+  main .para {
+    margin-left: -90px;
+    width: 160px;
+    font-size: 14px;
+  }
+
+  .papers-status-container {
+    width: 150px;
+    margin-left: -80px;
+  }
+
+  .papers-status-container p {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .remove-mobile {
+    display: none;
+  }
 }

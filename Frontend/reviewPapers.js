@@ -2,6 +2,8 @@
 const pageNumber = document.getElementById("page-number");
 const leftBtn = document.getElementById("left-btn");
 const rightBtn = document.getElementById("right-btn");
+const arrowUp = document.getElementById("arrow-up");
+const arrowDown = document.getElementById("arrow-down");
 
 let currentPage = 1;
 const limit = 9;
@@ -85,6 +87,7 @@ leftBtn.addEventListener("click", () => {
     allSubmittedPapers(currentPage);
   }
 })
+
 
 
 const dashboardBtn = document.getElementById("dashboard-btn");

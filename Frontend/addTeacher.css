@@ -306,3 +306,89 @@ input::placeholder {
     bottom: 100%;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .dashboard-btn {
+    margin-bottom: 30px;
+  }
+
+  .remove-mobile {
+    display: none;
+  }
+
+  form {
+    width: 300px;
+  }
+
+  form h3 {
+    color: #000000;
+    font-weight: 600;
+  }
+
+  .main-heading {
+    text-align: center;
+  }
+
+
+  .input-container {
+    margin-block: 5px;
+  }
+
+  .input-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+
+  .user-container {
+    width: 255px;
+  }
+
+  .email-container {
+    width: 255px;
+  }
+
+  .password-container {
+    width: 255px;
+  }
+
+  #register-password {
+    margin-right: 0px;
+  }
+
+  .password-container input {
+    width: 155px;
+  }
+
+
+  .roles-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+
+  .roles-container select {
+    width: 205px;
+  }
+
+  .roles-container {
+    margin-top: 5px;
+  }
+
+  .roles-container select {
+    padding-right: 144px;
+  }
+
+  .register-button {
+    width: 255px;
+  }
+
+  .image-container img {
+    display: none;
+  }
+
+  .account-container {
+    font-size: 15px;
+  }
+
+}

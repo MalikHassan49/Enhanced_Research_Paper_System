@@ -244,3 +244,140 @@ body.low-fade::before {
   font-size: 16px;
   border-radius: 12px;
 }
+
+@media screen and (max-width: 600px) {
+
+  .main-heading {
+    margin-top: 20px;
+  }
+
+  .main-heading h1 {
+    font-size: 30px;
+  }
+
+  .main-heading p {
+    font-size: 16px;
+  }
+
+  .remove-mobile {
+    display: none;
+  }
+
+  .reviews-container {
+    display: none;
+    flex-wrap: wrap;
+  }
+
+  .reviews-basic-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+  }
+
+  .reviews-container .review {
+    width: 450px;
+    height: 200px;
+    padding: 25px 15px;
+    margin-right: 0px;
+  }
+
+  .reviews-container .review .status {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+
+  .reviews-container .review .review-btn {
+    padding: 10px 25px;
+  }
+
+  /* if papers are not submitted */
+
+  .reviews-available-container {
+    display: none;
+    text-align: center;
+    border: 1px solid black;
+    width: 100%;
+    padding-block: 70px;
+    background-color: #ffffffef;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+  }
+
+  .reviews-available-container:hover {
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.1), -5px -5px 10px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .reviews-available-container i {
+    font-size: 100px;
+    color: #fa709a;
+    margin-bottom: 25px;
+  }
+
+  .reviews-available-container h1 {
+    color: #475259;
+    margin-bottom: 10px;
+  }
+
+  .reviews-available-container p {
+    color: #475259;
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+
+  .reviews-available-container button {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: linear-gradient(to bottom right, #fa709a, #ffff14);
+    transition: all 0.5s ease;
+  }
+
+  .reviews-available-container button:hover {
+    box-shadow: 0px 5px 5px 5px rgba(250, 112, 154, 0.2);
+  }
+
+  .teacher-comment-container {
+    width: 280px;
+    overflow: hidden;
+  }
+
+  .comment-name-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .comment-name-container p {
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  .comment-name-container i {
+    padding: 5px 5px;
+    width: 20px;
+    font-size: 10px;
+  }
+
+
+  .comment-text-container p {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 7px;
+  }
+
+  .comment-text-container textarea {
+    width: 245px;
+    padding: 5px 8px;
+    font-size: 15px;
+    border-radius: 12px;
+  }
+}

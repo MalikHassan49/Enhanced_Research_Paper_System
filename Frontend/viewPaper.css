@@ -168,3 +168,36 @@ select {
   font-weight: 800;
   margin-block: 5px;
 }
+
+@media screen and (max-width: 600px) {
+  .view-papers-container {
+  width: 310px;
+  padding: 40px 22px;
+}
+
+.remove-mobile {
+  display: none;
+}
+
+.main-heading {
+  font-size: 25px;
+}
+
+.dashboard-btn {
+  width: 80px;
+  margin-bottom: 10px;
+}
+
+.paper-comment-container {
+  overflow: hidden;
+}
+
+#paper-comment {
+  width: 265px;
+}
+
+select {
+  width: 265px;
+}
+
+}
