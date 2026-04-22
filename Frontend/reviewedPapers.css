@@ -294,53 +294,25 @@ body.low-fade::before {
   /* if papers are not submitted */
 
   .reviews-available-container {
-    display: none;
-    text-align: center;
-    border: 1px solid black;
-    width: 100%;
-    padding-block: 70px;
-    background-color: #ffffffef;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.5s ease;
-  }
-
-  .reviews-available-container:hover {
-    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.1), -5px -5px 10px 5px rgba(0, 0, 0, 0.1);
+    width: 320px;
+    padding-inline: 20px;
   }
 
   .reviews-available-container i {
-    font-size: 100px;
-    color: #fa709a;
-    margin-bottom: 25px;
+    font-size: 60px;
   }
 
   .reviews-available-container h1 {
-    color: #475259;
-    margin-bottom: 10px;
+    font-size: 30px;
   }
 
   .reviews-available-container p {
-    color: #475259;
-    font-size: 18px;
-    margin-bottom: 30px;
+    font-size: 16px;
   }
 
   .reviews-available-container button {
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: 600;
-    padding: 12px 30px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    background: linear-gradient(to bottom right, #fa709a, #ffff14);
-    transition: all 0.5s ease;
-  }
-
-  .reviews-available-container button:hover {
-    box-shadow: 0px 5px 5px 5px rgba(250, 112, 154, 0.2);
+    font-size: 16px;
+    padding: 12px 22px;
   }
 
   .teacher-comment-container {
