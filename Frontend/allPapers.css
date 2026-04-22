@@ -255,3 +255,42 @@ body .fade-out {
 #right-btn:hover {
   box-shadow: 0px 0px 6px 6px rgba(255, 105, 224, 0.3);
 }
+
+@media screen and (max-width: 600px) {
+  .main-heading {
+    margin-bottom: 40px;
+    margin-top: 20px;
+  }
+
+  .main-heading h1 {
+    font-size: 35px;
+  }
+
+  .remove-mobile {
+    display: none;
+  }
+
+  .review-papers-container {
+    display: none;
+    flex-wrap: wrap;
+  }
+
+  .review-papers-container .paper {
+    width: 320px;
+    height: 250px;
+    margin-right: 0px;
+    margin-left: 4px;
+    margin-bottom: 40px;
+  }
+
+  .review-papers-container .paper .delete-btn {
+    padding: 10px 35px;
+  }
+
+  /* if papers are not submitted */
+
+  #right-btn {
+    margin-right: 12px;
+  }
+
+}
