@@ -72,7 +72,7 @@ if (registerForm) {
         setTimeout(() => {
           document.body.classList.add('fade-out');
 
-          window.location.href = "admin.html";
+          window.location.href = "../admin/admin.html";
         }, 1200)
       }
       else {
