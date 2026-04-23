@@ -11,7 +11,7 @@ app.use(cors({
   origin: function(origin, callback) {
     const allowedOrigins = [
       "http://127.0.0.1:3000",
-      "https://enhanced-research-paper-system-le9g.vercel.app"
+      "https://enhanced-research-paper-system.vercel.app"
     ];
     if(!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
