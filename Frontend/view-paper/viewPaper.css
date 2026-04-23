@@ -124,12 +124,10 @@ select {
 
 .buttons-container {
   margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .buttons-container button {
+  width: 668px;
   padding: 10px 20px;
   color: #000000;
   border: none;
@@ -197,6 +195,10 @@ select {
 }
 
 select {
+  width: 265px;
+}
+
+.buttons-container button {
   width: 265px;
 }
 

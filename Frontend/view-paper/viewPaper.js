@@ -56,13 +56,11 @@ buttonsContainer.innerHTML = `
       <a href="${fileUrl}">
         <button>View Paper</button>
       </a>
-      <a href="${fileUrl}" download>
-        <button>Download</button>
-      </a>
 `
 // move to pdfViewer.html file
 
 {/* <button id="viewBtn">View Paper</button> */}
+
 
 // document.getElementById("viewBtn").addEventListener("click", () => {  
 
