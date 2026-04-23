@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="javascriptreact">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Dashboard</title>
+  <link rel="stylesheet" href="teacherDashboard.css">
+</head>
+
+<body>
+  <!-- navbar starts here -->
+  <nav>
+    <h2>Research Paper System</h2>
+    <div class="logout-section">
+      <p>Welcome, hassan!</p>
+      <button id="logoutBtn">LOGOUT</button>
+    </div>
+  </nav>
+  <!-- navbar ends here -->
+
+  <!-- main section starts here -->
+  <main>
+    <div class="teacher-dashboard">
+      <h1>Teacher Dashboard</h1>
+      <p>Review and evaluate research papers</p>
+    </div>
+    <div class="teacher-info-container">
+      <div class="teacher-review-paper-container">
+        <i class="fa-solid fa-file"></i>
+        <h1>Review Papers</h1>
+        <p>View and review submitted research papers</p>
+        <button class="review-btn" id="review-btn">START REVIEWING PAPERS</button>
+      </div>
+      <div class="teacher-reviewed-paper-container">
+        <i class="fa-solid fa-file"></i>
+        <h1>Reviewed Papers</h1>
+        <p>View all papers you have reviewed</p>
+        <button id="view-papers">VIEW REVIEWS</button>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <span class="remove-mobile">
+      Developed by Hassan Raza
+      <i class="fa-regular fa-copyright"></i>
+      2026 Teacher Dashboard. All rights reserved.
+    </span>
+  </footer>
+  <script src="https://kit.fontawesome.com/1d8804d5ad.js" crossorigin="anonymous"></script>
+  <script src="../shared/config.js"></script>
+  <script src="teacherDashboard.js"></script>
+</body>
+
+</html>

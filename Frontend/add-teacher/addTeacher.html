@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="javascriptreact">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Teacher</title>
+  <link rel="stylesheet" href="addTeacher.css">
+</head>
+<body>
+  <button class="dashboard-btn" id="dashboard-btn"><i class="fa-solid fa-arrow-left"></i> Back <span class="remove-mobile">to Dashboard</span></button>
+  <form id="registerForm">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+
+      <h2 class="main-heading">Teacher Registration Form</h2>
+      <h3>Welcome Back</h3>
+      <!-- first input container -->
+      <div class="input-container">
+        <label for="Username">Username</label>
+        <div class="user-container">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" id="register-username" name="Username" placeholder="Enter your name">
+        </div>
+      </div>
+      <!-- second input container -->
+      <div class="input-container">
+        <label for="Email">Email Address</label>
+        <div class="email-container">
+          <i class="fa-solid fa-envelope"></i>
+          <input type="email" id="register-email" name="Email" placeholder="Enter your email">
+        </div>
+      </div>
+      <!-- third input container -->
+      <div class="input-container">
+        <label for="Password">Password</label>
+        <div class="password-container">
+          <i id="register-lock-password" class="fa-solid fa-lock"></i>
+          <input type="password" id="register-password" name="register-password" placeholder="Enter your password">
+          <i id="register-toggle-password" class="fa-solid fa-eye"></i>
+        </div>
+      </div>
+      <!-- roles-container -->
+      <div class="roles-container">
+        <label for="Roles">Select Role</label>
+        <div class="role-selection">
+          <i class="fa-solid fa-user"></i>
+          <select name="Roles" id="Roles">
+            <option value="Teacher">Teacher</option>
+          </select>
+        </div>
+      </div>
+      <div class="credentials-container">
+        <!-- dynamically create -->
+      </div>
+      <button type="submit" class="register-button">
+        Register
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+      <p class="account-container">Already have an account&#63;
+        <a href="../login/login.html">Login Here</a>
+      </p>
+    </form>
+    <script src="https://kit.fontawesome.com/1d8804d5ad.js" crossorigin="anonymous"></script>
+    <script src="../shared/config.js"></script>
+    <script src="addTeacher.js"></script>
+</body>
+</html>

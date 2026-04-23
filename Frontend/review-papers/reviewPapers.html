@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="javascriptreact">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review Papers</title>
+  <link rel="stylesheet" href="reviewPapers.css">
+</head>
+
+<body>
+  <button class="dashboard-btn" id="dashboard-btn"><i class="fa-solid fa-arrow-left"></i> Back <span
+      class="remove-mobile">to Dashboard</span></button>
+  <div class="main-heading">
+    <h1>Review Research Papers</h1>
+    <p>View all submitted papers</p>
+    <span id="page-number">1</span>
+  </div>
+  <div class="left-btn-container">
+    <span class="remove-mobile-left-btn">
+      <button id="left-btn"><i class="fa-solid fa-arrow-left"></i>
+        Prev</button>
+    </span>
+  </div>
+  <div class="review-papers-container">
+    <!-- dynamically create paper cards in javascript -->
+  </div>
+  <div class="right-btn-container">
+    <span class="remove-mobile-right-btn">
+      <button id="right-btn">Next <i class="fa-solid fa-arrow-right"></i></button>
+    </span>
+  </div>
+
+  <!-- if papers are not submitted by user -->
+  <div class="review-papers-available-container">
+    <i class="fa-regular fa-file"></i>
+    <h1>No Papers Yet</h1>
+    <p>Students haven't submitted any research papers</p>
+  </div>
+  <script src="https://kit.fontawesome.com/1d8804d5ad.js" crossorigin="anonymous"></script>
+  <script src="../shared/config.js"></script>
+  <script src="reviewPapers.js"></script>
+</body>
+
+</html>
