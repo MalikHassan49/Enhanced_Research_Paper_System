@@ -318,15 +318,15 @@ input::placeholder {
   }
 
   .user-container {
-    width: 265px;
+    width: 280px;
   }
 
   .email-container {
-    width: 265px;
+    width: 280px;
   }
 
   .password-container {
-    width: 265px;
+    width: 280px;
   }
 
   #register-password {
@@ -338,24 +338,24 @@ input::placeholder {
   }
 
   .password-container input {
-    width: 165px;
+    width: 170px;
   }
 
   .roles-container select {
-    width: 215px;
+    width: 230px;
   }
 
   .roles-container select {
-    padding-right: 160px;
+    padding-right: 120px;
     outline: none;
   }
 
   .register-button {
-    width: 265px;
+    width: 280px;
   }
 
   .account-container {
-    width: 295px;
+    width: 310px;
     padding-left: 15px;
   }
 
@@ -382,7 +382,7 @@ input::placeholder {
   background-color: antiquewhite;
   padding: 10px;
   border-radius: 10px;
-  width: 265px;
+  width: 280px;
   margin-top: 10px;
 }
 
