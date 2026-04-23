@@ -57,10 +57,12 @@ const registerUser = asyncHandler(async (req, res) => {
 
   const createdUser = await User.findById(user._id).select("-password -refreshToken");
 
+  const isProduction = process.env.NOD_ENV === "Production";
+
   const options = {
     httpOnly: true,
-    secure: false,
-    sameSite: "Lax"
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "Lax"
   }
 
   return res
@@ -104,10 +106,12 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
 
+  const isProduction = process.env.NOD_ENV === "Production";
+
   const options = {
     httpOnly: true,
-    secure: false,
-    sameSite: "Lax"
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "Lax"
   }
 
 
@@ -139,10 +143,12 @@ const logoutUser = asyncHandler(async (req, res) => {
     }
   )
 
+  const isProduction = process.env.NOD_ENV === "Production";
+
   const options = {
     httpOnly: true,
-    secure: false,
-    sameSite: "Lax"
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "Lax"
   }
 
   return res
