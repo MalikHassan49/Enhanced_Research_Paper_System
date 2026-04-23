@@ -1,7 +1,7 @@
 
 async function fetchReviewedPapers() {
   try {
-    const response = await fetch("http://127.0.0.1:5000/api/v1/papers/reviewed-papers",
+    const response = await fetch(`${API_BASE_URL}/api/v1/papers/reviewed-papers`,
       {
         method: "GET",
         credentials: "include"
@@ -62,7 +62,7 @@ document.addEventListener("click", async (e) => {
 
     const paperId = e.target.dataset.id;
     try {
-      const response = await fetch(`http://127.0.0.1:5000/api/v1/papers/${paperId}/comment`, {
+      const response = await fetch(`${API_BASE_URL}/api/v1/papers/${paperId}/comment`, {
         method: "GET",
         credentials: "include"
       });

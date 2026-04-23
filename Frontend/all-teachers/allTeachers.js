@@ -11,7 +11,7 @@ dashboardBtn.addEventListener("click", () => {
 
 async function allTeachers() {
   try {
-    const response = await fetch("http://127.0.0.1:5000/api/v1/users/all-teachers", {
+    const response = await fetch(`${API_BASE_URL}/api/v1/users/all-teachers`, {
       method: "GET",
       credentials: "include"
     });
@@ -52,7 +52,7 @@ document.addEventListener("click", async (e) => {
     const card = e.target.closest(".teacher-container");
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/api/v1/users/${teacherId}/delete-teacher`, {
+      const response = await fetch(`${API_BASE_URL}/api/v1/users/${teacherId}/delete-teacher`, {
         method: "DELETE",
         credentials: "include"
       });

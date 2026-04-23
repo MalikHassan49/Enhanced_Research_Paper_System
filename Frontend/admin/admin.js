@@ -53,7 +53,7 @@ logoutBtn.addEventListener("click", async () => {
 
   try {
 
-    const response = await fetch("http://127.0.0.1:5000/api/v1/users/logout",
+    const response = await fetch(`${API_BASE_URL}/api/v1/users/logout`,
       {
         method: "POST",
         credentials: "include"
@@ -83,7 +83,7 @@ logoutBtn.addEventListener("click", async () => {
 
 async function papersStatus() {
   try {
-    const response = await fetch("http://127.0.0.1:5000/api/v1/papers/papers-status", {
+    const response = await fetch(`${API_BASE_URL}/api/v1/papers/papers-status`, {
       method : "GET",
       credentials : "include"
     });

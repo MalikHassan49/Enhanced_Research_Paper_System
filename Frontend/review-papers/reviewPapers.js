@@ -11,7 +11,7 @@ const limit = 9;
 async function allSubmittedPapers(page) {
 
   try {
-    const response = await fetch(`http://127.0.0.1:5000/api/v1/papers/all-submitted-papers?page=${page}&limit=${limit}`,
+    const response = await fetch(`${API_BASE_URL}/api/v1/papers/all-submitted-papers?page=${page}&limit=${limit}`,
       {
         method: "GET",
         credentials: "include"

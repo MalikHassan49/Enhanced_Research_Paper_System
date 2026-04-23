@@ -30,7 +30,7 @@ submitBtn.addEventListener("click", async (e) => {
 
   console.log("Before fetch");
   try {
-    const response = await fetch("http://127.0.0.1:5000/api/v1/papers/submit-paper",
+    const response = await fetch(`${API_BASE_URL}/api/v1/papers/submit-paper`,
       {
         method: "POST",
         credentials: "include",

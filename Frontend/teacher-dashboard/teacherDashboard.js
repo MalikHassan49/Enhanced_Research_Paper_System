@@ -2,7 +2,7 @@
 
 async function getCurrentUser() {
   try {
-    const response = await fetch("http://127.0.0.1:5000/api/v1/users/getCurrentUser", {
+    const response = await fetch(`${API_BASE_URL}/api/v1/users/getCurrentUser`, {
       method: "GET",
       credentials: "include"
     });
@@ -22,7 +22,7 @@ async function getCurrentUser() {
 
         try {
 
-          const response = await fetch("http://127.0.0.1:5000/api/v1/users/logout",
+          const response = await fetch(`${API_BASE_URL}/api/v1/users/logout`,
             {
               method: "POST",
               credentials: "include"
