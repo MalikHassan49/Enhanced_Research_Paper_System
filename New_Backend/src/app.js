@@ -22,7 +22,13 @@ const app = express();
 //   credentials: true
 // }));
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://127.0.0.1:3000",
+    "https://enhanced-research-paper-system-le9g.vercel.app"
+  ],
+  credentials: true
+}));
 
 
 app.use(express.json({limit: '16kb'}))
