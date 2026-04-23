@@ -12,8 +12,8 @@ async function createAdmin() {
 
     await User.create({
       username: "Hassan",
-      email: "hassan.raza.developer10@gmail.com",
-      password: "Raza250$",
+      email: process.env.ADMIN_EMAIL,
+      password: process.env.ADMIN_PASSWORD,
       role: "Admin"
     });
 
