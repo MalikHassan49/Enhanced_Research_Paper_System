@@ -96,7 +96,9 @@ aside i {
 }
 
 main {
-  margin: 95px 0px 0px 260px;
+  position: fixed;
+  left: 260px;
+  top: 95px;
 }
 
 main h1 {
