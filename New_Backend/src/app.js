@@ -7,22 +7,22 @@ const app = express();
 
 // app.use(cors());
 
-app.use(cors({
-  origin: function(origin, callback) {
-    const allowedOrigins = [
-      "http://127.0.0.1:3000"
-    ];
-    if(!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } 
-    else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  }, 
-  credentials: true
-}));
+// app.use(cors({
+//   origin: function(origin, callback) {
+//     const allowedOrigins = [
+//       "http://127.0.0.1:3000"
+//     ];
+//     if(!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } 
+//     else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   }, 
+//   credentials: true
+// }));
 
-// app.use(cors());
+app.use(cors());
 
 
 app.use(express.json({limit: '16kb'}))
