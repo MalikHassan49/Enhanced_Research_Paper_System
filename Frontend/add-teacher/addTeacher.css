@@ -317,7 +317,7 @@ input::placeholder {
   }
 
   form {
-    width: 300px;
+    width: 320px;
   }
 
   form h3 {
@@ -341,15 +341,15 @@ input::placeholder {
   }
 
   .user-container {
-    width: 255px;
+    width: 265px;
   }
 
   .email-container {
-    width: 255px;
+    width: 265px;
   }
 
   .password-container {
-    width: 255px;
+    width: 265px;
   }
 
   #register-password {
@@ -357,7 +357,7 @@ input::placeholder {
   }
 
   .password-container input {
-    width: 155px;
+    width: 165px;
   }
 
 
@@ -368,7 +368,7 @@ input::placeholder {
   }
 
   .roles-container select {
-    width: 205px;
+    width: 215px;
   }
 
   .roles-container {
@@ -376,11 +376,11 @@ input::placeholder {
   }
 
   .roles-container select {
-    padding-right: 144px;
+    padding-right: 154px;
   }
 
   .register-button {
-    width: 255px;
+    width: 265px;
   }
 
   .image-container img {
@@ -389,6 +389,20 @@ input::placeholder {
 
   .account-container {
     font-size: 15px;
+    width: 265px;
+  }
+
+  .credentials-container p {
+    color: whitesmoke;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 265px;
+    margin-top: 15px;
+    margin-bottom: -5px;
+    border: 3px solid #000000;
+    background: linear-gradient(to bottom right, #667eea, #764ba2);
   }
 
 }

@@ -8,9 +8,8 @@
 body {
   max-width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #1E3A8A, #6B85B6);
+  background: linear-gradient(to right bottom, #4facfe, #00f2fe);
   transition: opacity 0.1s ease;
-  /* for smooth animation */
 }
 
 body.fade-out {
@@ -314,20 +313,20 @@ input::placeholder {
   }
 
   .register-container {
-    width: 88%;
+    width: 92%;
     margin: 0 auto;
   }
 
   .user-container {
-    width: 255px;
+    width: 265px;
   }
 
   .email-container {
-    width: 255px;
+    width: 265px;
   }
 
   .password-container {
-    width: 255px;
+    width: 265px;
   }
 
   #register-password {
@@ -339,24 +338,24 @@ input::placeholder {
   }
 
   .password-container input {
-    width: 155px;
+    width: 165px;
   }
 
   .roles-container select {
-    width: 205px;
+    width: 215px;
   }
 
   .roles-container select {
-    padding-right: 140px;
+    padding-right: 160px;
     outline: none;
   }
 
   .register-button {
-    width: 255px;
+    width: 265px;
   }
 
   .account-container {
-    width: 285px;
+    width: 295px;
     padding-left: 15px;
   }
 
@@ -370,9 +369,21 @@ input::placeholder {
     justify-content: space-evenly;
     align-items: center;
     padding-block: 80px;
-    width: 88%;
+    width: 92%;
     margin: 0 auto;
   }
 
+  /* invalid credentials container */
+
+.credentials-container p {
+  color: #1E3A8A;
+  font-weight: 800;
+  font-size: 16px;
+  background-color: antiquewhite;
+  padding: 10px;
+  border-radius: 10px;
+  width: 265px;
+  margin-top: 10px;
+}
 
 }
