@@ -207,7 +207,7 @@ main .para {
   aside {
     position: fixed;
     left: 0%;
-    top: 90px;
+    top: 91px;
     width: 150px;
     margin-top: -11px;
   }
@@ -219,7 +219,7 @@ main .para {
   }
 
   main {
-    margin: 95px 0px 0px 260px;
+    margin: 105px 0px 0px 260px;
   }
 
   main h1 {
