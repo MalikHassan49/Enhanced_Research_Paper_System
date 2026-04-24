@@ -66,7 +66,7 @@ if (registerForm) {
     } catch (error) {
       console.log(error);
       const container = document.querySelector(".credentials-container");
-      container.innerHTML = `<p>${error.message} || "Email already exist"</p>`
+      container.innerHTML = `<p>"Email already exist"</p>`
     }
   })
 }
