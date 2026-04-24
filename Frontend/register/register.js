@@ -65,7 +65,8 @@ if (registerForm) {
 
     } catch (error) {
       console.log(error);
-      alert("Server error");
+      const container = document.querySelector(".credentials-container");
+      container.innerHTML = `<p>${error.message} || "Email already exist"</p>`
     }
   })
 }
