@@ -197,7 +197,9 @@ const allTeachers = asyncHandler(async (req, res) => {
 
 const deleteTeacher = asyncHandler(async (req, res) => {
   console.log("Delete teacher API HIT!!!");
-  const teacherId = req.params.id;
+  console.log("id: ", req.params?.id);
+  const teacherId = req.params?.id;
+
 
   const teacher = await User.findByIdAndDelete(teacherId);
 
@@ -276,6 +278,53 @@ const getCurrentUser = asyncHandler(async (req, res) => {
     )
 });
 
+const updateTeacher = asyncHandler(async (req, res) => {
+  console.log("Teacher update data API HIT!");
+  const teacherId = req.params?.id;
+  const { username, email } = req.body;
+
+  const alreadyExist = await User.findOne({
+    email,
+    _id: { $ne: teacherId }
+  });
+
+  if (alreadyExist) {
+    return res
+    .status(400)
+    .json(
+      new ApiResponse(
+        400,
+        {},
+        "Email already exist"
+      )
+    )
+  }
+
+  const updateUser = await User.findByIdAndUpdate(teacherId,
+    {
+      $set: {
+        username: username,
+        email: email
+      }
+    },
+    {
+      returnDocument: "after"
+    }
+  )
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        updateUser,
+        "Teacher data update successfully!"
+      )
+    )
+
+})
+
+
 export {
   registerUser,
   loginUser,
@@ -284,5 +333,6 @@ export {
   deleteTeacher,
   allStudents,
   deleteStudent,
-  getCurrentUser
+  getCurrentUser,
+  updateTeacher
 }
