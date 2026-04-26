@@ -83,6 +83,14 @@ body .fade-out {
   color: #383636;
 }
 
+.student-container .email {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 300px;
+    overflow: hidden;
+  }
+
+
 .btns-container {
   display: flex;
   justify-content: space-between;
@@ -195,41 +203,19 @@ body .fade-out {
     width: 300px;
   }
 
-  .student-container .role {
-    background-color: #764ba2;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 600;
-  }
-
-  .student-container .email {
-    margin-right: 70px;
-    margin-bottom: 8px;
-  }
-
-  .student-container .username {
-    margin-right: 70px;
-    margin-bottom: 8px;
-  }
-
-  .delete-btn {
-    background-color: #ffff14;
-    padding: 10px;
-    border: none;
-    border-radius: 20px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    color: #ffffff;
-    transition: all 0.3s ease;
-  }
-
   .btns-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
     gap: 133px;
+  }
+
+  .student-container .email {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    overflow: hidden;
   }
 
 }
