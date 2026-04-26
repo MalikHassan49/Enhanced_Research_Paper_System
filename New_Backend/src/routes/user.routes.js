@@ -1,6 +1,7 @@
 import express from "express";
 import { registerUser, loginUser, logoutUser, allTeachers, deleteTeacher, allStudents,
-  deleteStudent, getCurrentUser, updateTeacher
+  deleteStudent, getCurrentUser, updateTeacher,
+  updateStudent
  } from "../controllers/user.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
@@ -15,6 +16,7 @@ router.route("/all-students").get(verifyJWT, allStudents);
 router.route("/:id/delete-student").delete(verifyJWT, deleteStudent);
 router.route("/getCurrentUser").get(verifyJWT, getCurrentUser);
 router.route("/:id/update-teacher").patch(verifyJWT, updateTeacher);
+router.route("/:id/update-student").patch(verifyJWT, updateStudent);
 
 export default router;
 

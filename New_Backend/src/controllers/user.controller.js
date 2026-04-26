@@ -1,3 +1,4 @@
+import { Paper } from "../models/paper.model.js";
 import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
@@ -249,6 +250,7 @@ const deleteStudent = asyncHandler(async (req, res) => {
   const studentId = req.params.id;
 
   const student = await User.findByIdAndDelete(studentId);
+  const deletePapers = await Paper.deleteMany({ studentId: studentId });
 
   return res
     .status(200)
@@ -256,7 +258,7 @@ const deleteStudent = asyncHandler(async (req, res) => {
       new ApiResponse(
         200,
         student,
-        "Student deleted successfully"
+        "Student and all papers deleted successfully"
       )
     )
 });
@@ -290,14 +292,14 @@ const updateTeacher = asyncHandler(async (req, res) => {
 
   if (alreadyExist) {
     return res
-    .status(400)
-    .json(
-      new ApiResponse(
-        400,
-        {},
-        "Email already exist"
+      .status(400)
+      .json(
+        new ApiResponse(
+          400,
+          {},
+          "Email already exist"
+        )
       )
-    )
   }
 
   const updateUser = await User.findByIdAndUpdate(teacherId,
@@ -324,6 +326,52 @@ const updateTeacher = asyncHandler(async (req, res) => {
 
 })
 
+const updateStudent = asyncHandler(async (req, res) => {
+  console.log("Student update data API HIT!");
+  const studentId = req.params?.id;
+  const { username, email } = req.body;
+
+  const alreadyExist = await User.findOne({
+    email,
+    _id: { $ne: studentId }
+  });
+
+  if (alreadyExist) {
+    return res
+      .status(400)
+      .json(
+        new ApiResponse(
+          400,
+          {},
+          "Email already exist"
+        )
+      )
+  }
+
+  const updateUser = await User.findByIdAndUpdate(studentId,
+    {
+      $set: {
+        username: username,
+        email: email
+      }
+    },
+    {
+      returnDocument: "after"
+    }
+  )
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        updateUser,
+        "Student data update successfully!"
+      )
+    )
+
+})
+
 
 export {
   registerUser,
@@ -334,5 +382,6 @@ export {
   allStudents,
   deleteStudent,
   getCurrentUser,
-  updateTeacher
+  updateTeacher,
+  updateStudent
 }
