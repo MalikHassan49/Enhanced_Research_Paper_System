@@ -9,7 +9,8 @@
 </head>
 
 <body>
-  <button class="dashboard-btn" id="dashboard-btn"><i class="fa-solid fa-arrow-left"></i> Back <span class="remove-mobile">to Dashboard</span></button>
+  <button class="dashboard-btn" id="dashboard-btn"><i class="fa-solid fa-arrow-left"></i> Back <span
+      class="remove-mobile">to Dashboard</span></button>
   <div class="main-heading">
     <h1>All Papers</h1>
     <p>View all submitted papers</p>
@@ -35,6 +36,29 @@
     <i class="fa-regular fa-file"></i>
     <h1>No Papers Yet</h1>
     <p>Students haven't submitted any research papers</p>
+  </div>
+  <!-- select teacher container -->
+  <div class="select-teacher-container">
+    <div class="paper-title-container">
+      <div class="paper-title-left-data">
+        <span>Paper Title: </span>
+        <span>AI Research on ML</span>
+      </div>
+      <div class="paper-title-right-data">
+        <i class="fa-solid fa-xmark" id="x-mark"></i>
+      </div>
+    </div>
+    <p class="teacher-para">Select Teacher:</p>
+    <div class="teachers-option-container">
+      <!-- dynamically create -->
+    </div>
+    <div class="teacher-credentials-container">
+      <!-- dynamically create -->
+    </div>
+    <div class="btns-container">
+      <button class="assign-btn">Assign</button>
+      <button class="cancel-btn">Cancel</button>
+    </div>
   </div>
   <script src="https://kit.fontawesome.com/1d8804d5ad.js" crossorigin="anonymous"></script>
   <script src="../shared/config.js"></script>

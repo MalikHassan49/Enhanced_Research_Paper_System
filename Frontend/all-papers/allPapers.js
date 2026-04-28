@@ -49,25 +49,26 @@ async function allSubmittedPapers(page) {
         <p class = "paper-abstract">${paper.paperAbstract}</p>
         <div class = "paper-name-container">
         <button class = "delete-btn" data-paper-id = "${paper._id}">Delete Paper</button>
+        <button class = "confirm-assign-btn" data-title ="${paper.title} data-paper-id = "${paper._id}">Assign Teacher</button>
         </div>
         `
-      container.appendChild(card);
-    });
+        container.appendChild(card);
+      });
 
-  } else {
-    document.querySelector(".review-papers-available-container").style.display = "block";
-    pageNumber.style.display = "none";
-    leftBtn.style.display = "none";
-    rightBtn.style.display = "none";
+    } else {
+      document.querySelector(".review-papers-available-container").style.display = "block";
+      pageNumber.style.display = "none";
+      leftBtn.style.display = "none";
+      rightBtn.style.display = "none";
+    }
+
+    pageNumber.innerText = currentPage;
+    // disable buttons
+    leftBtn.disabled = currentPage == 1;
+    rightBtn.disabled = currentPage == totalPages;
+  } catch (error) {
+    console.log(error);
   }
-
-  pageNumber.innerText = currentPage;
-  // disable buttons
-  leftBtn.disabled = currentPage == 1;
-  rightBtn.disabled = currentPage == totalPages;
-} catch (error) {
-  console.log(error);
-}
 }
 
 // first time send request
@@ -126,5 +127,96 @@ document.addEventListener("click", async (e) => {
     } catch (error) {
       console.log(error);
     }
+  }
+})
+
+// assign teacher pop-up box
+document.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("confirm-assign-btn")) {
+    document.body.classList.add("fade-low");
+    const paperTitle = e.target.dataset.title;;
+    const selectTeacherContainer = document.querySelector(".select-teacher-container");
+    selectTeacherContainer.dataset.paperId = e.target.dataset.paperId;
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/v1/users/all-teachers`, {
+        method: "GET",
+        credentials: "include"
+      });
+
+      const responseData = await response.json();
+      console.log("Response Data: ", responseData);
+      const teacherOptionContainer = document.querySelector(".teachers-option-container");
+      teacherOptionContainer.innerHTML = "";
+      if (responseData.data) {
+        responseData.data.forEach(teacher => {
+          const card = document.createElement("div");
+          card.classList.add("option-container");
+          card.innerHTML += `
+          <input type="radio" name="teacher" id="${teacher._id}" value="${teacher._id}">
+        <label for="${teacher._id}">Sir ${teacher.username}</label>
+          `
+          teacherOptionContainer.appendChild(card);
+          document.querySelector(".select-teacher-container").style.display = "flex";
+        });
+
+      }
+
+      // remove the pop-up 
+      const xmark = document.getElementById("x-mark");
+      xmark.addEventListener("click", () => {
+        document.querySelector(".select-teacher-container").style.display = "none";
+        document.body.classList.remove('fade-low');
+      })
+
+
+    } catch (error) {
+      console.log("Major Error: ", error);
+    }
+  }
+
+  // select the teacher
+  if (e.target.classList.contains("assign-btn")) {
+    const selectedTeacher = document.querySelector("input[name=teacher]:checked");
+
+    // extract the paperId
+    const selectTeacherContainer = document.querySelector(".select-teacher-container");
+    const paperId = selectTeacherContainer.dataset.paperId;
+    if (selectedTeacher) {
+      console.log(selectedTeacher.value);
+      console.log(selectedTeacher.id);
+      const teacherId = selectedTeacher.value;
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/v1/papers/${paperId}/assign-teacher`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            teacherId
+          })
+        });
+
+        const responseData = await response.json();
+        console.log("ResponseData: ", responseData);
+        const teacherCredentialsContainer = document.querySelector('.teacher-credentials-container');
+        teacherCredentialsContainer.innerHTML = `
+              <p>Teacher assigned succesfully</p>
+              `
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
+  // cancel btn
+  if (e.target.classList.contains("cancel-btn")) {
+    const selectedTeacher = document.querySelector("input[name=teacher]:checked");
+    if (selectedTeacher) {
+      selectedTeacher.checked = false;
+    }
+    document.querySelector(".select-teacher-container").style.display = "none";
+    document.body.classList.remove("fade-low");
   }
 })

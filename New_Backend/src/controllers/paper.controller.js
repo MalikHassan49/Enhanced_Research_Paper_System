@@ -66,7 +66,7 @@ const submitPaper = asyncHandler(async (req, res) => {
         "Paper submitted successfully"
       )
     )
-    console.log("5 Response send properly...");
+  console.log("5 Response send properly...");
 });
 
 const studentAllPapers = asyncHandler(async (req, res) => {
@@ -150,7 +150,11 @@ const reviewPaper = asyncHandler(async (req, res) => {
       status: paperStatus,
       reviewedBy: userId
     }
-  })
+  },
+    {
+      returnDocument: "after"
+    }
+  )
 
   return res
     .status(200)
@@ -230,23 +234,55 @@ const deletePaper = asyncHandler(async (req, res) => {
 })
 
 
-const papersStatus = asyncHandler( async (req, res) => {
-  const acceptedPapers = await Paper.countDocuments({status : "Accepted"})
-  const rejectedPapers = await Paper.countDocuments({status : "Rejected"});
-  const pendingPapers = await Paper.countDocuments({status : "Pending"});
-  const underReviewPapers = await Paper.countDocuments({status : "Under Review"});
+const papersStatus = asyncHandler(async (req, res) => {
+  const acceptedPapers = await Paper.countDocuments({ status: "Accepted" })
+  const rejectedPapers = await Paper.countDocuments({ status: "Rejected" });
+  const pendingPapers = await Paper.countDocuments({ status: "Pending" });
+  const underReviewPapers = await Paper.countDocuments({ status: "Under Review" });
 
   return res
-  .status(200)
-  .json(
-    new ApiResponse(
-      200,
-      {
-        acceptedPapers, rejectedPapers, pendingPapers, underReviewPapers
-      },
-      "Paper status fetched successfully!"
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        {
+          acceptedPapers, rejectedPapers, pendingPapers, underReviewPapers
+        },
+        "Paper status fetched successfully!"
+      )
     )
+})
+
+
+const assignTeacher = asyncHandler(async (req, res) => {
+  console.log("Assign Teacher API HIT!");
+  const {paperId} = req.params?.id;
+  const {teacherId} = req.body;
+
+  if (!teacherId) {
+    throw new ApiError(400, "Teacher Id is required");
+  }
+
+  const assignedTeacher = await User.findByIdAndUpdate(paperId, {
+    $set: {
+      assignTeacher: teacherId
+    }
+  },
+    {
+      returnDocument: "after"
+    }
   )
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        assignedTeacher,
+        "Teacher assigned successfully"
+      )
+    )
+
 })
 
 export {
@@ -257,5 +293,6 @@ export {
   comment,
   reviewedPapers,
   deletePaper,
-  papersStatus
+  papersStatus,
+  assignTeacher
 }

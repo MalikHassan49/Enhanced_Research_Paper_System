@@ -10,12 +10,21 @@ body {
   background: linear-gradient(to bottom right, #ff69e0, #ffff14);
   width: 100%;
   min-height: 100vh;
-  transition: opacity 0.3s all;
+  transition: opacity, background 0.3s all;
 }
 
-body .fade-out {
+body.fade-out {
   opacity: 0;
 }
+
+body.fade-low::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.55);
+}
+
 
 .main-heading {
   text-align: center;
@@ -86,7 +95,7 @@ body .fade-out {
 
 .review-papers-container .paper .status {
   background-color: #ffff14;
-  color: #ffffff;
+  color: #000000;
   width: fit-content;
   padding: 5px 15px;
   border: none;
@@ -130,10 +139,10 @@ body .fade-out {
   overflow: hidden;
 }
 
-.review-papers-container .paper .delete-btn {
+.paper-name-container .delete-btn {
   background: linear-gradient(to bottom right, #28ffb3, #43e97b);
   border: none;
-  padding: 10px 40px;
+  padding: 10px 20px;
   color: #ffffff;
   font-weight: 600;
   font-size: 16px;
@@ -143,6 +152,22 @@ body .fade-out {
 }
 
 .delete-btn:hover {
+  box-shadow: 0px 3px 10px 2px rgba(0, 0, 0, 0.2);
+}
+
+.paper-name-container .confirm-assign-btn {
+  background: linear-gradient(to bottom right, #28ffb3, #43e97b);
+  border: none;
+  padding: 10px 20px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: box-shadow 0.4s ease;
+}
+
+.assign-assign-btn:hover {
   box-shadow: 0px 3px 10px 2px rgba(0, 0, 0, 0.2);
 }
 
@@ -214,6 +239,17 @@ body .fade-out {
   color: #ffffff;
 }
 
+/* teacher credentials */
+.teacher-credentials-container {
+  width: 300px;
+  margin-block: 5px;
+}
+
+.teacher-credentials-container p {
+  color: #764ba2;
+  font-weight: 800;
+}
+
 .btns-container {
   display: flex;
   justify-content: space-between;
@@ -256,6 +292,119 @@ body .fade-out {
   box-shadow: 0px 0px 6px 6px rgba(255, 105, 224, 0.3);
 }
 
+/* select teacher */
+.select-teacher-container {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 500px;
+  max-height: 350px;
+  /* margin: 0 auto; */
+  border: none;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 15px;
+}
+
+.paper-title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.teachers-option-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  overflow-y: scroll;
+}
+
+/* .teachers-option-container::-webkit-scrollbar {
+  display: none;
+} */
+
+.paper-title-left-data span {
+  max-width: 300px;
+  text-overflow: ellipsis;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.paper-title-right-data {
+  width: 25px;
+  font-size: 14px;
+  background: #764ba2;
+  color: #ffffff;
+  border-radius: 50%;
+  text-align: center;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.teacher-para {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.option-container {
+  padding: 4px;
+}
+
+.option-container input {
+  font-size: 18px;
+}
+
+.option-container label {
+  font-size: 18px;
+}
+
+.btns-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.assign-btn {
+  background-color: #ffff14;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.assign-btn:hover {
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+}
+
+.cancel-btn {
+  background-color: #764ba2;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+}
+
 @media screen and (max-width: 600px) {
   .main-heading {
     margin-bottom: 40px;
@@ -283,8 +432,14 @@ body .fade-out {
     margin-bottom: 40px;
   }
 
-  .review-papers-container .paper .delete-btn {
-    padding: 10px 35px;
+  .paper-name-container .delete-btn {
+
+    padding: 8px 10px;
+    font-size: 16px;
+  }
+
+  .paper-name-container .confirm-assign-btn {
+    padding: 8px 10px;
   }
 
   /* if papers are not submitted */
@@ -292,5 +447,13 @@ body .fade-out {
   #right-btn {
     margin-right: 12px;
   }
+
+  /* teacher credentials */
+  .teacher-credentials-container {
+    width: 300px;
+    margin-block: 5px;
+  }
+
+
 
 }

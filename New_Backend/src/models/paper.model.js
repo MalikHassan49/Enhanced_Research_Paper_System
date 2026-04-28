@@ -26,6 +26,11 @@ const paperSchema = new Schema({
     ref: "User",
     default: null
   },
+  assignTeacher: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    default: null
+  },
   status: {
     type: String,
     enum: ["Pending", "Under Review", "Accepted", "Rejected"],

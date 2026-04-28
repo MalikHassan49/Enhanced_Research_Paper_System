@@ -50,6 +50,10 @@ submitBtn.addEventListener("click", async (e) => {
         credentialsContainer.innerHTML = `
         <p>Paper Submitted Successfully</p>
       `
+        // back to dashboard
+        setTimeout(() => {
+          window.location.href = "../student-dashboard/studentDashboard.html";
+        }, 3000)
       }
       else {
         credentialsContainer.innerHTML = `
@@ -70,5 +74,5 @@ dashboardBtn.addEventListener("click", () => {
 
   setTimeout(() => {
     window.location.href = "../student-dashboard/studentDashboard.html";
-  }, 200)
+  }, 2000)
 })
