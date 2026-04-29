@@ -108,6 +108,42 @@ const allSubmittedPapers = asyncHandler(async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 9;
   const skip = (page - 1) * limit;
+  const userId = req.user._id;
+
+  const totalPapers = await Paper.countDocuments();
+
+  const papers = await Paper.find({
+    assignTeacher: userId
+  })
+    .populate("studentId", "username")
+    .populate("reviewedBy", "username")
+    .sort({ createdAt: -1 })
+    .limit(limit)
+    .skip(skip)
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        {
+          papers,
+          totalPapers,
+          currentPage: page,
+          totalPages: Math.ceil(totalPapers / limit)
+        },
+        "Papers fetched successfully"
+      )
+    )
+})
+
+
+const allPapers = asyncHandler(async (req, res) => {
+  console.log("All Papers API HIT !!!");
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 9;
+  const skip = (page - 1) * limit;
+  const userId = req.user._id;
 
   const totalPapers = await Paper.countDocuments();
 
@@ -256,14 +292,15 @@ const papersStatus = asyncHandler(async (req, res) => {
 
 const assignTeacher = asyncHandler(async (req, res) => {
   console.log("Assign Teacher API HIT!");
-  const {paperId} = req.params?.id;
-  const {teacherId} = req.body;
+  console.log(req.params);
+  const { paperId } = req.params;
+  const { teacherId } = req.body;
 
   if (!teacherId) {
     throw new ApiError(400, "Teacher Id is required");
   }
 
-  const assignedTeacher = await User.findByIdAndUpdate(paperId, {
+  const assignedTeacher = await Paper.findByIdAndUpdate(paperId, {
     $set: {
       assignTeacher: teacherId
     }
@@ -272,6 +309,10 @@ const assignTeacher = asyncHandler(async (req, res) => {
       returnDocument: "after"
     }
   )
+
+  if (!assignedTeacher) {
+    throw new ApiError(404, "Paper not found!");
+  }
 
   return res
     .status(200)
@@ -289,6 +330,7 @@ export {
   submitPaper,
   studentAllPapers,
   allSubmittedPapers,
+  allPapers,
   reviewPaper,
   comment,
   reviewedPapers,

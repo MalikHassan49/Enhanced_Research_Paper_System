@@ -9,7 +9,7 @@ const limit = 9;
 async function allSubmittedPapers(page) {
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/v1/papers/all-submitted-papers?page=${page}&limit=${limit}`,
+    const response = await fetch(`${API_BASE_URL}/api/v1/papers/all-papers?page=${page}&limit=${limit}`,
       {
         method: "GET",
         credentials: "include"
@@ -49,7 +49,7 @@ async function allSubmittedPapers(page) {
         <p class = "paper-abstract">${paper.paperAbstract}</p>
         <div class = "paper-name-container">
         <button class = "delete-btn" data-paper-id = "${paper._id}">Delete Paper</button>
-        <button class = "confirm-assign-btn" data-title ="${paper.title} data-paper-id = "${paper._id}">Assign Teacher</button>
+        <button class = "confirm-assign-btn" data-title ="${paper.title}" data-paper-id = "${paper._id}">Assign Teacher</button>
         </div>
         `
         container.appendChild(card);
@@ -182,6 +182,7 @@ document.addEventListener("click", async (e) => {
     // extract the paperId
     const selectTeacherContainer = document.querySelector(".select-teacher-container");
     const paperId = selectTeacherContainer.dataset.paperId;
+    console.log("PaperId: ", paperId);
     if (selectedTeacher) {
       console.log(selectedTeacher.value);
       console.log(selectedTeacher.id);
