@@ -142,10 +142,10 @@ document.addEventListener("click", async (e) => {
       console.log("Response Data: ", responseData);
       if (!response.ok) {
         console.log("Response not ok");
-        card.querySelector(".credentials-container").style.display = "block";
+        // card.querySelector(".credentials-container").style.display = "block";
         card.querySelector(".credentials-container p").innerText = responseData.message;
         setTimeout(() => {
-          card.querySelector(".credentials-container").style.display = "none";
+          card.querySelector(".credentials-container").innerHTML = "";
         }, 3000)
         return;
       }

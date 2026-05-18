@@ -165,14 +165,15 @@ body .fade-out {
 }
 
 .credentials-container {
-  display: none;
+  display: block;
+  min-height: 30px;
 }
 
 .credentials-container p {
   color: #764ba2;
   font-size: 16px;
   font-weight: 800;
-  margin-block: 5px;
+  margin-top: 5px;
 }
 
 @media screen and (max-width: 600px) {
