@@ -1,3 +1,4 @@
+const submitFirstPaperBtn = document.getElementById("submit-first-paper-btn");
 
 async function fetchPapersData() {
   try {
@@ -99,5 +100,12 @@ document.addEventListener("click", async (e) => {
     }
   }
 
+})
+
+// submit first paper
+submitFirstPaperBtn.addEventListener("click", () => {
+  setTimeout(() => {
+    window.location.href = "../submit-paper/submitPaper.html";
+  }, 1000)
 })
 

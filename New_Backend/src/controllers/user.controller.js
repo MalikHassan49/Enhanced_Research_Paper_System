@@ -22,6 +22,7 @@ const generateAccessAndRefreshToken = async (userId) => {
   }
 }
 
+
 // register controller
 const registerUser = asyncHandler(async (req, res) => {
   console.log("Register API hit");
@@ -383,5 +384,112 @@ export {
   deleteStudent,
   getCurrentUser,
   updateTeacher,
-  updateStudent
+  updateStudent,
 }
+
+
+// ********* OTP verification code **********
+
+// import crypto from "crypto";
+// import { redis } from "../config/redis.js";
+// import { sendEmail } from "../utils/email.js";
+
+// register controller
+// const registerUser = asyncHandler(async (req, res) => {
+//   console.log("Register API hit");
+//   // flow of api
+//   // Take email,password etc from user
+//   // Check email,password etc
+
+//   const { username, email, password, role } = req.body;
+//   console.log("Username: ", username);
+//   console.log("Email: ", email);
+//   console.log("Password: ", password);
+//   console.log("Role: ", role);
+
+//   // safe validation
+//   if (!username || !email || !password || !role) {
+//     throw new ApiError(400, "All fields are required");
+//   }
+
+//   const alreadyExist = await User.findOne({ email })
+
+//   if (alreadyExist) {
+//     throw new ApiError(400, "Email already exist");
+//   }
+
+
+//   const user = await User.create({
+//     username,
+//     email,
+//     password,
+//     role
+//   })
+
+//   // generate verification token
+//   const token = crypto.randomBytes(32).toString("hex");
+
+//   await redis.set(`verify:${token}`, user._id.toString(), { EX: 3600 });
+
+//   const link = `${process.env.BASE_URL}/verify-email?token=${token}`;
+
+//   await sendEmail({
+//     to: email,
+//     from: process.env.FROM_EMAIL,
+//     subject: "Email verification",
+//     html: `<h3>Click to verify</h3><a href="${link}">
+//     Verify Email</a>`
+//   })
+
+//   return res
+//     .status(200)
+//     .json(
+//       new ApiResponse(
+//         200,
+//         user,
+//         "User registered successfully, but not verified"
+//       )
+//     )
+// })
+
+// verify email
+// const verifyEmail = asyncHandler(async (req, res) => {
+//   const { token } = req.query;
+
+//   const userId = await redis.get(`verify:${token}`);
+
+//   if (!userId) {
+//     throw new ApiError(400, "Invalid or expired token!");
+//   }
+
+//   const verifiedUser = await User.findByIdAndUpdate(userId,
+//     { isVerified: true },
+//     {returnDocument: "after"}
+//   );
+
+//   await redis.del(`verify:${token}`);
+
+//   const { accessToken, refreshToken } = await generateAccessAndRefreshToken(verifiedUser._id)
+
+//   const createdUser = await User.findById(verifiedUser._id).select("-password -refreshToken");
+
+//   const isProduction = process.env.NOD_ENV === "Production";
+
+//   const options = {
+//     httpOnly: true,
+//     secure: isProduction,
+//     sameSite: isProduction ? "none" : "Lax"
+//   }
+
+//   return res
+//     .status(201)
+//     .cookie("accessToken", accessToken, options)
+//     .cookie("refreshToken", refreshToken, options)
+//     .json(
+//       new ApiResponse(
+//         201,
+//         createdUser,
+//         "Email verified successfully"
+//       )
+//     )
+// })

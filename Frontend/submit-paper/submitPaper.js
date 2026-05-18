@@ -1,16 +1,31 @@
 // submitPaper.html (Files temporary store in browser code)
 const fileUpload = document.getElementById("fileUpload");
 const fileText = document.getElementById("fileText");
+const fileError = document.getElementById("fileError");
 
 
 fileUpload.addEventListener("change", () => {
   console.log("File data: ", fileUpload.files);
   console.log("First File data: ", fileUpload.files[0]);
 
-  if (fileUpload.files.length > 0) {
-    fileText.textContent = fileUpload.files[0].name;
+  const file = fileUpload.files[0];
+
+  if (file) {
+    const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+
+    fileText.textContent = `${file.name} (${fileSizeMB}MB)`
+
+    fileError.textContent = "";
+
+    if (fileSizeMB > 10 * 1024 * 1024) {
+      fileError.textContent = "You cannot upload file greater than 10MB.";
+      fileUpload.value = "";
+
+      fileText.textContent = "";
+    }
   }
-});
+}
+);
 
 // send request to backend
 const paperTitle = document.getElementById("paper-title");

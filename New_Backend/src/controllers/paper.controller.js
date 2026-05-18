@@ -149,7 +149,7 @@ const allPapers = asyncHandler(async (req, res) => {
 
   const papers = await Paper.find({})
     .populate("studentId", "username")
-    .populate("reviewedBy", "username")
+    .populate("assignTeacher", "username")
     .sort({ createdAt: -1 })
     .limit(limit)
     .skip(skip)

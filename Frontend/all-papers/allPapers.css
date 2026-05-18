@@ -115,7 +115,7 @@ body.fade-low::before {
 .review-papers-container .paper .paper-abstract {
   display: -webkit-box;
   -webkit-line-clamp: 2;
-  /* only show three lines    */
+  /* only show two lines    */
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
   overflow: hidden;

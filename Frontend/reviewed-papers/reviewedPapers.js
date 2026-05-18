@@ -102,3 +102,11 @@ document.addEventListener("click", async (e) => {
 
 })
 
+
+const reviewFirstPaperBtn = document.getElementById("review-first-paper-btn");
+
+reviewFirstPaperBtn.addEventListener("click", () => {
+  setTimeout(() => {
+    window.location.href = "../review-papers/reviewPapers.html";
+  }, 1000)
+})

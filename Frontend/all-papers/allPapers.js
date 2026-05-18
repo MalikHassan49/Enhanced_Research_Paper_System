@@ -6,6 +6,7 @@ const rightBtn = document.getElementById("right-btn");
 let currentPage = 1;
 const limit = 9;
 
+
 async function allSubmittedPapers(page) {
 
   try {
@@ -42,7 +43,7 @@ async function allSubmittedPapers(page) {
 
         card.innerHTML += `
         <div class = "user-info-container">
-        <p class = "username">Reviewed By: ${paper.reviewedBy?.username || "None"}</p>
+        <p class = "username">Assigned Teacher: ${paper.assignTeacher?.username || "Not Assigned"}</p>
         <p class = "status">${paper.status}</p>
         </div>
         <h1 class = "paper-title">${paper.paperTitle}</h1>
@@ -205,6 +206,15 @@ document.addEventListener("click", async (e) => {
         teacherCredentialsContainer.innerHTML = `
               <p>Teacher assigned succesfully</p>
               `
+        setTimeout(() => {
+          document.querySelector(".select-teacher-container").style.display = "none";
+          document.body.classList.remove("fade-low");
+          teacherCredentialsContainer.innerHTML = `
+              <p></p>
+              `
+        }, 2000)
+        // refresh papers
+        await allSubmittedPapers(currentPage);
       } catch (error) {
         console.log(error);
       }
