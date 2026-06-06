@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-
+import { errorHandler } from "./middlewares/error.middleware.js";
 
 const app = express();
 
@@ -46,5 +46,7 @@ import paperRouter from "./routes/paper.routes.js";
 // routes declaration
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/papers", paperRouter);
+
+app.use(errorHandler);
 
 export { app }

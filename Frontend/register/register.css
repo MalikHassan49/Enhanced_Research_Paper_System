@@ -9,7 +9,8 @@ body {
   max-width: 100%;
   min-height: 100vh;
   /* background: linear-gradient(to right bottom, rgb(79, 172, 254), rgb(0, 242, 255)); */
-  background: linear-gradient(to bottom right, #67a6ff, #004aff);
+  /* background: linear-gradient(to bottom right, #67a6ff, #004aff); */
+  background: linear-gradient(to top left,#667eea, #764ba2);
   transition: opacity 0.1s ease;
 }
 
@@ -27,15 +28,19 @@ form {
   align-items: center;
   /* border: 6px solid #808080; */
   overflow: hidden;
-  border-radius: 15px;
+  border-radius: 20px;
+  /* border: 4px solid #764ba2; */
+  cursor: pointer;
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 20px;
   padding-bottom: 15px;
-  background: rgba(0, 242, 255, 0.09);
-  /* backdrop-filter: blur(10px); */
+  background: linear-gradient(135deg, #7b8fe7, #c793fc);
+  box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.3);
+  /* backdrop-filter: blur(12px); */
 }
 
+/* 
 form span {
   position: absolute;
   display: block;
@@ -46,45 +51,44 @@ form span:nth-child(1) {
   left: -100%;
   width: 100%;
   height: 5px;
-  background: linear-gradient(to right, #1E3A8A, #38BDF8);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   animation: topMove 2s linear infinite;
-}
+} */
 
-form span:nth-child(2) {
+/* form span:nth-child(2) {
   top: -100%;
   right: 0;
   width: 5px;
   height: 100%;
-  background: linear-gradient(to bottom, #1E3A8A, #38BDF8);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   animation: rightMove 2s linear infinite;
   animation-delay: 0.5s;
-}
-
+} */
+/* 
 form span:nth-child(3) {
   bottom: 0;
   right: -100%;
   width: 100%;
   height: 5px;
-  background: linear-gradient(to left, #1E3A8A, #38BDF8);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   animation: bottomMove 2s linear infinite;
   animation-delay: 1s;
-}
+} */
 
-form span:nth-child(4) {
+/* form span:nth-child(4) {
   bottom: -100%;
   left: 0;
   width: 5px;
   height: 100%;
-  background: linear-gradient(to top, #1E3A8A, #38BDF8);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   animation: leftMove 2s linear infinite;
   animation-delay: 1.5s;
-}
+} */
 
 form h3 {
   color: #000000;
   font-weight: 600;
-  /* padding-block: 5px; */
-  /* margin-block: 5px; */
+
 }
 
 .main-heading {
@@ -228,7 +232,7 @@ input::placeholder {
   border-radius: 8px;
   border: 3px solid #000000;
   cursor: pointer;
-  background: linear-gradient(to right, #1E3A8A, #38BDF8);
+  background: linear-gradient(135deg, #667eea, #764ba2);
 }
 
 .register-container {

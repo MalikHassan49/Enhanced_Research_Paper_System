@@ -1,0 +1,168 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI';
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(to right, #667eea, #764ba2);
+}
+
+.otp-container {
+  /* border: 4px solid gray; */
+  border: none;
+  border-radius: 20px;
+  padding: 20px;
+  width: 450px;
+  margin: 0 auto;
+  margin-top: 100px;
+  background-color: whitesmoke;
+  box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.2);
+}
+
+.otp-container h1 {
+  text-align: center;
+  background: linear-gradient(to right, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
+
+.otp-container p {
+  text-align: center;
+}
+
+.otp-container .verify-btn {
+  margin-left: 140px;
+  background: none;
+  background-color: #8a2be2;
+  color: #ffffff;
+  border-radius: 20px;
+  border: none;
+  padding: 10px 35px;
+  font-size: 16px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.verify-btn:active {
+  background-color: #7722c7;
+}
+
+.input-containers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 400px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.input-containers input {
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  gap: 35px;
+  width: 400px;
+}
+
+.buttons-container button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-align: center;
+  border: 1px solid gray;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.buttons-container button:active {
+  background-color: rgb(110, 108, 108);
+}
+
+.backspace-container {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  text-align: center;
+  border: 1px solid gray;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.backspace-container:active {
+  background-color: rgb(110, 108, 108);
+}
+
+.resend-btn {
+  color: #7722c7;
+  font-weight: 600;
+}
+
+.cooldown-otp {
+  color: rgb(94, 177, 94);
+}
+
+.resend-otp {
+  color: rgb(94, 177, 94);
+}
+
+@media screen and (max-width: 600px) {
+
+  .otp-container {
+    width: 330px;
+  }
+
+
+  .input-containers {
+    gap: 10px;
+    width: 330px;
+  }
+
+  .input-containers input {
+    width: 40px;
+    height: 40px;
+  }
+
+  .otp-container .verify-btn {
+    margin-left: 95px;
+  }
+
+  .buttons-container {
+    gap: 20px;
+    width: 330px;
+    overflow: hidden;
+  }
+
+  .buttons-container button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .backspace-container {
+    width: 40px;
+    height: 40px;
+  }
+
+  .backspace-container .backspace {
+    width: 25px;
+  }
+}

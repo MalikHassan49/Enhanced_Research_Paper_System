@@ -49,15 +49,13 @@ if (registerForm) {
 
       const responseData = await response.json();
       if (response.ok) {
-        console.log("User register successfully");
         console.log("Response data: ", responseData);
+        localStorage.setItem("verifyEmail", email);
         // for smooth animate to studentDashboard
         document.body.classList.add("fade-out");
         setTimeout(() => {
-          if (role === "Student") {
-            window.location.href = "../student-dashboard/studentDashboard.html";
-          }
-        }, 100)
+            window.location.href = "../verify-otp/verify-otp.html";
+        }, 1000)
       }
       else {
         alert(data.message || "Registration Failed");
@@ -66,7 +64,7 @@ if (registerForm) {
     } catch (error) {
       console.log(error);
       const container = document.querySelector(".credentials-container");
-      container.innerHTML = `<p>"Email already exist"</p>`
+      container.innerHTML = `<p>"Invalid credentials"</p>`
     }
   })
 }

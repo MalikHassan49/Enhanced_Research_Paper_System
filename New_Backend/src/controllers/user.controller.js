@@ -3,6 +3,10 @@ import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
+import redisClient from "../redis/redisClient.js";
+import { sendEmail } from "../utils/email.js";
+import { generateOTP } from "../utils/otp.js";
+import { registerSchema, loginSchema, verifyOTPSchema, resendOTPSchema, forgotPasswordSchema, resetPasswordSchema } from "../validations/auth.validation.js";
 
 // generate access token and refresh token
 const generateAccessAndRefreshToken = async (userId) => {
@@ -22,100 +26,281 @@ const generateAccessAndRefreshToken = async (userId) => {
   }
 }
 
-
 // register controller
 const registerUser = asyncHandler(async (req, res) => {
-  console.log("Register API hit");
-  // flow of api
-  // Take email,password etc from user
-  // Check email,password etc
 
-  const { username, email, password, role } = req.body;
-  console.log("Username: ", username);
-  console.log("Email: ", email);
-  console.log("Password: ", password);
-  console.log("Role: ", role);
-
-  // safe validation
-  if (!username || !email || !password || !role) {
-    throw new ApiError(400, "All fields are required");
-  }
-
-  const alreadyExist = await User.findOne({ email })
-
-  if (alreadyExist) {
+  // Zod Validation
+  const validatedData = registerSchema.parse(req.body);
+  // Destructuring
+  const { username, email, password, role } = validatedData;
+  // Check existing user in MongoDB
+  const existingUser = await User.findOne({ email });
+  // if User already exist
+  if (existingUser) {
     throw new ApiError(400, "Email already exist");
   }
+  // Check existing OTP in redis
+  const existingOTP = await redisClient.get(`otp:${email}`);
+  // if OTP already exist
+  if (existingOTP) {
+    // convert redis string into object
+    const parsedOTP = JSON.parse(existingOTP);
+    // get remaining expiry time
+    const remainingTime = await redisClient.ttl(`otp:${email}`);
+    // convert seconds into minutes
+    const remainingMinutes = Math.ceil(remainingTime / 60);
+    // Resend same OTP
+    await sendEmail(
+      email,
+      "OTP Verification",
+      `Your otp is ${parsedOTP.otp}`,
+      `
+      <h1>Email verification</h1>
+      <h2>Your otp is ${parsedOTP.otp}</h2>
+      <p>otp already generated</p>
+      <p>This otp is valid for ${remainingMinutes} minutes(s)</p>
+      `
+    );
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          {},
+          "OTP resent successfully"
+        )
+      )
+  }
+  // generate new otp
+  const otp = generateOTP();
+  // Store user data temporary in Redis database
+  // User data 15 min
+  await redisClient.set(
+    `user:${email}`,
+    JSON.stringify({
+      username,
+      email,
+      password,
+      role
+    }),
+    {
+      EX: 900
+    }
+  );
+  // otp data 5 min
+  await redisClient.set(
+    `otp:${email}`,
+    JSON.stringify({
+      otp
+    }),
+    {
+      EX: 300
+    }
+  );
+  // Send OTP email
+  await sendEmail(
+    email,
+    "OTP Verification",
+    `Your otp is ${otp}`,
+    `
+    <h1>Email Verification</h1>
+    <h2>Your otp is ${otp}</h2>
+    <p>OTP valid for 5 minutes</p>
+    `
+  )
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        {},
+        "OTP sent successfully"
+      )
+    )
+});
 
+const verifyOTP = asyncHandler(async (req, res) => {
+  const validatedData = verifyOTPSchema.parse(req.body);
+
+  const { email, otp } = validatedData;
+
+  const otpData = await redisClient.get(`otp:${email}`);
+
+  if (!otpData) {
+    throw new ApiError(400, "OTP expired.Please resend otp");
+  }
+
+  const parsedData = JSON.parse(otpData);
+
+  if (parsedData.otp !== otp) {
+    throw new ApiError(400, "Invalid OTP");
+  }
+
+  // get user data from redis
+  const userData = await redisClient.get(`user:${email}`);
+
+  if (!userData) {
+    throw new ApiError(400, "Registration failed.Please register again");
+  }
+
+  const parsedUser = JSON.parse(userData);
 
   const user = await User.create({
-    username,
-    email,
-    password,
-    role
-  })
+    username: parsedUser.username,
+    email: parsedUser.email,
+    password: parsedUser.password,
+    role: parsedUser.role,
+    isVerified: true
+  });
 
-  const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id)
+  await redisClient.del(`user:${email}`);
+  await redisClient.del(`otp:${email}`);
+
+  const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id);
+
+  console.log("AccessToken: ", accessToken);
+  console.log("RefreshToken: ", refreshToken);
 
   const createdUser = await User.findById(user._id).select("-password -refreshToken");
 
-  const isProduction = process.env.NOD_ENV === "Production";
+  const isProduction = process.env.NOD_ENV === "production";
 
   const options = {
     httpOnly: true,
     secure: isProduction,
     sameSite: isProduction ? "none" : "Lax"
-  }
+  };
 
   return res
-    .status(201)
+    .status(200)
     .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)
     .json(
       new ApiResponse(
-        201,
+        200,
         createdUser,
-        "User registered successfully"
+        "User verified successfully"
       )
     )
 })
 
-// login controller
-const loginUser = asyncHandler(async (req, res) => {
-  // Take the email, apssword, role
-  // Check the fields
-  // Match passowrd, email in database
-  console.log("login API hit");
-  const { username, email, password, role } = req.body;
+const resendOTP = asyncHandler(async (req, res) => {
+  const validatedData = resendOTPSchema.parse(req.body);
 
-  if (!username || !email || !password || !role) {
-    throw new ApiError(400, "All fields are required")
+  const { email } = validatedData;
+
+  // Cooldown check
+
+  const cooldown = await redisClient.get(`cooldown:${email}`);
+  console.log("cooldown", cooldown);
+
+  if (cooldown) {
+    const ttl = await redisClient.ttl(`cooldown:${email}`);
+    return res
+    .status(400)
+    .json(
+      new ApiResponse(
+        400,
+        { ttl },
+        `Wait for ${ttl}s  before requesting another otp`
+      )
+    )
   }
 
-  const user = await User.findOne({ email })
+  // User check
 
+  const userData = await redisClient.get(`user:${email}`);
+
+  if (!userData) {
+    throw new ApiError(400, "Registration expired.Please register again");
+  }
+
+  // Otp check
+  const otpData = await redisClient.get(`otp:${email}`);
+
+  let otpToSend;
+
+  if (otpData) {
+    const parsedOTP = JSON.parse(otpData);
+    otpToSend = parsedOTP.otp;
+  }
+  else {
+    // generate new otp
+    otpToSend = generateOTP();
+    await redisClient.set(
+      `otp:${email}`,
+      JSON.stringify({
+        otp: otpToSend
+      }),
+      {
+        EX: 300
+      }
+    );
+  }
+
+  // Send Email
+  await sendEmail(
+      email,
+      "Resend OTP",
+      `Your otp is ${otpToSend}`,
+      `
+      <h1>OTP Verification</h1>,
+      <h2>Your OTP is ${otpToSend}</h2>
+      <p>OTP valid for 5 minutes</p>
+      `
+    );
+
+  await redisClient.set(
+    `cooldown:${email}`,
+    "true",
+    {
+      EX: 30
+    }
+  );
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        {},
+        "OTP resend successfully"
+      )
+    )
+})
+
+const loginUser = asyncHandler(async (req, res) => {
+  const validatedData = loginSchema.parse(req.body);
+  const { email, password, role } = validatedData;
+
+  const user = await User.findOne({ email });
   if (!user) {
     throw new ApiError(400, "User not found");
   }
 
-  const isValidPassword = await user.isPasswordCorrect(password);
-
-  if (!isValidPassword) {
-    throw new ApiError(400, "Invalid password");
+  if (!user.isVerified) {
+    throw new ApiError(400, "Verify your email first");
   }
 
-  const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id)
+  if (user.role !== role) {
+    throw new ApiError(400, "Invalid User");
+  }
+
+  const isPasswordCorrect = await user.isPasswordCorrect(password);
+  if (!isPasswordCorrect) {
+    throw new ApiError(400, "Invalid credentials");
+  }
+
+  const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id);
 
   const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
 
-  const isProduction = process.env.NOD_ENV === "Production";
+  const isProduction = process.env.NOD_ENV === "production";
 
   const options = {
-    httpOnly: true,
-    secure: isProduction,
-    sameSite: isProduction ? "none" : "Lax"
+    httpOnly: isProduction,
+    secure: isProduction ? "none" : "Lax",
   }
-
 
   return res
     .status(200)
@@ -125,10 +310,235 @@ const loginUser = asyncHandler(async (req, res) => {
       new ApiResponse(
         200,
         loggedInUser,
-        "User loggedIn successfully"
+        "User login successfully"
+      )
+    )
+
+})
+
+const forgotPassword = asyncHandler(async (req, res) => {
+  const validatedData = forgotPasswordSchema.parse(req.body);
+  const { email } = validatedData;
+
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new ApiError(400, "User not found");
+  }
+
+  const otp = generateOTP();
+
+  // normalized the email
+  const normalizedEmail = email.toLowerCase().trim();
+  await redisClient.set(
+    `reset:${normalizedEmail}`,
+    otp,
+    {
+      EX: 300
+    }
+  );
+
+  await sendEmail(
+    normalizedEmail,
+    "Reset Password OTP",
+    `Your otp is ${otp}`,
+    `
+    <h1>Reset Password</h1>
+    <h2>Your otp is ${otp}</h2>
+    `
+  )
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        {},
+        "Reset OTP sent"
+      )
+    )
+});
+
+const verifyResetOTP = asyncHandler(async (req, res) => {
+  const validatedData = verifyOTPSchema.parse(req.body);
+
+  const { email, otp } = validatedData;
+  console.log("EMAIL: ", email);
+  console.log("REDIS KEY: ", `reset:${email}`);
+  // normalize the email
+  const normalizedEmail = email.toLowerCase().trim();
+
+  const storedOTP = await redisClient.get(`reset:${normalizedEmail}`);
+  console.log("STORED OTP: ", storedOTP);
+
+  if (!storedOTP) {
+    throw new ApiError(400, "OTP expired");
+  }
+
+  if (storedOTP !== otp) {
+    throw new ApiError(400, "Invalid otp");
+  }
+
+  await redisClient.set(
+    `reset-verified:${email}`,
+    "true",
+    {
+      EX: 300
+    }
+  );
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        {},
+        "OTP verified successfully"
+      )
+    )
+});
+
+
+const resetPassword = asyncHandler(async (req, res) => {
+  const validatedData = resetPasswordSchema.parse(req.body);
+
+  const { email, newPassword } = validatedData;
+
+  const verified = await redisClient.get(`reset-verified:${email}`);
+
+  if (!verified) {
+    throw new ApiError(400, "OTP verification required");
+  }
+
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new ApiError(400, "User not found");
+  }
+
+  user.Password = newPassword;
+  await user.save({ validateBeforeSave: false });
+
+  await redisClient.del(`reset:${email}`);
+  await redisClient.del(`reset-verify:${email}`);
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        {},
+        "Password reset successfully"
       )
     )
 })
+
+
+
+// register controller
+// const registerUser = asyncHandler(async (req, res) => {
+//   console.log("Register API hit");
+//   // flow of api
+//   // Take email,password etc from user
+//   // Check email,password etc
+
+//   const { username, email, password, role } = req.body;
+//   console.log("Username: ", username);
+//   console.log("Email: ", email);
+//   console.log("Password: ", password);
+//   console.log("Role: ", role);
+
+//   // safe validation
+//   if (!username || !email || !password || !role) {
+//     throw new ApiError(400, "All fields are required");
+//   }
+
+//   const alreadyExist = await User.findOne({ email })
+
+//   if (alreadyExist) {
+//     throw new ApiError(400, "Email already exist");
+//   }
+
+
+//   const user = await User.create({
+//     username,
+//     email,
+//     password,
+//     role
+//   })
+
+//   const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id)
+
+//   const createdUser = await User.findById(user._id).select("-password -refreshToken");
+
+//   const isProduction = process.env.NOD_ENV === "Production";
+
+//   const options = {
+//     httpOnly: true,
+//     secure: isProduction,
+//     sameSite: isProduction ? "none" : "Lax"
+//   }
+
+//   return res
+//     .status(201)
+//     .cookie("accessToken", accessToken, options)
+//     .cookie("refreshToken", refreshToken, options)
+//     .json(
+//       new ApiResponse(
+//         201,
+//         createdUser,
+//         "User registered successfully"
+//       )
+//     )
+// })
+
+// // login controller
+// const loginUser = asyncHandler(async (req, res) => {
+//   // Take the email, apssword, role
+//   // Check the fields
+//   // Match passowrd, email in database
+//   console.log("login API hit");
+//   const { username, email, password, role } = req.body;
+
+//   if (!username || !email || !password || !role) {
+//     throw new ApiError(400, "All fields are required")
+//   }
+
+//   const user = await User.findOne({ email })
+
+//   if (!user) {
+//     throw new ApiError(400, "User not found");
+//   }
+
+//   const isValidPassword = await user.isPasswordCorrect(password);
+
+//   if (!isValidPassword) {
+//     throw new ApiError(400, "Invalid password");
+//   }
+
+//   const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id)
+
+//   const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
+
+//   const isProduction = process.env.NOD_ENV === "Production";
+
+//   const options = {
+//     httpOnly: true,
+//     secure: isProduction,
+//     sameSite: isProduction ? "none" : "Lax"
+//   }
+
+
+//   return res
+//     .status(200)
+//     .cookie("accessToken", accessToken, options)
+//     .cookie("refreshToken", refreshToken, options)
+//     .json(
+//       new ApiResponse(
+//         200,
+//         loggedInUser,
+//         "User loggedIn successfully"
+//       )
+//     )
+// })
 
 // logout controller
 
@@ -376,7 +786,12 @@ const updateStudent = asyncHandler(async (req, res) => {
 
 export {
   registerUser,
+  verifyOTP,
+  resendOTP,
   loginUser,
+  forgotPassword,
+  verifyResetOTP,
+  resetPassword,
   logoutUser,
   allTeachers,
   deleteTeacher,

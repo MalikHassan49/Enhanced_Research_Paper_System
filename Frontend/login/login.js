@@ -25,7 +25,7 @@ if (loginForm) {
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const username = document.getElementById("login-username").value;
+    // const username = document.getElementById("login-username").value;
     const email = document.getElementById("login-email").value;
     const password = document.getElementById("login-password").value;
     const role = document.getElementById("Roles").value;
@@ -38,7 +38,6 @@ if (loginForm) {
         },
         credentials: "include",
         body: JSON.stringify({
-          username,
           email,
           password,
           role

@@ -16,7 +16,6 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: [true, "password is required"],
-    unique: true
   },
   role: {
     type: String,
@@ -25,6 +24,10 @@ const userSchema = new Schema({
   },
   refreshToken: {
     type: String
+  }, 
+  isVerified: {
+    type: Boolean,
+    default: false
   }
 },
   { timestamps: true })
