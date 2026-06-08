@@ -272,7 +272,6 @@ const resendOTP = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
   const validatedData = loginSchema.parse(req.body);
   const { email, password, role } = validatedData;
-
   const user = await User.findOne({ email });
   if (!user) {
     throw new ApiError(400, "User not found");
@@ -281,16 +280,16 @@ const loginUser = asyncHandler(async (req, res) => {
   if (!user.isVerified) {
     throw new ApiError(400, "Verify your email first");
   }
-
+ 
   if (user.role !== role) {
     throw new ApiError(400, "Invalid User");
   }
-
+  
   const isPasswordCorrect = await user.isPasswordCorrect(password);
   if (!isPasswordCorrect) {
     throw new ApiError(400, "Invalid credentials");
   }
-
+  console.log("Step5");
   const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id);
 
   const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
@@ -317,7 +316,10 @@ const loginUser = asyncHandler(async (req, res) => {
 })
 
 const forgotPassword = asyncHandler(async (req, res) => {
+  console.log("Forgot password api hit");
+   console.log("Req body: ", req.body);
   const validatedData = forgotPasswordSchema.parse(req.body);
+  console.log("Validated Data: ", validatedData);
   const { email } = validatedData;
 
   const user = await User.findOne({ email });
@@ -326,6 +328,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
   }
 
   const otp = generateOTP();
+  console.log("OTP: ", otp);
 
   // normalized the email
   const normalizedEmail = email.toLowerCase().trim();
@@ -399,6 +402,8 @@ const verifyResetOTP = asyncHandler(async (req, res) => {
 
 
 const resetPassword = asyncHandler(async (req, res) => {
+  console.log("Reset Password API HIT!");
+  console.log("Req Body: ", req.body);
   const validatedData = resetPasswordSchema.parse(req.body);
 
   const { email, newPassword } = validatedData;
@@ -413,8 +418,7 @@ const resetPassword = asyncHandler(async (req, res) => {
   if (!user) {
     throw new ApiError(400, "User not found");
   }
-
-  user.Password = newPassword;
+  user.password = newPassword;
   await user.save({ validateBeforeSave: false });
 
   await redisClient.del(`reset:${email}`);
@@ -430,115 +434,6 @@ const resetPassword = asyncHandler(async (req, res) => {
       )
     )
 })
-
-
-
-// register controller
-// const registerUser = asyncHandler(async (req, res) => {
-//   console.log("Register API hit");
-//   // flow of api
-//   // Take email,password etc from user
-//   // Check email,password etc
-
-//   const { username, email, password, role } = req.body;
-//   console.log("Username: ", username);
-//   console.log("Email: ", email);
-//   console.log("Password: ", password);
-//   console.log("Role: ", role);
-
-//   // safe validation
-//   if (!username || !email || !password || !role) {
-//     throw new ApiError(400, "All fields are required");
-//   }
-
-//   const alreadyExist = await User.findOne({ email })
-
-//   if (alreadyExist) {
-//     throw new ApiError(400, "Email already exist");
-//   }
-
-
-//   const user = await User.create({
-//     username,
-//     email,
-//     password,
-//     role
-//   })
-
-//   const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id)
-
-//   const createdUser = await User.findById(user._id).select("-password -refreshToken");
-
-//   const isProduction = process.env.NOD_ENV === "Production";
-
-//   const options = {
-//     httpOnly: true,
-//     secure: isProduction,
-//     sameSite: isProduction ? "none" : "Lax"
-//   }
-
-//   return res
-//     .status(201)
-//     .cookie("accessToken", accessToken, options)
-//     .cookie("refreshToken", refreshToken, options)
-//     .json(
-//       new ApiResponse(
-//         201,
-//         createdUser,
-//         "User registered successfully"
-//       )
-//     )
-// })
-
-// // login controller
-// const loginUser = asyncHandler(async (req, res) => {
-//   // Take the email, apssword, role
-//   // Check the fields
-//   // Match passowrd, email in database
-//   console.log("login API hit");
-//   const { username, email, password, role } = req.body;
-
-//   if (!username || !email || !password || !role) {
-//     throw new ApiError(400, "All fields are required")
-//   }
-
-//   const user = await User.findOne({ email })
-
-//   if (!user) {
-//     throw new ApiError(400, "User not found");
-//   }
-
-//   const isValidPassword = await user.isPasswordCorrect(password);
-
-//   if (!isValidPassword) {
-//     throw new ApiError(400, "Invalid password");
-//   }
-
-//   const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id)
-
-//   const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
-
-//   const isProduction = process.env.NOD_ENV === "Production";
-
-//   const options = {
-//     httpOnly: true,
-//     secure: isProduction,
-//     sameSite: isProduction ? "none" : "Lax"
-//   }
-
-
-//   return res
-//     .status(200)
-//     .cookie("accessToken", accessToken, options)
-//     .cookie("refreshToken", refreshToken, options)
-//     .json(
-//       new ApiResponse(
-//         200,
-//         loggedInUser,
-//         "User loggedIn successfully"
-//       )
-//     )
-// })
 
 // logout controller
 

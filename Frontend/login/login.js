@@ -72,3 +72,11 @@ if (loginForm) {
     }
   })
 }
+
+const forgotPasswordBtn = document.querySelector(".forgot-password-button");
+
+forgotPasswordBtn.addEventListener("click", () => {
+  setTimeout(() => {
+    window.location.href = "../forgot-password/forgotPassword.html";
+  }, 2000)
+})

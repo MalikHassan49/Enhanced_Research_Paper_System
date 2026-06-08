@@ -10,7 +10,7 @@ body {
   min-height: 100vh;
   /* background: linear-gradient(to right bottom, rgb(79, 172, 254), rgb(0, 242, 255)); */
   /* background: linear-gradient(to bottom right, #67a6ff, #004aff); */
-  background: linear-gradient(to top left,#667eea, #764ba2);
+  background: linear-gradient(to top left, #667eea, #764ba2);
   transition: opacity 0.1s ease;
 }
 
@@ -235,6 +235,20 @@ input::placeholder {
   background: linear-gradient(135deg, #667eea, #764ba2);
 }
 
+.forgot-password-button {
+  margin-top: 20px;
+  width: 290px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 8px;
+  border: 3px solid #000000;
+  cursor: pointer;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
 .register-container {
   display: flex;
   justify-content: space-evenly;
@@ -380,15 +394,15 @@ input::placeholder {
 
   /* invalid credentials container */
 
-.credentials-container p {
-  color: #1E3A8A;
-  font-weight: 800;
-  font-size: 16px;
-  background-color: antiquewhite;
-  padding: 10px;
-  border-radius: 10px;
-  width: 280px;
-  margin-top: 10px;
-}
+  .credentials-container p {
+    color: #1E3A8A;
+    font-weight: 800;
+    font-size: 16px;
+    background-color: antiquewhite;
+    padding: 10px;
+    border-radius: 10px;
+    width: 280px;
+    margin-top: 10px;
+  }
 
 }

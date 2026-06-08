@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="javascriptreact">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Email</title>
+  <link rel="stylesheet" href="verifyEmail.css">
+</head>
+
+<body>
+  <div class="main-email-container">
+    <button class="arrow-left-btn"><i class="fa-solid fa-arrow-left"></i>Back</button>
+    <div class="verify-email-container">
+      <div class="verify-container">
+        <div class="verify-upper-container">
+          <img src="../assets/images/verified_user2.png" alt="verified_user">           
+        </div>
+        <div class="verify-lower-container">
+          <h2>Verify Your Email</h2>
+          <p>We've sent a 6-digit code to <br> <span class="user-email">john.doe@example.com</span></p>
+        </div>
+      </div>
+      <p class="verification-container-main-heading">Verification Code</p>
+      <div class="verification-inputs-container">
+        <input class="otp-input" type="text" maxlength="1" autofocus>
+        <input class="otp-input" type="text" maxlength="1">
+        <input class="otp-input" type="text" maxlength="1">
+        <input class="otp-input" type="text" maxlength="1">
+        <input class="otp-input" type="text" maxlength="1">
+        <input class="otp-input" type="text" maxlength="1">
+      </div>
+      <button class="verify-btn">Verify Code</button>
+      <p class="resend-code-para">Didn't receive code&#63; <span class="resend-code">Resend Code</span></p>
+    </div>
+  </div>
+</body>
+<script src="https://kit.fontawesome.com/1d8804d5ad.js" crossorigin="anonymous"></script>
+<script src="../shared/config.js"></script>
+<script src="verifyEmail.js"></script>
+
+</html>
