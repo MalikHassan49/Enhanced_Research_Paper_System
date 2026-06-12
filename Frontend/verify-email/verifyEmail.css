@@ -112,3 +112,29 @@ body {
   font-weight: 600;
   cursor: pointer;
 }
+
+@media screen and (max-width: 600px) {
+  .main-email-container {
+    width: 330px;
+    overflow: hidden;
+  }
+
+  .verification-inputs-container {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .verification-inputs-container input {
+    width: 35px;
+    height: 35px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
+  }
+
+}

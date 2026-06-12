@@ -41,7 +41,10 @@ verifyBtn.addEventListener("click", async () => {
   })
   console.log("OTP: ", otp);
 
+  const userEmail = document.querySelector(".user-email");
+
   const email = localStorage.getItem("verifyEmail");
+  userEmail.value = email;
   try {
     const response = await fetch(`${API_BASE_URL}/api/v1/users/verify-reset-otp`, {
       method: "POST",

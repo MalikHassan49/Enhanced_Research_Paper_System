@@ -373,6 +373,10 @@ input::placeholder {
     width: 280px;
   }
 
+  .forgot-password-button {
+  width: 280px;
+}
+
   .account-container {
     width: 310px;
     padding-left: 15px;
