@@ -14,7 +14,8 @@ async function createAdmin() {
       username: "Hassan",
       email: process.env.ADMIN_EMAIL,
       password: process.env.ADMIN_PASSWORD,
-      role: "Admin"
+      role: "Admin",
+      isVerified: true
     });
 
     console.log("Admin created successfull");
