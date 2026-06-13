@@ -297,8 +297,9 @@ const loginUser = asyncHandler(async (req, res) => {
   const isProduction = process.env.NOD_ENV === "production";
 
   const options = {
-    httpOnly: isProduction,
-    secure: isProduction ? "none" : "Lax",
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "Lax"
   }
 
   return res
