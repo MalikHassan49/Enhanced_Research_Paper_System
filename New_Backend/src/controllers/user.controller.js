@@ -163,7 +163,7 @@ const verifyOTP = asyncHandler(async (req, res) => {
 
   const createdUser = await User.findById(user._id).select("-password -refreshToken");
 
-  const isProduction = process.env.NOD_ENV === "production";
+  const isProduction = process.env.NOD_ENV === "Production";
 
   const options = {
     httpOnly: true,
@@ -294,7 +294,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
 
-  const isProduction = process.env.NOD_ENV === "production";
+  const isProduction = process.env.NOD_ENV === "Production";
 
   const options = {
     httpOnly: true,
