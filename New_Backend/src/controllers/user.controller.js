@@ -6,7 +6,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import redisClient from "../redis/redisClient.js";
 import { sendEmail } from "../utils/email.js";
 import { generateOTP } from "../utils/otp.js";
-import { registerSchema, loginSchema, verifyOTPSchema, resendOTPSchema, forgotPasswordSchema, resetPasswordSchema } from "../validations/auth.validation.js";
+import { registerSchema, loginSchema, verifyOTPSchema, resendOTPSchema, forgotPasswordSchema, resetPasswordSchema, createTeacherSchema } from "../validations/auth.validation.js";
 
 // generate access token and refresh token
 const generateAccessAndRefreshToken = async (userId) => {
@@ -197,14 +197,14 @@ const resendOTP = asyncHandler(async (req, res) => {
   if (cooldown) {
     const ttl = await redisClient.ttl(`cooldown:${email}`);
     return res
-    .status(400)
-    .json(
-      new ApiResponse(
-        400,
-        { ttl },
-        `Wait for ${ttl}s  before requesting another otp`
+      .status(400)
+      .json(
+        new ApiResponse(
+          400,
+          { ttl },
+          `Wait for ${ttl}s  before requesting another otp`
+        )
       )
-    )
   }
 
   // User check
@@ -240,15 +240,15 @@ const resendOTP = asyncHandler(async (req, res) => {
 
   // Send Email
   await sendEmail(
-      email,
-      "Resend OTP",
-      `Your otp is ${otpToSend}`,
-      `
+    email,
+    "Resend OTP",
+    `Your otp is ${otpToSend}`,
+    `
       <h1>OTP Verification</h1>,
       <h2>Your OTP is ${otpToSend}</h2>
       <p>OTP valid for 5 minutes</p>
       `
-    );
+  );
 
   await redisClient.set(
     `cooldown:${email}`,
@@ -280,11 +280,11 @@ const loginUser = asyncHandler(async (req, res) => {
   if (!user.isVerified) {
     throw new ApiError(400, "Verify your email first");
   }
- 
+
   if (user.role !== role) {
     throw new ApiError(400, "Invalid User");
   }
-  
+
   const isPasswordCorrect = await user.isPasswordCorrect(password);
   if (!isPasswordCorrect) {
     throw new ApiError(400, "Invalid credentials");
@@ -318,7 +318,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
 const forgotPassword = asyncHandler(async (req, res) => {
   console.log("Forgot password api hit");
-   console.log("Req body: ", req.body);
+  console.log("Req body: ", req.body);
   const validatedData = forgotPasswordSchema.parse(req.body);
   console.log("Validated Data: ", validatedData);
   const { email } = validatedData;
@@ -472,6 +472,54 @@ const logoutUser = asyncHandler(async (req, res) => {
     )
 
 })
+
+const createTeacher = asyncHandler(async (req, res) => {
+  console.log("Teacher Data: ", req.body);
+  console.log("Create teacher API HIT!");
+  // zod validation
+  const validatedData = createTeacherSchema.parse(req.body);
+  // Destructuring
+  const { username, email, password, role } = validatedData;
+  // check existing user
+  const existingTeacher = await User.findOne({ email });
+
+  if (existingTeacher) {
+    throw new ApiError(400, "Teacher already exists");
+  }
+
+  const teacher = await User.create({
+    username,
+    email,
+    password,
+    role,
+    isVerified: true
+  });
+
+  await sendEmail(
+    email,
+    "Teacher account created",
+    `Your account has been created`,
+    `
+    <h2>Welcome to Research Paper Management System</h2>
+    <p>Your account has been created successfully by admin.</p>
+    <p><strong>Email: </strong> ${email} </p>
+    <p><strong>Password: </strong> ${password} </p>
+    <p><strong>Role: </strong> Teacher </p>
+
+    <p>Please Login and change your password.</p>
+    `
+  );
+
+  return res
+    .status(201)
+    .json(
+      new ApiResponse(
+        201,
+        teacher,
+        "Teacher created successfully"
+      )
+    )
+});
 
 
 const allTeachers = asyncHandler(async (req, res) => {
@@ -685,6 +733,7 @@ export {
   verifyOTP,
   resendOTP,
   loginUser,
+  createTeacher,
   forgotPassword,
   verifyResetOTP,
   resetPassword,

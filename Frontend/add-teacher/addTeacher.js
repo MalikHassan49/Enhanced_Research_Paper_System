@@ -45,7 +45,7 @@ if (registerForm) {
     const role = document.getElementById("Roles").value;
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/users/register`, {
+      const response = await fetch(`${API_BASE_URL}/api/v1/users/create-teacher`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

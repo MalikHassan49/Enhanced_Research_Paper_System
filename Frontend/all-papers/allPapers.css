@@ -143,7 +143,7 @@ body.fade-low::before {
   background: linear-gradient(to bottom right, #28ffb3, #43e97b);
   border: none;
   padding: 10px 20px;
-  color: #ffffff;
+  color: #383636;
   font-weight: 600;
   font-size: 16px;
   border-radius: 10px;
@@ -159,7 +159,7 @@ body.fade-low::before {
   background: linear-gradient(to bottom right, #28ffb3, #43e97b);
   border: none;
   padding: 10px 20px;
-  color: #ffffff;
+  color: #383636;
   font-weight: 600;
   font-size: 16px;
   border-radius: 10px;
@@ -217,7 +217,7 @@ body.fade-low::before {
 }
 
 .review-papers-available-container button {
-  color: #ffffff;
+  color: #000000;
   font-size: 18px;
   font-weight: 600;
   padding: 12px 30px;
@@ -258,7 +258,7 @@ body.fade-low::before {
 
 #left-btn {
   display: none;
-  color: #ffffff;
+  color: #383636;
   background-color: rgb(255, 255, 20);
   padding: 10px;
   border-radius: 20px;
@@ -276,7 +276,7 @@ body.fade-low::before {
 
 #right-btn {
   display: none;
-  color: #ffffff;
+  color: #383636;
   background-color: rgb(255, 105, 224);
   padding: 10px;
   border-radius: 20px;
@@ -379,7 +379,7 @@ body.fade-low::before {
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
-  color: #ffffff;
+  color: #000000;
   transition: all 0.3s ease;
 }
 

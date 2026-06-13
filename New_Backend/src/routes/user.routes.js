@@ -2,7 +2,7 @@ import express from "express";
 import { registerUser, verifyOTP, resendOTP, loginUser, forgotPassword, verifyResetOTP,
   resetPassword, logoutUser, allTeachers, deleteTeacher, allStudents,
   deleteStudent, getCurrentUser, updateTeacher,
-  updateStudent
+  updateStudent, createTeacher
  } from "../controllers/user.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import { otpLimiter } from "../middlewares/rateLimit.middleware.js";
@@ -13,6 +13,7 @@ router.route("/register").post(otpLimiter, registerUser);
 router.route("/verify-otp").post(verifyOTP);
 router.route("/resend-otp").post(otpLimiter, resendOTP);
 router.route("/login").post(loginUser);
+router.route("/create-teacher").post(verifyJWT, createTeacher);
 router.route("/forgot-password").post(otpLimiter, forgotPassword);
 router.route("/verify-reset-otp").post(verifyResetOTP);
 router.route("/reset-password").post(resetPassword);

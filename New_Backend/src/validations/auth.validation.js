@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { email, z } from "zod";
 
 // implement register validation schema
 export const registerSchema = z.object({
@@ -64,4 +64,21 @@ export const resetPasswordSchema = z.object({
   newPassword: z
     .string()
     .min(6, "Password must be at least 6 characters")
+});
+
+// implement create Teacher schema
+export const createTeacherSchema = z.object({
+  username: z
+    .string()
+    .min(3, "Username must be atleast 3 characters"),
+
+  email: z
+    .string()
+    .email("Invalid email"),
+
+  password: z
+    .string()
+    .min(6, "Password must be at least 6 characters"),
+
+  role: z.enum(["Teacher"])
 });
