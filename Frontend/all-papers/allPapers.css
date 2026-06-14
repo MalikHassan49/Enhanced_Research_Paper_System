@@ -258,7 +258,7 @@ body.fade-low::before {
 
 #left-btn {
   display: none;
-  color: #383636;
+  color: #ffffff;
   background-color: rgb(255, 255, 20);
   padding: 10px;
   border-radius: 20px;
@@ -276,7 +276,7 @@ body.fade-low::before {
 
 #right-btn {
   display: none;
-  color: #383636;
+  color: #ffffff;
   background-color: rgb(255, 105, 224);
   padding: 10px;
   border-radius: 20px;

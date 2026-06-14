@@ -132,13 +132,15 @@ document.addEventListener("click", async (e) => {
 })
 
 // assign teacher pop-up box
+// const userPaperTitle = document.querySelector(".paper-title");
+
 document.addEventListener("click", async (e) => {
   if (e.target.classList.contains("confirm-assign-btn")) {
     document.body.classList.add("fade-low");
-    const paperTitle = e.target.dataset.title;;
+    const paperTitle = e.target.dataset.title;
     const selectTeacherContainer = document.querySelector(".select-teacher-container");
     selectTeacherContainer.dataset.paperId = e.target.dataset.paperId;
-
+    // userPaperTitle.value = paperTitle;
     try {
       const response = await fetch(`${API_BASE_URL}/api/v1/users/all-teachers`, {
         method: "GET",

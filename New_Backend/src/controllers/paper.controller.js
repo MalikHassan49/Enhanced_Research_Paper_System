@@ -3,7 +3,9 @@ import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
+import { extractTextFromPDF } from "../services/pdf.service.js";
 import { deleteFromCloudinary, uploadOnCloudinary } from "../utils/cloudinary.js";
+import { generateSummary } from "../services/ai.service.js";
 
 
 const submitPaper = asyncHandler(async (req, res) => {
@@ -16,7 +18,9 @@ const submitPaper = asyncHandler(async (req, res) => {
   const file = req.file;
   const localFilePath = req.file.path;
 
-  // console.log("Request User: ", req.user)
+  // extract text from file
+  const extractedText = await extractTextFromPDF(localFilePath);
+  console.log("Extracted Text: ", extractedText);
 
   const userId = req.user?._id;
 
@@ -30,10 +34,7 @@ const submitPaper = asyncHandler(async (req, res) => {
 
 
   // file upload on cloudinary
-
-  console.log("1 Api Hit");
   const responseFromCloudinary = await uploadOnCloudinary(localFilePath);
-  console.log("2 Cloudinary done");
 
   if (!responseFromCloudinary) {
     throw new ApiError(400, "Something went wrong while uploading file on cloudinary");
@@ -50,12 +51,9 @@ const submitPaper = asyncHandler(async (req, res) => {
       publicId: filePublicId,
       filename: req.file.originalname
     },
+    extractedText,
     studentId: userId,
   });
-
-  console.log("3 Mongo db save done");
-
-  console.log("4  Sending response...");
 
   return res
     .status(200)
@@ -324,7 +322,55 @@ const assignTeacher = asyncHandler(async (req, res) => {
       )
     )
 
-})
+});
+
+const generatePaperSummary = asyncHandler(async (req, res) => {
+  console.log("Generate paper summary API HIT!");
+  const { paperId } = req.params;
+
+  const paper = await Paper.findById(paperId);
+
+  if (!paper) {
+    throw new ApiError(404, "Paper not found!")
+  }
+
+  if (paper.summary && paper.summary.trim() !== "") {
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          {
+            summary: paper.summary
+          },
+          "Paper summary fetched successfully!"
+        )
+      )
+  }
+
+  if (!paper.extractedText) {
+    throw new ApiError(400, "Extracted text not found for this paper!")
+  }
+
+  const summary = await generateSummary(paper.extractedText);
+
+  paper.summary = summary;
+  paper.summaryGeneratedAt = new Date();
+
+  await paper.save({ validateBeforeSave: false });
+
+  return res
+  .status(200)
+  .json(
+    new ApiResponse(
+      200,
+      {
+        summary
+      },
+      "Paper summary generated succesfully"
+    )
+  )
+});
 
 export {
   submitPaper,
@@ -336,5 +382,6 @@ export {
   reviewedPapers,
   deletePaper,
   papersStatus,
-  assignTeacher
+  assignTeacher,
+  generatePaperSummary
 }

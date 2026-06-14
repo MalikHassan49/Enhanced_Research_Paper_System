@@ -39,6 +39,18 @@ const paperSchema = new Schema({
   teacherComment: {
     type: String,
     default: ""
+  },
+  extractedText: {
+    type: String,
+    default: ""
+  },
+  summary: {
+    type: String,
+    default: ""
+  },
+  summaryGeneratedAt: {
+    type: Date,
+    default: null
   }
 }, { timestamps: true });
 

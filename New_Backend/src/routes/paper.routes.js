@@ -1,6 +1,6 @@
 import express from "express";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
-import { submitPaper, studentAllPapers, allSubmittedPapers, reviewPaper, comment, reviewedPapers, deletePaper, papersStatus, assignTeacher, allPapers  } from "../controllers/paper.controller.js";
+import { submitPaper, studentAllPapers, allSubmittedPapers, reviewPaper, comment, reviewedPapers, deletePaper, papersStatus, assignTeacher, allPapers, generatePaperSummary  } from "../controllers/paper.controller.js";
 import multer from "multer";
 import { upload } from "../middlewares/multer.middleware.js";
 
@@ -16,5 +16,6 @@ router.route("/reviewed-papers").get(verifyJWT, reviewedPapers);
 router.route("/:id/delete-paper").delete(verifyJWT, deletePaper);
 router.route("/papers-status").get(verifyJWT, papersStatus);
 router.route("/:paperId/assign-teacher").patch(verifyJWT, assignTeacher);
+router.route("/:paperId/generate-summary").get(generatePaperSummary);
 
 export default router;

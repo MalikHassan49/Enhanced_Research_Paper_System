@@ -6,7 +6,7 @@ dashboardBtn.addEventListener("click", () => {
 
   setTimeout(() => {
     window.location.href = "../review-papers/reviewPapers.html";
-  }, 200)
+  }, 1000)
 })
 
 // URL params come from reviewPaper.html file
@@ -54,15 +54,56 @@ const buttonsContainer = document.querySelector(".buttons-container");
 
 buttonsContainer.innerHTML = `
       <a href="${fileUrl}">
-        <button>View Paper</button>
+        <button class="view-paper-btn">View Paper</button>
       </a>
-`
+      <button class="generate-ai-summary-btn">Generate AI Summary</button>
+`;
+
+const aiSummaryContainer = document.querySelector(".ai-summary-container");
+const summaryContainer = document.querySelector(".summary-container");
+const generateSummaryBtn = document.querySelector(".generate-ai-summary-btn");
+
+generateSummaryBtn.addEventListener("click", async () => {
+  generateSummaryBtn.disabled = true;
+  generateSummaryBtn.innerText = "Generating...";
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/v1/papers/${paperId}/generate-summary`, {
+      method: "GET",
+      credentials: "include"
+    });
+
+    const responseData = await response.json();
+    console.log("Response Data: ", responseData);
+    if (response.ok) {
+      setTimeout(() => {
+        aiSummaryContainer.style.display = "block";
+        summaryContainer.innerText = responseData.data.summary;
+        generateSummaryBtn.innerHTML = "Generate AI Summary";
+      }, 1000)
+
+    }
+  } catch (error) {
+    console.log("Error: ", error);
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+
 // move to pdfViewer.html file
 
-{/* <button id="viewBtn">View Paper</button> */}
+{/* <button id="viewBtn">View Paper</button> */ }
 
 
-// document.getElementById("viewBtn").addEventListener("click", () => {  
+// document.getElementById("viewBtn").addEventListener("click", () => {
 
 //   window.location.href = `pdfViewer.html?file=${encodeURIComponent(fileUrl)}`;
 // });
@@ -70,7 +111,7 @@ buttonsContainer.innerHTML = `
 
 // let fullUrl = fileUrl;
 
-  // // agar local path hai
-  // if(fileUrl.startsWith("/temp")) {
-  //   fullUrl = `http://localhost:5000${fileUrl}`;
-  // }
+// // agar local path hai
+// if(fileUrl.startsWith("/temp")) {
+//   fullUrl = `http://localhost:5000${fileUrl}`;
+// }
