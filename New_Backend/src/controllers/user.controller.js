@@ -51,16 +51,130 @@ const registerUser = asyncHandler(async (req, res) => {
     const remainingMinutes = Math.ceil(remainingTime / 60);
     // Resend same OTP
     await sendEmail(
-      email,
-      "OTP Verification",
-      `Your otp is ${parsedOTP.otp}`,
-      `
-      <h1>Email verification</h1>
-      <h2>Your otp is ${parsedOTP.otp}</h2>
-      <p>otp already generated</p>
-      <p>This otp is valid for ${remainingMinutes} minutes(s)</p>
-      `
-    );
+  email,
+  "🔐 Verify Your Email Address",
+  `Your OTP is ${parsedOTP.otp}`,
+  `
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f7fc;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 30px auto;
+        background: #ffffff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+
+      .header {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: white;
+        text-align: center;
+        padding: 30px;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 28px;
+      }
+
+      .content {
+        padding: 30px;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .otp-box {
+        background: #f3f4f6;
+        border: 2px dashed #4f46e5;
+        border-radius: 10px;
+        text-align: center;
+        padding: 20px;
+        margin: 25px 0;
+      }
+
+      .otp {
+        font-size: 36px;
+        font-weight: bold;
+        color: #4f46e5;
+        letter-spacing: 8px;
+      }
+
+      .info {
+        background: #eef2ff;
+        padding: 15px;
+        border-left: 4px solid #4f46e5;
+        border-radius: 6px;
+        margin-top: 20px;
+      }
+
+      .footer {
+        text-align: center;
+        background: #f9fafb;
+        padding: 20px;
+        color: #6b7280;
+        font-size: 13px;
+      }
+
+      .warning {
+        color: #dc2626;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+
+      <div class="header">
+        <h1>🔐 Email Verification</h1>
+        <p>Secure One-Time Password (OTP)</p>
+      </div>
+
+      <div class="content">
+        <h2>Hello 👋</h2>
+
+        <p>
+          We received a request to verify your email address.
+          Please use the following OTP to complete your verification process:
+        </p>
+
+        <div class="otp-box">
+          <div class="otp">${parsedOTP.otp}</div>
+        </div>
+
+        <div class="info">
+          ⏳ This OTP is valid for
+          <strong>${remainingMinutes} minute(s)</strong>.
+        </div>
+
+        <p class="warning">
+          Do not share this OTP with anyone.
+        </p>
+
+        <p>
+          If you did not request this verification, you can safely ignore this email.
+        </p>
+      </div>
+
+      <div class="footer">
+        <p>© 2026 HassanSoft. All Rights Reserved.</p>
+        <p>This is an automated email, please do not reply.</p>
+      </div>
+
+    </div>
+  </body>
+  </html>
+  `
+);
     return res
       .status(200)
       .json(
