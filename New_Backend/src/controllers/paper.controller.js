@@ -1,3 +1,4 @@
+import paperQueue from "../redis/paper.queue.js";
 import { Paper } from "../models/paper.model.js";
 import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
@@ -20,7 +21,6 @@ const submitPaper = asyncHandler(async (req, res) => {
 
   // extract text from file
   const extractedText = await extractTextFromPDF(localFilePath);
-  console.log("Extracted Text: ", extractedText);
 
   const userId = req.user?._id;
 
@@ -53,6 +53,12 @@ const submitPaper = asyncHandler(async (req, res) => {
     },
     extractedText,
     studentId: userId,
+  });
+
+  // create paper job automatically
+
+  await paperQueue.add("process-paper", {
+    paperId: paper._id.toString()
   });
 
   return res
@@ -360,16 +366,16 @@ const generatePaperSummary = asyncHandler(async (req, res) => {
   await paper.save({ validateBeforeSave: false });
 
   return res
-  .status(200)
-  .json(
-    new ApiResponse(
-      200,
-      {
-        summary
-      },
-      "Paper summary generated succesfully"
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        {
+          summary
+        },
+        "Paper summary generated succesfully"
+      )
     )
-  )
 });
 
 export {
