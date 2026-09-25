@@ -12,9 +12,11 @@ dashboardBtn.addEventListener("click", () => {
 // URL params come from reviewPaper.html file
 const params = new URLSearchParams(window.location.search);
 const paperId = params.get("id");
-const fileUrl = decodeURIComponent(params.get("url"));
+const fileUrl = params.get("url") ? decodeURIComponent(params.get("url")) : "";
+const paperTitle = params.get("title") ? decodeURIComponent(params.get("title")) : "";
 console.log("paperId: ", paperId);
 console.log("fileUrl: ", fileUrl);
+console.log("paperTitle: ", paperTitle);
 
 // send request to backend
 const reviewBtn = document.getElementById("review-btn");
@@ -53,15 +55,37 @@ reviewBtn.addEventListener("click", async () => {
 const buttonsContainer = document.querySelector(".buttons-container");
 
 buttonsContainer.innerHTML = `
-      <a href="${fileUrl}">
-        <button class="view-paper-btn">View Paper</button>
+      <a href="${fileUrl}" target="_blank" rel="noopener noreferrer">
+        <button type="button" class="view-paper-btn">View Paper</button>
       </a>
-      <button class="generate-ai-summary-btn">Generate AI Summary</button>
+      <button type="button" class="generate-ai-summary-btn">Generate AI Summary</button>
+      <button type="button" class="chat-with-paper-btn">Chat with Paper</button>
 `;
 
 const aiSummaryContainer = document.querySelector(".ai-summary-container");
 const summaryContainer = document.querySelector(".summary-container");
 const generateSummaryBtn = document.querySelector(".generate-ai-summary-btn");
+const chatWithPaperBtn = document.querySelector(".chat-with-paper-btn");
+
+chatWithPaperBtn.addEventListener("click", () => {
+  if (!paperId) {
+    alert("Paper ID is missing. Please return to a valid paper review page.");
+    return;
+  }
+
+  const chatUrl = new URL("../paper-chat/paperChat.html", window.location.href);
+  chatUrl.searchParams.set("id", paperId);
+
+  if (paperTitle) {
+    chatUrl.searchParams.set("title", paperTitle);
+  }
+
+  if (fileUrl) {
+    chatUrl.searchParams.set("url", fileUrl);
+  }
+
+  window.location.href = chatUrl.toString();
+});
 
 generateSummaryBtn.addEventListener("click", async () => {
   generateSummaryBtn.disabled = true;

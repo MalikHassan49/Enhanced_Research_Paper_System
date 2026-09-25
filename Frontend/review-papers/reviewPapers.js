@@ -49,7 +49,7 @@ async function allSubmittedPapers(page) {
         <p class = "paper-abstract">${paper.paperAbstract}</p>
         <div class = "paper-name-container">
         <p class = "file-name">${paper.file.filename}</p>
-        <button class = "view-paper-btn" data-paper-id = "${paper._id}" data-file-url = "${paper.file.url}" >Review Paper</button>
+        <button class = "view-paper-btn" data-paper-id = "${paper._id}" data-file-url = "${paper.file.url}" data-paper-title = "${paper.paperTitle}" >Review Paper</button>
         </div>
         `
         container.appendChild(card);
@@ -108,9 +108,11 @@ document.addEventListener("click", (e) => {
 
     const paperId = e.target.dataset.paperId;
     const fileUrl = e.target.dataset.fileUrl;
+    const paperTitle = e.target.dataset.paperTitle || "";
+    const titleParam = paperTitle ? `&title=${encodeURIComponent(paperTitle)}` : "";
 
     setTimeout(() => {
-      window.location.href = `../view-paper/viewPaper.html?id=${paperId}&url=${encodeURIComponent(fileUrl)}`;
+      window.location.href = `../view-paper/viewPaper.html?id=${paperId}&url=${encodeURIComponent(fileUrl)}${titleParam}`;
     }, 100)
   }
 })

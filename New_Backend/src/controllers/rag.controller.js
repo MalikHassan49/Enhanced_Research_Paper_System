@@ -9,21 +9,26 @@ export const chatWithPaper = asyncHandler(async (req, res) => {
     
     const { paperId } = req.params;
     const { question } = req.body;
+    const normalizedPaperId = paperId?.trim();
+    const normalizedQuestion = typeof question === "string" ? question.trim() : "";
 
-    console.log("Paper ID:", paperId);
-    console.log("Question:", question);
+    console.log("Paper ID:", normalizedPaperId);
+    console.log("Question:", normalizedQuestion);
 
-    console.log("Validation passed");
+    if (!normalizedPaperId) {
+        throw new ApiError(400, "Paper ID is required");
+    }
 
-    if (!question || typeof question !== "string") {
+    if (!normalizedQuestion) {
         throw new ApiError(400, "Question is required");
     }
 
+    console.log("Validation passed");
     console.log("Calling generatePaperAnswer...");
 
     const searchResults = await generatePaperAnswer(
-        question,
-        paperId
+        normalizedQuestion,
+        normalizedPaperId
     );
 
     console.log("generatePaperAnswer completed");

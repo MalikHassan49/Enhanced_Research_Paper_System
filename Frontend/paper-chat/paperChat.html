@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat with Research Paper</title>
+  <link rel="stylesheet" href="paperChat.css">
+</head>
+
+<body>
+  <div class="chat-page">
+    <div class="chat-shell">
+      <button id="back-btn" class="back-btn" type="button">← Back to Paper</button>
+
+      <div class="chat-header">
+        <h1>Chat with Research Paper</h1>
+        <p id="paper-title">Ask questions about this paper</p>
+      </div>
+
+      <div id="chat-messages" class="chat-messages" aria-live="polite">
+        <div class="chat-message assistant">
+          <div class="message-bubble">
+            <strong>Assistant</strong>
+            <p>Ask me anything about this paper, and I will answer based on its content.</p>
+          </div>
+        </div>
+      </div>
+
+      <form id="chat-form" class="chat-form">
+        <label for="user-question" class="sr-only">Ask a question about this paper</label>
+        <textarea id="user-question" rows="1" placeholder="Ask something about this paper..."></textarea>
+        <button id="send-btn" type="submit">Send</button>
+      </form>
+
+      <p id="status-message" class="status-message" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <script src="../shared/config.js"></script>
+  <script src="paperChat.js"></script>
+</body>
+
+</html>

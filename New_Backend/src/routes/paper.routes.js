@@ -18,6 +18,6 @@ router.route("/:id/delete-paper").delete(verifyJWT, deletePaper);
 router.route("/papers-status").get(verifyJWT, papersStatus);
 router.route("/:paperId/assign-teacher").patch(verifyJWT, assignTeacher);
 router.route("/:paperId/generate-summary").get(generatePaperSummary);
-router.route("/:paperId/rag-chat").post(chatWithPaper);
+router.route("/:paperId/rag-chat").post(verifyJWT, chatWithPaper);
 
 export default router;
