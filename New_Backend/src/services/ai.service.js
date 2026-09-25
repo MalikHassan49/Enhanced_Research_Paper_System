@@ -2,107 +2,135 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Establish connection with Google Gemini
 const genAI = new GoogleGenerativeAI(
-  process.env.GEMINI_API_KEY
+    process.env.GEMINI_API_KEY
 );
 
 // Common Gemini configuration
-
 const GEMINI_MODEL = "gemini-3.8-flash";
 
 const MAX_RETRIES = 3;
 
 const INITIAL_RETRY_DELAY = 1000;
 
+
 // Helper: Sleep
-
-
 const sleep = (ms) => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
 };
+
 
 // Helper: Check whether Gemini error is retryable
-
 const isRetryableError = (error) => {
 
-  const status =
-    error?.status ??
-    error?.code ??
-    error?.response?.status;
+    const status =
+        error?.status ??
+        error?.code ??
+        error?.response?.status;
 
-  return (
-    status === 429 ||
-    status === 500 ||
-    status === 502 ||
-    status === 503 ||
-    status === 504
-  );
+    return (
+        status === 429 ||
+        status === 500 ||
+        status === 502 ||
+        status === 503 ||
+        status === 504
+    );
 };
+
 
 // Helper: Generate Gemini content with retry
-
 const generateWithRetry = async (prompt) => {
 
-  const model = genAI.getGenerativeModel({
-    model: GEMINI_MODEL
-  });
+    const model = genAI.getGenerativeModel({
+        model: GEMINI_MODEL
+    });
 
-  for (
-    let attempt = 0;
-    attempt <= MAX_RETRIES;
-    attempt++
-  ) {
+    for (
+        let attempt = 0;
+        attempt <= MAX_RETRIES;
+        attempt++
+    ) {
 
-    try {
+        try {
 
-      const result = await model.generateContent(prompt);
+            const result = await model.generateContent(prompt);
 
-      return result.response.text();
+            return result.response.text();
 
-    } catch (error) {
+        } catch (error) {
 
-      console.error(
-        `Gemini request failed (attempt ${attempt + 1}):`,
-        error
-      );
+            console.error(
+                `Gemini request failed (attempt ${attempt + 1}):`,
+                error
+            );
 
-      const retryable = isRetryableError(error);
+            const retryable = isRetryableError(error);
 
-      const isLastAttempt =
-        attempt === MAX_RETRIES;
+            const isLastAttempt =
+                attempt === MAX_RETRIES;
 
-      // Don't retry permanent errors or when all attempts are finished
-      if (!retryable || isLastAttempt) {
-        throw new Error(
-          "The AI service is temporarily unavailable. Please try again in a moment."
-        );
-      }
+            // Don't retry permanent errors
+            // or when all attempts are finished
+            if (!retryable || isLastAttempt) {
 
-      const delay =
-        INITIAL_RETRY_DELAY *
-        Math.pow(2, attempt);
+                throw new Error(
+                    "The AI service is temporarily unavailable. Please try again in a moment."
+                );
+            }
 
-      console.warn(
-        `Retrying Gemini request in ${delay}ms...`
-      );
+            const delay =
+                INITIAL_RETRY_DELAY *
+                Math.pow(2, attempt);
 
-      await sleep(delay);
+            console.warn(
+                `Retrying Gemini request in ${delay}ms...`
+            );
+
+            await sleep(delay);
+        }
     }
-  }
 };
+
+
+// Clean Gemini response
+const cleanGeminiResponse = (text) => {
+
+    return text
+        // Remove bold markdown: **text**
+        .replace(/\*\*(.*?)\*\*/g, "$1")
+
+        // Remove italic markdown: *text*
+        .replace(/\*(.*?)\*/g, "$1")
+
+        // Remove markdown headings: ### Heading
+        .replace(/^#+\s*/gm, "")
+
+        // Remove bullet points: - item
+        .replace(/^\s*[-•]\s+/gm, "")
+
+        // Remove unnecessary spaces
+        .replace(/[ \t]+/g, " ")
+
+        // Remove excessive blank lines
+        .replace(/\n{3,}/g, "\n\n")
+
+        .trim();
+};
+
 
 // GENERATE SUMMARY
 
 export const generateSummary = async (text) => {
 
-  if (!text || typeof text !== "string") {
-    throw new Error(
-      "Text is required for summary generation"
-    );
-  }
+    if (!text || typeof text !== "string") {
 
-  const prompt = `
+        throw new Error(
+            "Text is required for summary generation"
+        );
+    }
+
+    const prompt = `
 You are an expert academic reviewer.
 
 Analyze the following research paper and generate a professional summary.
@@ -138,57 +166,89 @@ Research Paper:
 ${text}
 `;
 
-  try {
+    try {
 
-    const summary = await generateWithRetry(prompt);
+        const summary = await generateWithRetry(prompt);
 
-    console.log("Summary:", summary);
+        const cleanSummary =
+            cleanGeminiResponse(summary);
 
-    return summary;
+        console.log(
+            "Summary:",
+            cleanSummary
+        );
 
-  } catch (error) {
+        return cleanSummary;
 
-    console.error(
-      "Gemini Summary Error:",
-      error
-    );
+    } catch (error) {
 
-    throw error;
-  }
+        console.error(
+            "Gemini Summary Error:",
+            error
+        );
+
+        throw error;
+    }
 };
 
 // GENERATE RAG ANSWER
 
 export const generateRagAnswer = async (
-  question,
-  context
+    question,
+    context
 ) => {
 
-  if (!question || typeof question !== "string") {
-    throw new Error(
-      "Question is required for RAG answer"
-    );
-  }
+    if (!question || typeof question !== "string") {
 
-  if (!context || typeof context !== "string") {
-    throw new Error(
-      "Context is required for RAG answer"
-    );
-  }
+        throw new Error(
+            "Question is required for RAG answer"
+        );
+    }
 
-  const prompt = `
-You are a research paper assistant.
+    if (!context || typeof context !== "string") {
 
-Answer the user's question using only the provided context.
+        throw new Error(
+            "Context is required for RAG answer"
+        );
+    }
 
-Rules:
+    const prompt = `
+You are an academic research paper assistant.
 
-- Use only the provided context.
-- Do not use outside knowledge.
-- Do not make up information.
-- If the answer is not available in the context, say:
+Your task is to answer the user's question using ONLY the provided context.
+
+STRICT RULES:
+
+1. Use only information present in the provided context.
+
+2. Do not use outside knowledge.
+
+3. Do not invent, assume, or guess information.
+
+4. If the answer cannot be found in the context, respond exactly:
+
 "I could not find the answer in this paper."
-- Give a clear and concise answer.
+
+5. Give a direct and concise answer.
+
+6. Use simple and professional language.
+
+7. Do not use Markdown.
+
+8. Do not use:
+   - **bold**
+   - *italic*
+   - # headings
+   - bullet symbols
+   - Markdown code blocks
+
+9. If multiple points are necessary, use numbered points.
+
+10. Do not repeat the user's question.
+
+11. Do not mention the provided context in your answer.
+
+12. Do not add information that is not supported by the context.
 
 Context:
 
@@ -197,23 +257,33 @@ ${context}
 Question:
 
 ${question}
+
+Answer:
 `;
 
-  try {
+    try {
 
-    const answer = await generateWithRetry(prompt);
+        const answer =
+            await generateWithRetry(prompt);
 
-    console.log("RAG Answer:", answer);
+        // Clean Gemini response
+        const cleanAnswer =
+            cleanGeminiResponse(answer);
 
-    return answer;
+        console.log(
+            "RAG Answer:",
+            cleanAnswer
+        );
 
-  } catch (error) {
+        return cleanAnswer;
 
-    console.error(
-      "Gemini RAG Error:",
-      error
-    );
+    } catch (error) {
 
-    throw error;
-  }
+        console.error(
+            "Gemini RAG Error:",
+            error
+        );
+
+        throw error;
+    }
 };
