@@ -2,6 +2,7 @@ const params = new URLSearchParams(window.location.search);
 const paperId = params.get("id") || "";
 const paperTitle = params.get("title") ? decodeURIComponent(params.get("title")) : "";
 const fileUrl = params.get("url") ? decodeURIComponent(params.get("url")) : "";
+const FRIENDLY_ERROR_MESSAGE = "We couldn’t generate an answer right now. The AI service may be temporarily unavailable. Please try again in a moment.";
 
 const backBtn = document.getElementById("back-btn");
 const chatMessages = document.getElementById("chat-messages");
@@ -18,6 +19,32 @@ if (paperTitle) {
 function showStatus(message, type = "") {
   statusMessage.textContent = message;
   statusMessage.className = `status-message ${type}`.trim();
+}
+
+function getFriendlyErrorMessage(error) {
+  const rawMessage = error?.message || error?.toString() || "";
+
+  if (!rawMessage) {
+    return FRIENDLY_ERROR_MESSAGE;
+  }
+
+  const lowerCaseMessage = rawMessage.toLowerCase();
+
+  if (
+    lowerCaseMessage.includes("googlegenerativeai") ||
+    lowerCaseMessage.includes("generative") ||
+    lowerCaseMessage.includes("fetching from") ||
+    lowerCaseMessage.includes("service unavailable") ||
+    lowerCaseMessage.includes("temporarily unavailable") ||
+    lowerCaseMessage.includes("429") ||
+    lowerCaseMessage.includes("500") ||
+    lowerCaseMessage.includes("503") ||
+    lowerCaseMessage.includes("504")
+  ) {
+    return FRIENDLY_ERROR_MESSAGE;
+  }
+
+  return rawMessage;
 }
 
 function scrollToBottom() {
@@ -140,7 +167,8 @@ chatForm.addEventListener("submit", async (event) => {
     const responseData = await response.json();
 
     if (!response.ok) {
-      throw new Error(responseData?.message || "The request failed while fetching the answer.");
+      const backendMessage = responseData?.message || FRIENDLY_ERROR_MESSAGE;
+      throw new Error(backendMessage);
     }
 
     const answer = responseData?.data?.answer || "I could not find an answer for that question.";
@@ -148,9 +176,10 @@ chatForm.addEventListener("submit", async (event) => {
     appendMessage("assistant", answer);
     showStatus("", "");
   } catch (error) {
+    const friendlyMessage = getFriendlyErrorMessage(error);
     removeLoadingIndicator(loadingIndicator);
-    appendMessage("assistant", error.message || "Something went wrong while fetching the answer.", true);
-    showStatus(error.message || "Something went wrong while fetching the answer.", "error");
+    appendMessage("assistant", friendlyMessage, true);
+    showStatus("Please try again in a moment.", "error");
   } finally {
     sendBtn.disabled = false;
     sendBtn.textContent = "Send";

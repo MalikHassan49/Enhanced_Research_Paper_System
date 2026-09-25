@@ -74,7 +74,9 @@ const generateWithRetry = async (prompt) => {
 
       // Don't retry permanent errors or when all attempts are finished
       if (!retryable || isLastAttempt) {
-        throw error;
+        throw new Error(
+          "The AI service is temporarily unavailable. Please try again in a moment."
+        );
       }
 
       const delay =

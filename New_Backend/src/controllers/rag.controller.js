@@ -26,22 +26,29 @@ export const chatWithPaper = asyncHandler(async (req, res) => {
     console.log("Validation passed");
     console.log("Calling generatePaperAnswer...");
 
-    const searchResults = await generatePaperAnswer(
-        normalizedQuestion,
-        normalizedPaperId
-    );
+    try {
+        const searchResults = await generatePaperAnswer(
+            normalizedQuestion,
+            normalizedPaperId
+        );
 
-    console.log("generatePaperAnswer completed");
+        console.log("generatePaperAnswer completed");
+        console.log("RAG answer generated:", searchResults);
 
-    console.log("RAG answer generated:", searchResults);
-
-    return res
-        .status(200)
-        .json(
-            new ApiResponse(
-                200,
-                searchResults,
-                "Relevant paper chunks retrieved successfully"
+        return res
+            .status(200)
+            .json(
+                new ApiResponse(
+                    200,
+                    searchResults,
+                    "Relevant paper chunks retrieved successfully"
+                )
             )
-        )
+    } catch (error) {
+        console.error("RAG chat generation failed:", error);
+        throw new ApiError(
+            503,
+            "The AI assistant is currently unavailable. Please try again in a moment."
+        );
+    }
 })
