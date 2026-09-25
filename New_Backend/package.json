@@ -12,7 +12,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@google/genai": "^2.24.0",
     "@google/generative-ai": "^0.24.1",
+    "@qdrant/js-client-rest": "^1.19.0",
     "@sendgrid/mail": "^8.1.6",
     "@upstash/redis": "^1.38.0",
     "bcrypt": "^6.0.0",
@@ -31,6 +33,7 @@
     "pdf-parse": "^2.4.5",
     "redis": "^5.12.1",
     "resend": "^6.12.3",
+    "uuid": "^14.0.2",
     "zod": "^4.4.3"
   },
   "devDependencies": {

@@ -1,8 +1,7 @@
 import paperQueue from "./paper.queue.js";
 
-const job = await paperQueue.add("test-paper", {
-    paperId: "12345",
-    message: "Hello BullMQ"
+const job = await paperQueue.add("chunking-paper", {
+    paperId: '6a2ea4e7743b4bf697c22238'
 });
 
 console.log("Job added successfully", job.id);

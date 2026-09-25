@@ -10,7 +10,7 @@ const rawRedisClient = createClient({
 });
 
 rawRedisClient.on("error", (error) => {
-    console.log("Redis Url: ", error);
+    console.log("Redis Error: ", error);
 });
 
 // await rawRedisClient.connect();

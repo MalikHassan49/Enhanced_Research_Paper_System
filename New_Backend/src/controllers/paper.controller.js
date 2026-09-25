@@ -70,7 +70,6 @@ const submitPaper = asyncHandler(async (req, res) => {
         "Paper submitted successfully"
       )
     )
-  console.log("5 Response send properly...");
 });
 
 const studentAllPapers = asyncHandler(async (req, res) => {
