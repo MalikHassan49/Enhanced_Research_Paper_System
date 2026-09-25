@@ -5,6 +5,7 @@ import { Paper } from "../models/paper.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { chunkText } from "../services/chunking.service.js";
 import connectDB from "../db/db.js";
+import { createServer } from "node:http";
 import { generateEmbeddings } from "../services/embeding.service.js";
 import { createPaperCollection, upsertPaperChunks } from "../services/qdrant.service.js";
 
@@ -72,4 +73,40 @@ paperWorker.on("completed", (job) => {
 
 paperWorker.on("failed", (job, error) => {
     console.log(`Job ${job?.id} failed`, error);
+});
+
+// HTTP health server for Render
+const PORT = process.env.PORT || 10000;
+
+const server = createServer((req, res) => {
+    if (req.url === "/" && req.method === "GET") {
+        res.writeHead(200, {
+            "Content-Type": "application/json"
+        });
+
+        res.end(
+            JSON.stringify({
+                status: "ok",
+                service: "paper-worker"
+            })
+        );
+
+        return;
+    }
+
+    res.writeHead(404, {
+        "Content-Type": "application/json"
+    });
+
+    res.end(
+        JSON.stringify({
+            error: "Route not found"
+        })
+    );
+});
+
+server.listen(PORT, "0.0.0.0", () => {
+    console.log(
+        `Worker health server running on port ${PORT}`
+    );
 });
