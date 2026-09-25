@@ -20,10 +20,27 @@ if (loginLockPassword && loginPassword) {
 
 // Login form submit
 const loginForm = document.getElementById("loginForm");
+const loginBtn = document.querySelector(".register-button");
+let isLoggingIn = false;
+
+const setLoginLoading = (isLoading) => {
+  isLoggingIn = isLoading;
+  loginBtn.disabled = isLoading;
+  loginBtn.setAttribute("aria-busy", String(isLoading));
+  loginBtn.innerHTML = isLoading
+    ? '<span class="button-spinner" aria-hidden="true"></span>'
+    : 'Login <i class="fa-solid fa-arrow-right"></i>';
+};
 
 if (loginForm) {
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    if (isLoggingIn) {
+      return;
+    }
+
+    setLoginLoading(true);
 
     // const username = document.getElementById("login-username").value;
     const email = document.getElementById("login-email").value;
@@ -48,7 +65,6 @@ if (loginForm) {
 
       if (response.ok) {
         console.log("User Login successfull");
-        console.log(data);
 
         document.body.classList.add("fade-out");
 
@@ -69,6 +85,8 @@ if (loginForm) {
       console.log(error);
       const container = document.querySelector(".credentials-container");
       container.innerHTML = `<p>Invalid email or password</p>`
+    } finally {
+      setLoginLoading(false);
     }
   })
 }

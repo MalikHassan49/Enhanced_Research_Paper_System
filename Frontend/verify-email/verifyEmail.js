@@ -31,6 +31,10 @@ backBtn.addEventListener("click", () => {
   }, 1000)
 });
 
+const userEmail = document.querySelector(".user-email");
+const email = localStorage.getItem("verifyEmail");
+userEmail.textContent = email || "your email address";
+
 // get otp
 const verifyBtn = document.querySelector(".verify-btn");
 
@@ -39,12 +43,6 @@ verifyBtn.addEventListener("click", async () => {
   inputs.forEach((input) => {
     otp += input.value;
   })
-  console.log("OTP: ", otp);
-
-  const userEmail = document.querySelector(".user-email");
-
-  const email = localStorage.getItem("verifyEmail");
-  userEmail.value = email;
   try {
     const response = await fetch(`${API_BASE_URL}/api/v1/users/verify-reset-otp`, {
       method: "POST",
@@ -68,4 +66,3 @@ verifyBtn.addEventListener("click", async () => {
     console.log("Error: ", error);
   }
 });
-

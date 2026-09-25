@@ -67,7 +67,6 @@ verifyBtn.addEventListener("click", async () => {
   inputs.forEach((input) => {
     otp += input.value;
   });
-  console.log("OTP: ", otp);
   const email = localStorage.getItem("verifyEmail");
   try {
     const response = await fetch(`${API_BASE_URL}/api/v1/users/verify-otp`, {

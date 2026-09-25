@@ -33,9 +33,30 @@ const paperAbstract = document.getElementById("paper-abstract");
 
 // form submission
 const submitBtn = document.getElementById("submit-button");
+const paperForm = document.getElementById("paperForm");
+let isSubmitting = false;
+
+const setSubmissionLoading = (isLoading) => {
+  isSubmitting = isLoading;
+  submitBtn.disabled = isLoading;
+  submitBtn.setAttribute("aria-busy", String(isLoading));
+  submitBtn.innerHTML = isLoading
+    ? '<span class="button-spinner" aria-hidden="true"></span>'
+    : "Submit Paper";
+
+  paperForm.querySelectorAll("input, textarea, select, button").forEach((control) => {
+    control.disabled = isLoading;
+  });
+};
 
 submitBtn.addEventListener("click", async (e) => {
   e.preventDefault();
+
+  if (isSubmitting) {
+    return;
+  }
+
+  setSubmissionLoading(true);
 
   const formData = new FormData();
 
@@ -58,9 +79,9 @@ submitBtn.addEventListener("click", async (e) => {
 
     const responseData = await response.json();
     console.log("Response Data: ", responseData);
+    const credentialsContainer = document.querySelector(".credentials-container");
 
     if (response.ok) {
-      const credentialsContainer = document.querySelector(".credentials-container");
       if (credentialsContainer) {
         credentialsContainer.innerHTML = `
         <p>Paper Submitted Successfully</p>
@@ -70,14 +91,21 @@ submitBtn.addEventListener("click", async (e) => {
           window.location.href = "../student-dashboard/studentDashboard.html";
         }, 3000)
       }
-      else {
-        credentialsContainer.innerHTML = `
-        <p style ="color: red;">Submit Failed</p>
-      `
-      }
+    } else if (credentialsContainer) {
+      credentialsContainer.innerHTML = `
+        <p style="color: red;">${responseData.message || "Submit Failed"}</p>
+      `;
     }
   } catch (error) {
     console.log(error);
+    const credentialsContainer = document.querySelector(".credentials-container");
+    if (credentialsContainer) {
+      credentialsContainer.innerHTML = `
+        <p style="color: red;">Submit Failed. Please try again.</p>
+      `;
+    }
+  } finally {
+    setSubmissionLoading(false);
   }
 });
 

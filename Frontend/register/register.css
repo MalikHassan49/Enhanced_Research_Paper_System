@@ -235,6 +235,12 @@ input::placeholder {
   background: linear-gradient(135deg, #667eea, #764ba2);
 }
 
+.register-button:disabled,
+.forgot-password-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
 .forgot-password-button {
   margin-top: 20px;
   width: 290px;
